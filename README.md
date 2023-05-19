@@ -8,7 +8,7 @@
 
 <p><a href="https://www.whitehouse.gov/wp-content/uploads/legacy_drupal_files/omb/memoranda/2016/m-16-17.pdf">OMB A-123, Management's Responsibility for Enterprise Risk Management and Internal Control:</a> "Federal leaders and managers are responsible for...a governance structure defined through...sources, including laws...Executive directives and Agency policies."</p>
 
-<p><a href="IVNRegulatoryEcosystem.png"><img src="IVNRegulatoryEcosystem.png" width=640></a></p>
+<p><a href="https://basilwhite.com/ivn/IVNRegulatoryEcosystem.png"><img src="https://basilwhite.com/ivn/IVNRegulatoryEcosystem.png" width=640></a></p>
 
 <p>The Integrated Value Network (IVN) is an attempt to represent the US Federal Agency governance structure as a neural network.
 </p>
