@@ -41,11 +41,6 @@ The intent of the IVN project is to refine this network, and help policymakers a
 <li>Integrated Value: The Aspirational Goal of Purpose-Inspired Organizations (Antwerp Management School) - <a href="https://blog.antwerpmanagementschool.be/en/integrated-value-purpose-inspired-organizations"</a>https://blog.antwerpmanagementschool.be/en/integrated-value-purpose-inspired-organizations</a></li>
 </ul>
 
-<h2>Browse the IVN network diagram</h2>
-
-<p class="join">Because the IVN depicts policy products as nodes of an information network, that network can be depicted as a network diagram. Browse the IVN network diagram in Flourish Studio - <a href="https://public.flourish.studio/visualisation/6494098/">https://public.flourish.studio/visualisation/649409</a> 
-
-
 <h2>Watch the videos</h2>
 
 <p class="join">Set of short YouTube videos - <a href="https://www.youtube.com/playlist?list=PLMYMbTJRc5W4G1YyxgISpwb20o8Hpb4S4">https://www.youtube.com/playlist?list=PLMYMbTJRc5W4G1YyxgISpwb20o8Hpb4S4</a></p>
