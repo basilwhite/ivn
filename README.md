@@ -28,7 +28,8 @@ The intent of the IVN project is to refine this network, and help policymakers a
 
 <h2>IVN presentations</h2>
 <ul>
-<li>Can Neural Networks Inform Policy Development? - <a href="https://pmsymposium.s3.amazonaws.com/wp-content/uploads/sites/11/2022/12/30151943/11am_PG_White_Martin_Traquair.pptx.pdf">https://pmsymposium.s3.amazonaws.com/wp-content/uploads/sites/11/2022/12/30151943/11am_PG_White_Martin_Traquair.pptx.pdf)"></a></li>
+<li>Can Neural Networks Inform Policy Development? - <a href="https://pmsymposium.s3.amazonaws.com/wp-content/uploads/sites/11/2022/12/30151943/11am_PG_White_Martin_Traquair.pptx.pdf">https://pmsymposium.s3.amazonaws.com/wp-content/uploads/sites/11/2022/12/30151943/11am_PG_White_Martin_Traquair.pptx.pdf</a></li>
+</ul>
 
 <h2>Industry articles from the IVN team</h2>
 <ul>
