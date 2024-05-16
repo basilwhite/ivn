@@ -28,6 +28,7 @@ The intent of the IVN project is to refine this network, and help policymakers a
 
 <h2>IVN presentations</h2>
 <ul>
+  <li>Turning Strategy into Action Using the Integrated Value Network (IVN), 2024 PMI symposium – deck at <ahref="https://pmsymposium.umd.edu/pm2024/session/integrated-value-network-ivn-baca-martin-murrieta-white/">https://pmsymposium.umd.edu/pm2024/session/integrated-value-network-ivn-baca-martin-murrieta-white/</ahref>a> - video at <a href="https://vimeo.com/938818391/d034106f74">https://vimeo.com/938818391/d034106f74</a>
 <li>Using an Integrated Value Approach in Cross-Agency Collaboration to Ensure Mission Success - <a href="https://pmsymposium.s3.amazonaws.com/wp-content/uploads/sites/11/2022/12/30151943/11am_PG_White_Martin_Traquair.pptx.pdf">https://pmsymposium.s3.amazonaws.com/wp-content/uploads/sites/11/2022/12/30151943/11am_PG_White_Martin_Traquair.pptx.pdf</a></li>
 </ul>
 
