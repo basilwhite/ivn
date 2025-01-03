@@ -21,6 +21,7 @@ The intent of the IVN project is to refine this network, and help policymakers a
 
 <h2>Academic Publications by the IVN Team</h2>
 <ul>
+<li>Martin, B.A., White, B., Traquair, J. (2025). How Might We Improve HCI on a Platform Designed to Improve Interagency Collaboration?. In: Stephanidis, C., Antona, M., Ntoa, S., Salvendy, G. (eds) HCI International 2024 – Late Breaking Posters. HCII 2024. Communications in Computer and Information Science, vol 2319. Springer, Cham. https://doi.org/10.1007/978-3-031-78516-0_11 - <a href="https://basilwhite.com/ivn/MartinWhiteTraquair2024HowMightWeImproveHCIonaPlatform.pdf">https://basilwhite.com/ivn/MartinWhiteTraquair2024HowMightWeImproveHCIonaPlatform.pdf</a>
 <li>IVN poster presentation at the 2021 Information Architecture Conference - <a href="https://www.ryanwold.net/entries/ivm-poster-iac21">https://www.ryanwold.net/entries/ivm-poster-iac21</a></li>
 <li>White, B., Martin, B., & Wold, R. (2021). <a href="https://basilwhite.com/ivn/IVM%20BC%20-%20Review%20Copy%20-%20Version%206-15.pdf">The Integrated Value Model (IVM): A Relational Data Model of Business Value.</a> In <a href="https://bit.ly/3sMsLV2">Using Strategy Analytics to Measure Corporate Performance and Business Value Creation.</a></li>
 </ul>
