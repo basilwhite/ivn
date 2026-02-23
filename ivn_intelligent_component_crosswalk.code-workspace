@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"powerquery.client.additionalSymbolsDirectories": [
+			"c:/Users/Basil.White/OneDrive - USDA/OCIO-STRATUS Governance Document Working Group - Documents/Python/scripts/ivn/ivn_intelligent_component_crosswalk/.vscode/excel-pq-symbols"
+		]
+	}
+}
