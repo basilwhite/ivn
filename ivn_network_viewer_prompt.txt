@@ -1,0 +1,795 @@
+INTEGRATED VALUE NETWORK (IVN) VISUALIZER - LEARNING MODEL TRAINING PROMPT
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+Organizations need to understand complex dependency relationships between components in their Integrated Value Network. When components enable or depend on other components across multiple sources, stakeholders struggle to visualize these relationships, identify patterns, filter relevant connections, and understand the flow of dependencies at both granular (component) and high-level (source) perspectives.
+
+================================================================================
+BROADER CONTEXT
+================================================================================
+
+In enterprise architecture and organizational planning, an Integrated Value Network represents how different components (capabilities, services, processes, systems) interact and depend on each other. Understanding these relationships is critical for:
+
+- Impact analysis: What happens if component X fails or changes?
+- Strategic planning: Which components are foundational vs. derivative?
+- Resource allocation: Where should investments focus?
+- Risk assessment: What are single points of failure?
+- Communication: How to explain complex interdependencies to stakeholders?
+
+The data comes from normalized Excel sheets tracking components, their relationships (alignments), and their originating sources. This script transforms tabular dependency data into interactive visual networks.
+
+================================================================================
+CONCEPTS THAT MUST BE UNDERSTOOD
+================================================================================
+
+1. DIRECTED GRAPHS (DiGraph)
+A mathematical structure where nodes are connected by edges with direction. In our context:
+- Nodes = Components or Sources
+- Edges = Dependency relationships (A enables B means edge from A to B)
+- Direction matters: enabling → dependent
+
+2. GRAPH VISUALIZATION
+Converting abstract graph structures into visual layouts where:
+- Position is calculated algorithmically (spring layout)
+- Nodes are rendered as markers
+- Edges are rendered as lines
+- Interactive elements provide additional information on hover
+
+3. DATA NORMALIZATION
+Separating data into related tables to eliminate redundancy:
+- Components table: Unique components with IDs and descriptions
+- Alignments table: Relationships between components
+- Sources table: Origin sources for components
+
+4. DATA MERGING
+Joining multiple tables to create enriched dataset with all needed information in one place.
+
+5. STREAMLIT WEB APPLICATIONS
+Building interactive web-based data applications with Python where:
+- UI elements are created with simple function calls
+- State management is handled automatically
+- Caching optimizes performance
+- Updates trigger automatic reruns
+
+6. FILTERING AND INTERACTIVITY
+Allowing users to narrow down displayed data based on text matching against descriptions.
+
+================================================================================
+PREREQUISITE KNOWLEDGE
+================================================================================
+
+1. Python Programming Fundamentals
+- Functions and decorators (@st.cache_data)
+- Data structures (lists, dictionaries)
+- Iteration (for loops, iterrows)
+- String manipulation (lower, strip, contains)
+
+2. Pandas Library
+- DataFrames as tabular data structures
+- Reading Excel files with read_excel
+- Merging DataFrames on keys
+- Filtering with boolean indexing
+- Column operations (rename, drop)
+- Handling missing values (dropna)
+
+3. NetworkX Library
+- Creating directed graphs
+- Adding edges
+- Graph layout algorithms (spring_layout)
+- Accessing nodes and edges
+
+4. Plotly Graphing
+- Scatter plots
+- Graph objects vs express API
+- Layout customization
+- Interactive features (hover)
+
+5. Streamlit Framework
+- Page configuration
+- Layout elements (sidebar, tabs)
+- Input widgets (text_input)
+- Caching decorators
+- Chart rendering
+
+6. Relational Data Concepts
+- Primary keys (component_id, source_id)
+- Foreign keys (references between tables)
+- Left joins
+- Renaming columns to avoid conflicts
+
+================================================================================
+DOMAIN-SPECIFIC TERMS
+================================================================================
+
+- IVN (Integrated Value Network): The complete system of interconnected components
+- Component: An individual capability, service, or element within the network
+- Enabling Component: A component that provides capabilities to another component
+- Dependent Component: A component that relies on another component
+- Alignment: A documented relationship showing one component enables another
+- Source: The originating document, standard, or authority defining components
+- Component ID: Unique identifier for a component
+- Source ID: Unique identifier for a source document
+- Network Topology: The arrangement and connections within the graph
+- Spring Layout: A force-directed algorithm that positions nodes aesthetically
+- Node: Visual representation of a component or source in the graph
+- Edge: Visual representation of a dependency relationship
+- Hover Text: Information displayed when mouse is over a node
+
+================================================================================
+HIGH-LEVEL DESCRIPTION OF WHAT THE SCRIPT DOES
+================================================================================
+
+This script creates an interactive web-based visualization tool that:
+
+1. Loads and merges data from three Excel sheets (Components, Alignments, Sources)
+2. Creates enriched dataset with both enabling and dependent component information
+3. Provides text-based filters to narrow down displayed relationships
+4. Generates two interactive network diagrams:
+   - Component-Level Network: Shows individual component dependencies
+   - Source-Level Network: Shows high-level source dependencies
+5. Renders networks using force-directed layout for aesthetic node positioning
+6. Enables hover interactions to see component descriptions
+7. Uses tabs for easy switching between network views
+
+================================================================================
+WHY THE SCRIPT EXISTS
+================================================================================
+
+Manual analysis of component dependencies in spreadsheets is:
+- Cognitively overwhelming with many relationships
+- Unable to reveal patterns and clusters
+- Difficult to trace multi-hop dependencies
+- Hard to communicate to non-technical stakeholders
+- Time-consuming for impact analysis
+
+This script automates visualization, making complex networks comprehensible and interactive, enabling faster decision-making and better stakeholder communication.
+
+================================================================================
+ROLE OF THE SCRIPT
+================================================================================
+
+Primary Role: Interactive Visualization Tool
+
+The script serves as:
+- Data integration layer (merges normalized Excel data)
+- Filtering interface (sidebar inputs)
+- Graph generator (NetworkX processing)
+- Visualization renderer (Plotly charts)
+- Web application (Streamlit framework)
+
+It does NOT:
+- Modify source data
+- Perform analysis or calculations beyond graph creation
+- Validate data integrity
+- Export visualizations
+- Provide editing capabilities
+
+================================================================================
+KEY CONCEPTS AND LEARNING DATA
+================================================================================
+
+CONCEPT 1: Graph Construction from Relational Data
+
+The transformation process:
+1. Alignments table has: enabling_component_id, dependent_component_id
+2. Each row becomes a directed edge in the graph
+3. NetworkX DiGraph stores these relationships
+4. Graph structure enables layout algorithms
+
+Learning pattern:
+```
+FOR each alignment row:
+    CREATE edge from enabling_component_id TO dependent_component_id
+    ADD edge to directed graph
+```
+
+CONCEPT 2: Data Enrichment Through Multiple Merges
+
+Starting with alignments, we sequentially merge:
+1. Left merge with components on enabling_component_id → get enabling description & source_id
+2. Left merge with components on dependent_component_id → get dependent description & source_id
+3. Left merge with sources on enabling_source_id → get enabling source name
+4. Left merge with sources on dependent_source_id → get dependent source name
+
+Result: Single DataFrame with all information needed for filtering and display
+
+CONCEPT 3: Force-Directed Layout
+
+Spring layout treats:
+- Edges as springs pulling connected nodes together
+- Nodes as charged particles repelling each other
+- Iterative simulation finds equilibrium positions
+- Seed parameter ensures reproducible layouts
+
+CONCEPT 4: Plotly Graph Visualization
+
+Two-trace approach:
+1. Edge Trace: Line segments connecting node positions
+   - Constructed by alternating between start/end coordinates with None separators
+   - None creates line breaks between edges
+2. Node Trace: Scatter points at node positions
+   - Markers for visual representation
+   - Text labels for identification
+   - Hover text for detailed information
+
+CONCEPT 5: Streamlit Interactivity Pattern
+
+Flow:
+1. User inputs trigger script rerun from top
+2. Cached data (@st.cache_data) avoids reloading Excel
+3. Filters apply to DataFrame
+4. Graphs regenerate with filtered data
+5. UI updates automatically
+
+================================================================================
+INPUT DEFINITIONS
+================================================================================
+
+INPUT FILE: IVN_Normalized.xlsx
+
+Required Sheets:
+
+1. Components Sheet
+   Columns:
+   - component_id (text/number): Unique identifier for component
+   - source_id (text/number): Foreign key to Sources sheet
+   - description (text): Human-readable component description
+
+2. Alignments Sheet
+   Columns:
+   - enabling_component_id (text/number): Component that enables another
+   - dependent_component_id (text/number): Component that depends on another
+   
+3. Sources Sheet
+   Columns:
+   - source_id (text/number): Unique identifier for source
+   - source (text): Name or description of source document/standard
+
+Data Quality Requirements:
+- component_id values must be unique in Components sheet
+- source_id values must be unique in Sources sheet
+- enabling_component_id and dependent_component_id must reference valid component_id values
+- source_id in Components must reference valid source_id in Sources
+- Missing values in enabling/dependent component IDs will cause those alignments to be filtered out
+
+File Location:
+- Must be in same directory as script
+- Must be named exactly "IVN_Normalized.xlsx"
+
+USER INPUTS (during runtime):
+
+1. Enabling Filter (Sidebar Text Input)
+   - Purpose: Filter alignments by enabling component description
+   - Type: Text string (case-insensitive)
+   - Behavior: Shows only alignments where enabling_description contains the filter text
+   - Empty = show all
+
+2. Dependent Filter (Sidebar Text Input)
+   - Purpose: Filter alignments by dependent component description
+   - Type: Text string (case-insensitive)
+   - Behavior: Shows only alignments where dependent_description contains the filter text
+   - Empty = show all
+
+Filters are AND combined: both must match if both are provided.
+
+================================================================================
+OUTPUT DEFINITIONS
+================================================================================
+
+OUTPUT STRUCTURE:
+
+The script generates a web application with:
+
+1. HEADER
+   - Title: "Integrated Value Network (IVN) Visualizer"
+   - Wide layout spanning full browser width
+
+2. SIDEBAR (Left Panel)
+   - "Filters" header
+   - "Enabling Filter" text input box
+   - "Dependent Filter" text input box
+
+3. MAIN AREA (Center/Right)
+   - Tab selector with two options
+   
+   TAB 1: "Component Network"
+   - Subheader: "Component-Level Network"
+   - Interactive graph visualization showing:
+     * Nodes: Green markers representing components
+     * Node labels: First 6 characters of component_id
+     * Edges: Gray lines showing dependencies (enabling → dependent)
+     * Hover tooltips: Component descriptions (truncated to 150 characters)
+     * Graph title: "Component Network"
+   
+   TAB 2: "Source Network"  
+   - Subheader: "Source-Level Network"
+   - Interactive graph visualization showing:
+     * Nodes: Blue markers representing sources
+     * Node labels: Full source names
+     * Edges: Black lines showing source-level dependencies
+     * Hover tooltips: Source names
+     * Graph title: "Source Network"
+
+OUTPUT DATA STRUCTURE:
+
+Component Network Graph:
+- Nodes: Set of unique component_ids from filtered alignments
+- Edges: Directed edges from enabling_component_id to dependent_component_id
+- Layout: 2D coordinates calculated by spring layout algorithm
+- Visual encoding: 
+  * X-coordinate: horizontal position
+  * Y-coordinate: vertical position
+  * Color: light green (all nodes same color)
+  * Size: 6 pixels (all nodes same size)
+
+Source Network Graph:
+- Nodes: Set of unique source names from filtered alignments
+- Edges: Directed edges from enabling_source to dependent_source (deduplicated)
+- Layout: 2D coordinates calculated by spring layout algorithm
+- Visual encoding:
+  * X-coordinate: horizontal position  
+  * Y-coordinate: vertical position
+  * Color: light blue (all nodes same color)
+  * Size: 10 pixels (all nodes same size)
+
+INTERACTIVE FEATURES:
+
+Both graphs support:
+- Hover: Display detailed information about nodes
+- Zoom: Mouse wheel to zoom in/out
+- Pan: Click and drag to move view
+- Reset: Double-click to reset view
+- Responsive: Automatically resize with browser window
+
+================================================================================
+VALIDITY CHECKS
+================================================================================
+
+OUTPUT VALIDITY CRITERIA:
+
+1. Data Loading
+   VALID: All three DataFrames (components_df, alignments_df, sources_df) loaded successfully
+   INVALID: FileNotFoundError or sheet not found errors
+
+2. Data Merging
+   VALID: merged DataFrame contains all expected columns
+   INVALID: Missing columns after merge operations
+
+3. Filtering
+   VALID: filtered_df has rows after applying filters (or input data was empty)
+   INVALID: Not applicable - empty results are valid if filters are restrictive
+
+4. Graph Construction
+   VALID: Graph has at least 1 node (if filtered_df has rows)
+   VALID: Graph has 0 nodes if filtered_df is empty
+   INVALID: Graph construction raises exception
+
+5. Layout Calculation  
+   VALID: pos dictionary contains coordinates for all nodes
+   INVALID: Missing nodes in pos or calculation fails
+
+6. Visualization Rendering
+   VALID: Both tabs display Plotly figures without errors
+   INVALID: Rendering errors or blank charts when data exists
+
+INPUT VALIDATION:
+
+The script does NOT explicitly validate:
+- Excel file format correctness
+- Column presence in sheets
+- Data type consistency
+- Referential integrity
+
+These errors will surface as runtime exceptions. A robust version would include try-except blocks and validation checks.
+
+================================================================================
+SUCCESS CRITERIA
+================================================================================
+
+SUCCESSFUL EXECUTION INDICATORS:
+
+1. APPLICATION STARTUP
+   - Streamlit server starts without errors
+   - Page loads in browser
+   - Title and layout render correctly
+
+2. DATA PROCESSING
+   - Excel file found and opened
+   - All three sheets read successfully
+   - Merge operations complete without errors
+   - Caching activates (subsequent runs are faster)
+
+3. FILTERING
+   - Text inputs accept user typing
+   - Filters apply to data (chart updates when filter changes)
+   - Empty filters show all data
+   - Filters are case-insensitive
+
+4. VISUALIZATION
+   - Component network displays with nodes and edges
+   - Source network displays with nodes and edges
+   - Graphs are interactive (hover, zoom, pan work)
+   - Tabs switch between networks correctly
+   - Node labels are visible and readable
+   - Hover text shows descriptions
+
+5. PERFORMANCE
+   - Initial load completes in reasonable time (<10 seconds for typical datasets)
+   - Filter updates are responsive (<2 seconds)
+   - Caching prevents redundant Excel reads
+
+SUCCESSFUL OUTCOME DEFINITION:
+
+The user can:
+1. Open the application in a web browser
+2. See both network visualizations
+3. Use filters to focus on specific components
+4. Switch between component and source views
+5. Hover over nodes to see details
+6. Understand dependency relationships visually
+7. Interact with graphs smoothly
+
+================================================================================
+ERROR HANDLING LOGIC
+================================================================================
+
+CURRENT ERROR HANDLING:
+
+The script has MINIMAL explicit error handling. Failures propagate as exceptions:
+
+1. FILE NOT FOUND
+   - Trigger: IVN_Normalized.xlsx not in script directory
+   - Behavior: Streamlit displays error page with stack trace
+   - User action: Place file in correct location, refresh browser
+
+2. SHEET NOT FOUND
+   - Trigger: Excel file missing Components, Alignments, or Sources sheet
+   - Behavior: Pandas raises ValueError
+   - User action: Verify sheet names match exactly
+
+3. MISSING COLUMNS
+   - Trigger: Expected columns not in sheets
+   - Behavior: KeyError during merge or access operations
+   - User action: Verify Excel schema matches requirements
+
+4. EMPTY DATA
+   - Trigger: No rows in alignments or all filtered out
+   - Behavior: Empty graphs display (valid outcome)
+   - User action: Adjust filters or add data
+
+5. INVALID REFERENCES
+   - Trigger: component_id or source_id references that don't exist
+   - Behavior: NaN values in merged DataFrame (handled by dropna)
+   - User action: Fix data integrity issues in Excel
+
+FAILURE MANAGEMENT:
+
+The script does NOT gracefully handle errors. Production version should add:
+- Try-except blocks around file operations
+- Validation of Excel schema before processing
+- User-friendly error messages
+- Fallback behaviors
+- Logging
+
+================================================================================
+CORRECT LEARNING MODEL BEHAVIOR
+================================================================================
+
+WHAT "WORKING CORRECTLY" MEANS:
+
+A naive learning model that regenerates this script should produce code that:
+
+1. LOADS DATA IDENTICALLY
+   - Reads exact same Excel file name
+   - Expects exact same sheet names
+   - Creates same three DataFrames
+
+2. MERGES DATA IDENTICALLY
+   - Performs four sequential left merges
+   - Uses same column names for join keys
+   - Renames columns identically
+   - Drops temporary columns
+
+3. FILTERS IDENTICALLY
+   - Drops rows with missing component IDs
+   - Applies case-insensitive text filtering
+   - Uses contains logic (substring match)
+   - Combines filters with AND logic
+
+4. GENERATES GRAPHS IDENTICALLY
+   - Creates DiGraph instances
+   - Adds edges from filtered data
+   - Uses spring_layout with seed=42
+   - Builds edge traces with None separators
+   - Builds node traces with same visual properties
+
+5. RENDERS UI IDENTICALLY
+   - Sets wide layout
+   - Creates sidebar with same inputs
+   - Creates two tabs with same labels
+   - Plots same two visualizations
+   - Uses same colors, sizes, titles
+
+BEHAVIORAL EQUIVALENCE TEST:
+
+Given identical input Excel file, the regenerated script must:
+- Display identical graphs (due to fixed random seed)
+- Respond identically to filter inputs
+- Show identical hover text
+- Have identical UI layout
+
+Visual differences in Plotly interactivity controls are acceptable (framework version differences).
+
+================================================================================
+EXAMPLE SCENARIOS
+================================================================================
+
+SCENARIO 1: Basic Visualization
+
+Input Excel Data:
+Components:
+| component_id | source_id | description |
+|--------------|-----------|-------------|
+| C001 | S1 | User Authentication |
+| C002 | S1 | Database Access |
+| C003 | S2 | Reporting Engine |
+
+Alignments:
+| enabling_component_id | dependent_component_id |
+|-----------------------|------------------------|
+| C001 | C002 |
+| C002 | C003 |
+
+Sources:
+| source_id | source |
+|-----------|--------|
+| S1 | Security Policy |
+| S2 | Analytics Framework |
+
+Expected Component Network:
+- 3 nodes: C001, C002, C003
+- 2 edges: C001→C002, C002→C003
+- Linear chain topology
+
+Expected Source Network:
+- 2 nodes: Security Policy, Analytics Framework
+- 1 edge: Security Policy → Analytics Framework
+
+User Actions:
+1. Open application
+2. See both networks
+3. Hover over C002 → see "Database Access"
+
+---
+
+SCENARIO 2: Filtering
+
+Starting with scenario 1 data...
+
+User Actions:
+1. Type "auth" in Enabling Filter
+2. Observe Component Network updates to show only C001→C002 edge
+3. Observe C003 disappears (no longer has incoming edge)
+4. Clear filter
+5. Type "report" in Dependent Filter  
+6. Observe Component Network shows only C002→C003 edge
+7. Observe C001 disappears
+
+Expected Behavior:
+- Filters work case-insensitively ("auth" matches "Authentication")
+- Filters use substring matching
+- Graphs update dynamically
+- Empty results are valid
+
+---
+
+SCENARIO 3: Complex Network
+
+Input with 20 components and 50 alignments creating multiple clusters...
+
+Expected Behavior:
+- Spring layout distributes nodes aesthetically
+- Connected clusters group together
+- Isolated components appear separately
+- Node labels may overlap in dense areas (acceptable)
+- Hover still works to identify nodes
+- Zoom allows focusing on areas of interest
+
+Performance:
+- Initial render: 3-5 seconds
+- Filter updates: <1 second
+- Smooth interactions
+
+---
+
+SCENARIO 4: Missing Data
+
+Alignment with enabling_component_id = C999 (doesn't exist in Components)
+
+Expected Behavior:
+- Merge creates NaN for enabling_description
+- dropna removes this alignment
+- No error occurs
+- Remaining alignments display normally
+
+---
+
+SCENARIO 5: Empty Filters
+
+User Actions:
+1. Leave both filters empty
+2. Observe all alignments displayed
+
+Expected:
+- No filtering applied
+- Full network visible
+
+---
+
+SCENARIO 6: No Matches
+
+User Actions:
+1. Type "NONEXISTENT" in Enabling Filter
+
+Expected:
+- Empty graph displayed
+- No nodes or edges
+- No error messages
+- Graphs are blank but UI is functional
+
+================================================================================
+TEST CASES FOR VALIDATION
+================================================================================
+
+TEST 1: Data Loading
+Action: Run script with valid IVN_Normalized.xlsx
+Expected: Application starts, graphs display
+Pass Criteria: No exceptions, visualizations appear
+
+TEST 2: Missing File
+Action: Remove IVN_Normalized.xlsx, run script
+Expected: Error message about file not found
+Pass Criteria: Clear error indication (even if not graceful)
+
+TEST 3: Filter Application - Enabling
+Action: Enter "test" in enabling filter
+Expected: Only alignments where enabling_description contains "test" appear
+Pass Criteria: Graph updates, edges match filter
+
+TEST 4: Filter Application - Dependent
+Action: Enter "test" in dependent filter
+Expected: Only alignments where dependent_description contains "test" appear
+Pass Criteria: Graph updates, edges match filter
+
+TEST 5: Combined Filters
+Action: Enter "enable_text" in enabling, "depend_text" in dependent
+Expected: Only alignments matching BOTH conditions appear
+Pass Criteria: Intersection of both filters applied
+
+TEST 6: Case Insensitivity
+Action: Enter "TEST" in filter when data has "test"
+Expected: Filter matches despite case difference
+Pass Criteria: Results appear
+
+TEST 7: Tab Switching
+Action: Click between Component Network and Source Network tabs
+Expected: Different graphs display, both functional
+Pass Criteria: Tabs switch smoothly, both graphs render
+
+TEST 8: Hover Interaction
+Action: Hover mouse over node
+Expected: Tooltip with description appears
+Pass Criteria: Hover text displays correctly
+
+TEST 9: Graph Interaction
+Action: Zoom in/out, pan graph
+Expected: Smooth interaction, graph remains functional
+Pass Criteria: Plotly controls work
+
+TEST 10: Caching
+Action: Change filter (triggers rerun), observe behavior
+Expected: Data not reloaded from Excel (cache hit)
+Pass Criteria: Fast response, no disk access
+
+TEST 11: Empty Result Set
+Action: Enter filter that matches nothing
+Expected: Empty graph, no errors
+Pass Criteria: Application remains functional
+
+TEST 12: Source Network Deduplication
+Action: Multiple alignments between same sources
+Expected: Only one edge in source network
+Pass Criteria: drop_duplicates() works correctly
+
+================================================================================
+IMPLEMENTATION REQUIREMENTS FOR LEARNING MODEL
+================================================================================
+
+To faithfully recreate this script, the learning model must generate code that:
+
+1. IMPORTS
+   - streamlit as st
+   - pandas as pd
+   - networkx as nx
+   - plotly.graph_objects as go
+
+2. CONFIGURATION
+   - st.set_page_config(layout="wide")
+   - st.title with exact title text
+
+3. DATA LOADING FUNCTION
+   - Decorated with @st.cache_data
+   - Named load_data
+   - Reads three sheets from IVN_Normalized.xlsx
+   - Performs four sequential merges
+   - Returns three DataFrames
+
+4. DATA PROCESSING
+   - Call load_data() and unpack three DataFrames
+   - Create sidebar header
+   - Create two text inputs for filters
+   - Apply dropna on component IDs
+   - Apply conditional filtering with str.contains
+
+5. TAB STRUCTURE
+   - Create two tabs with specific labels
+   - First tab: Component network code
+   - Second tab: Source network code
+
+6. GRAPH GENERATION (Component Network)
+   - Create nx.DiGraph()
+   - Iterate filtered_df to add edges
+   - Calculate spring_layout with seed=42
+   - Build edge trace with None separators
+   - Build node trace with labels, hover, and specific styling
+   - Create Plotly Figure with specific layout
+   - Render with st.plotly_chart
+
+7. GRAPH GENERATION (Source Network)
+   - Extract unique source pairs
+   - Create nx.DiGraph()
+   - Add edges from source pairs
+   - Calculate spring_layout with seed=42
+   - Build edge trace with None separators
+   - Build node trace with different styling than component network
+   - Create Plotly Figure with specific layout
+   - Render with st.plotly_chart
+
+8. STYLING SPECIFICS
+   - Component nodes: size=6, color='lightgreen'
+   - Source nodes: size=10, color='lightblue'
+   - Component edges: color='gray', width=1
+   - Source edges: color='black', width=1
+   - Component labels: first 6 characters of ID
+   - Source labels: full source name
+   - Hover text: descriptions for components, names for sources
+
+================================================================================
+DEPENDENCY INFORMATION
+================================================================================
+
+REQUIRED LIBRARIES:
+- streamlit: Web application framework
+- pandas: Data manipulation and Excel reading
+- networkx: Graph data structure and algorithms
+- plotly: Interactive visualization
+- openpyxl: Excel file handling (pandas dependency)
+
+INSTALLATION:
+pip install streamlit pandas networkx plotly openpyxl
+
+RUNTIME REQUIREMENTS:
+- Python 3.7+
+- Excel file in same directory as script
+- Web browser for viewing application
+
+EXECUTION COMMAND:
+streamlit run ivn_network_viewer.py
+
+================================================================================
+END OF PROMPT
+================================================================================
+
+This prompt provides complete information for a naive learning model to reconstruct the ivn_network_viewer.py script with full fidelity to functionality, behavior, structure, and purpose.

@@ -1,0 +1,163 @@
+IVN_NETWORK_VIEWER.PBIX - AUTHORITATIVE PROMPT FOR NAIVE LEARNING MODEL
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+Organizations need to visualize dependency relationships within the Integrated Value Network (IVN). Raw spreadsheets of alignments between enabling and dependent components (and their sources) are hard to interpret, making it difficult to see impact, critical paths, and clusters. The PBIX provides interactive network graphs so users can explore these dependencies.
+
+================================================================================
+BROADER CONTEXT
+================================================================================
+- IVN represents how capabilities, systems, or components enable one another across governing sources.
+- Stakeholders require a clear, explorable view to perform impact analysis, risk assessment, planning, and communication.
+- Data lives in a single SharePoint-hosted workbook (`USDA-IVN-dataset.xlsx`). Power BI must load from this authoritative source.
+
+================================================================================
+CONCEPTS THAT MUST BE UNDERSTOOD
+================================================================================
+- Directed graphs: nodes and directed edges (Source -> Target).
+- Network Navigator visual: requires `Source` and `Target` columns; optional labels/tooltips.
+- Data shaping in Power Query: loading Excel workbook from SharePoint; renaming columns; ensuring required fields exist.
+- Relationship granularity: component-level edges vs. source-level edges.
+
+================================================================================
+PREREQUISITE KNOWLEDGE
+================================================================================
+- Power BI Desktop basics (queries, data source settings, visuals).
+- Power Query M for source configuration and column renaming.
+- SharePoint file access with Organizational credentials.
+- Network Navigator visual usage (fields mapping, optional formatting).
+
+================================================================================
+DOMAIN-SPECIFIC TERMS
+================================================================================
+- IVN: Integrated Value Network.
+- Enabling Component: a component that supports another.
+- Dependent Component: a component that relies on another.
+- Source (governing source): origin document/authority for a component.
+- Component-level edge: enabling_component_id -> dependent_component_id.
+- Source-level edge: enabling_source -> dependent_source.
+
+================================================================================
+HIGH-LEVEL DESCRIPTION OF WHAT THE PBIX DOES
+================================================================================
+- Loads IVN data from SharePoint-hosted Excel (`USDA-IVN-dataset.xlsx`).
+- Shapes data into an edges table with two required columns: `Source` and `Target`.
+- Feeds Network Navigator (2.1.0.250) visuals to render the IVN graph.
+- Optionally provides both component-level and source-level network views.
+
+================================================================================
+WHY THE PBIX EXISTS
+================================================================================
+- To convert tabular IVN alignments into intuitive network visuals.
+- To allow non-technical stakeholders to explore dependencies interactively.
+- To centralize data sourcing from the authoritative SharePoint workbook.
+
+================================================================================
+ROLE OF THE PBIX
+================================================================================
+- Presentation and exploration layer for IVN relationships.
+- Uses Network Navigator custom visual for graph rendering.
+- Does not edit or write back data; read-only visualization.
+
+================================================================================
+KEY CONCEPTS AND LEARNING DATA
+================================================================================
+- Edge table must expose `Source` and `Target` columns for the visual.
+- Mapping choices:
+  * Component network: `Source` = enabling_component_id, `Target` = dependent_component_id.
+  * Source network: `Source` = enabling_source, `Target` = dependent_source.
+- Data source must be set via SharePoint path (see Input Definitions).
+- If multiple visuals are present, each may bind to a different query (component vs. source edges).
+
+================================================================================
+INPUT DEFINITIONS
+================================================================================
+- Data source: SharePoint file
+  URL: https://usdagcc.sharepoint.com/sites/OCIO-STRATUSGovernanceDocumentWorkingGroup/Shared Documents/USDA-IVN-dataset.xlsx
+- Power Query source block (recommended):
+  ```m
+  let
+      SiteURL = "https://usdagcc.sharepoint.com/sites/OCIO-STRATUSGovernanceDocumentWorkingGroup",
+      Files = SharePoint.Files(SiteURL, [ApiVersion = 15]),
+      ThisFile = Table.SelectRows(Files, each Text.EndsWith([Name], "USDA-IVN-dataset.xlsx")),
+      Binary = ThisFile{0}[Content],
+      Source = Excel.Workbook(Binary, null, true)
+  in
+      Source
+  ```
+- Required credential: Organizational account for host https://usdagcc.sharepoint.com.
+- Queries:
+  * Use sheet/table names from the workbook as needed (e.g., Components, Alignments, Sources). 
+  * For the NetworkEdges query, ensure the two endpoint columns are present before rename.
+
+================================================================================
+OUTPUT DEFINITIONS
+================================================================================
+- Visuals: Network Navigator (version 2.1.0.250) 
+- Required fields per visual:
+  * Source: column named `Source`
+  * Target: column named `Target`
+  * Optional Tooltip/Label: descriptive fields (e.g., descriptions or source names)
+- Final output: Interactive graph(s) showing IVN dependencies.
+
+================================================================================
+VALIDITY CHECKS
+================================================================================
+- Data source resolves without 404: SharePoint path correct; credentials valid.
+- `NetworkEdges` query contains non-null `Source` and `Target` columns after renaming.
+- Visual fields are bound: Source -> `Source`, Target -> `Target`.
+- Refresh completes without errors.
+- Graph renders nodes and edges (not empty unless data is genuinely empty).
+
+================================================================================
+SUCCESS CRITERIA
+================================================================================
+- Refresh succeeds using the SharePoint workbook.
+- `Source` and `Target` populated for the edges table used by Network Navigator.
+- Network Navigator renders the graph with interactive exploration (pan/zoom/hover).
+- If both component-level and source-level views are intended, each visual shows the correct granularity.
+
+================================================================================
+ERROR HANDLING LOGIC
+================================================================================
+- 404/Not Found: fix the RelativePath to include `/sites/.../Shared Documents/USDA-IVN-dataset.xlsx`.
+- Credential prompts: set Data source settings → Organizational account for `https://usdagcc.sharepoint.com`.
+- Missing fields: ensure rename step maps the correct columns to `Source` and `Target`; verify upstream columns exist.
+- Empty visual: check filters and confirm data rows exist after shaping.
+
+================================================================================
+CORRECT LEARNING MODEL BEHAVIOR
+================================================================================
+- Always produce queries that load the workbook from the specified SharePoint path.
+- Always ensure the edges table feeding Network Navigator has columns named `Source` and `Target`.
+- Do not assume local file paths; use SharePoint.
+- Keep visuals bound to the correct fields; no hardcoded local paths.
+
+================================================================================
+EXAMPLE SCENARIOS / TEST CASES
+================================================================================
+1) Successful refresh: With credentials set, refresh completes; Network Navigator renders nodes/edges.
+2) Wrong path: If RelativePath lacks `Shared Documents`, refresh fails with 404; fix path.
+3) Missing columns: If rename fails, visual breaks; ensure `enabling_component_id`/`dependent_component_id` (or source equivalents) exist before renaming to `Source`/`Target`.
+4) Source-level vs component-level: Switch rename mapping to use source columns, bind the visual, refresh, and confirm edges represent sources.
+
+================================================================================
+BIDIRECTIONAL SYNCHRONIZATION RULES
+================================================================================
+- When ivn_network_viewer.pbix changes: Immediately update this prompt file (ivn_network_viewer.txt) to reflect all structural, data source, field mapping, and visual configuration changes. Remove any outdated info.
+- When ivn_network_viewer.txt changes: Treat this file as the specification. Update ivn_network_viewer.pbix to match (data source path, queries, rename steps, visual field bindings, version of Network Navigator). Ensure the PBIX faithfully implements what is written here.
+- Always overwrite the old prompt file with the latest, complete context so a naive learning model could reconstruct ivn_network_viewer.pbix from scratch.
+
+================================================================================
+REGENERATION CHECKLIST FOR A NAIVE MODEL
+================================================================================
+1) Create a PBIX that loads `USDA-IVN-dataset.xlsx` from the SharePoint path using the provided M source.
+2) Build queries for edges; rename endpoint columns to `Source` and `Target` (component-level or source-level as specified).
+3) Add Network Navigator visual (version 2.1.0.250) and bind Source/Target fields accordingly.
+4) Set credentials to Organizational account for `https://usdagcc.sharepoint.com`.
+5) Refresh; verify graph renders.
+
+================================================================================
+END OF PROMPT
+================================================================================
