@@ -1,0 +1,82 @@
+Problem Explanation:
+The ivn_transformation_engine.py script automates the extraction, transformation, and staging of updates for an Excel-based data governance workflow. It is designed for deterministic, auditable transformation of structured data rows using a stateless transformation engine (Anthropic Claude API or local AI model fallback).
+
+Broader Context:
+This script is part of an Integrated Value Network (IVN) automation system, which ensures that updates to a master Excel workbook are derived only from authoritative sources and are fully auditable. The system enforces a human-in-the-loop review process and strict schema validation. When no API key is available, it uses a local AI model to fetch source URLs and generate transformations.
+
+Concepts to Understand:
+- Data extraction from Excel using openpyxl
+- API-based transformation using a deterministic engine (Anthropic Claude) or local AI model
+- Web scraping and text extraction from source URLs
+- Local AI model inference for summarization
+- JSON schema validation
+- Staging updates for human review
+- Logging and backup for traceability
+
+Prerequisite Knowledge:
+- Python scripting
+- JSON and JSON schema
+- RESTful API concepts or local AI model usage
+- Web scraping with BeautifulSoup
+- Excel file structure and openpyxl usage
+- Hugging Face transformers for local AI
+
+Domain-Specific Terms:
+- component_id: Unique identifier for a data component
+- current_text: The text to be transformed
+- source_url: Authoritative source for transformation
+- staged update: A proposed change awaiting review
+- local AI transformation: On-device model inference for summarization
+- web scraping: Extracting text content from web pages
+
+High-Level Description:
+The script reads rows from an Excel file, validates and sends them to a transformation engine (real API or local AI with web fetching), validates the response, and stages the result in a JSONL file for later review and application.
+
+Why the Script Exists:
+To automate and standardize the process of updating Excel-based governance data, ensuring all changes are traceable, schema-compliant, and derived from authoritative sources, with advanced local AI fallback when external APIs are unavailable.
+
+Role of the Script:
+Acts as the orchestrator for the data transformation workflow, handling extraction, API/local AI calls, validation, and staging.
+
+Key Concepts and Learning Data:
+- Deterministic transformation (real API or local AI)
+- Stateless API interaction or local inference
+- Web content fetching and processing
+- Human-in-the-loop review
+- Schema validation
+- Logging and backup
+
+Input/Output Definitions:
+Input: Excel file (ivntest.xlsx), with columns for component_id, current_text, and source_url.
+Output: Staged updates in data/updates_staged.jsonl, log in logs/ivn_transformation_engine.log, backup Excel in data/backups/.
+
+Output Structure and Validity Checks:
+- Each staged update is a JSON object with timestamp, row_number, component_id, request, response, and applied flag.
+- All requests and responses are validated against JSON schemas.
+- Log and backup files are created for traceability.
+- Local AI responses include model details and source fetching status.
+
+Success Criteria:
+- All valid rows are processed and staged.
+- Invalid or incomplete rows are skipped with a warning.
+- All staged updates are schema-compliant and traceable.
+- No direct Excel editing occurs in this script.
+- Local AI mode activates automatically if API key is missing.
+- Source URLs are fetched and processed when possible.
+
+Error Handling:
+- Logs errors for invalid rows, failed API calls, web fetch failures, or schema validation failures.
+- Continues processing remaining rows after errors.
+- Falls back to mock transformation if local AI fails.
+
+Evaluation of Output:
+- Review data/updates_staged.jsonl for correct structure and content.
+- Check logs/ivn_transformation_engine.log for errors or warnings.
+- Ensure backup is created in data/backups/.
+- Verify local AI responses include source fetching details.
+
+Correct Learning Model Behavior:
+- The model should be able to regenerate the script to perform all described tasks, with correct input/output handling, error management, logging, web scraping, and local AI inference.
+
+Example Scenario:
+- Given an Excel file with 10 valid rows, the script should process all, fetch source URLs, generate AI summaries, stage updates, and log the process. If a row is missing a required field, it is skipped and logged as a warning. If source fetch fails, it falls back to mock.
