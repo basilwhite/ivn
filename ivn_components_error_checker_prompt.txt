@@ -1,0 +1,99 @@
+Title: ivn_components_error_checker
+
+Problem the script solves:
+- Automates quality checks on a federal governance deliverables dataset by detecting conflicting descriptions, duplicate descriptions across different components, multiple URLs per component, and enabling-dependent pairs that reference the same source document.
+- Provides interactive cleanup guidance for similar component and source names and descriptions to improve consistency before flagging errors.
+
+Broader context:
+- Governance component inventories often originate from Google Sheets or local Excel exports and contain inconsistent naming, duplicate descriptions, and mismatched URLs between enabling and dependent components.
+- Manual review is slow and error-prone; this script standardizes and flags issues to accelerate analyst review.
+
+Concepts that must be understood:
+- Dataframe operations (selection, concatenation, grouping) in pandas.
+- Text normalization and fuzzy similarity for grouping near-duplicates.
+- Interactive prompts to resolve field-level conflicts.
+- Writing multiple sheets to an Excel workbook.
+
+Prerequisite knowledge:
+- Basics of Python 3, pandas, and reading/writing Excel files.
+- Understanding of enabling vs. dependent components in governance deliverables.
+- Familiarity with fuzzy matching concepts (e.g., similarity ratios).
+
+Domain-specific terms:
+- Enabling Component: Upstream item that enables another deliverable.
+- Dependent Component: Downstream item that depends on an enabling component.
+- Source: Document or system origin of a component.
+- Component Description/URL: Descriptive text and reference link for a component.
+
+High-level description of what the script does and why it exists:
+- Loads a dataset from either a local Excel file (chosen via an in-terminal navigator) or a Google Sheets XLSX export URL.
+- Builds a unified view of all components (both enabling and dependent) to group near-duplicates by source and component name using fuzzy matching with blocking for speed.
+- Interactively asks the user to pick canonical values for similar component names, source names, and descriptions.
+- Flags rows in the original dataset for conflicting descriptions, shared descriptions across different components, multiple URLs for the same component, and enabling-dependent pairs from the same source.
+- Exports a timestamped Excel workbook with the flagged dataset, individual error tabs, and a READ_ME tab explaining each sheet and error column.
+- Exists to standardize and surface data quality issues quickly for analysts.
+
+Role of the script:
+- A command-line assistant for analysts to normalize and quality-check governance component data.
+
+Key concepts and learning data for regeneration:
+- Uses pandas for data handling, requests + BytesIO for URL-based Excel loading, tqdm for progress bars, re for normalization, and difflib SequenceMatcher or rapidfuzz (if installed) for similarity scoring.
+- Similarity threshold default: 95.
+- Blocking strategy in grouping to avoid O(n^2) comparisons: heads and first tokens of normalized source/component strings.
+- Interactive resolution applies to Component, Source, and Description fields (URL resolution step was removed; URLs are only checked/flagged, not interactively resolved).
+
+Inputs and outputs:
+- Inputs: User chooses 1 (local file) or 2 (URL). Local path selected via text navigator starting at the script directory. URL should be a Google Sheets XLSX export link. Dataset columns required: Enabling Source, Enabling Component, Enabling Component Description, Enabling Component URL, Dependent Source, Dependent Component, Dependent Component Description, Dependent Component URL.
+- Outputs: Excel workbook named `error_flagged_dataset_YYYYMMDDHHMM.xlsx` written to the working directory.
+- Output sheets:
+  - READ_ME: explanations for all sheets and error columns.
+  - Flagged Dataset: full input plus error columns.
+  - Multiple Descriptions: rows where the same component group has more than one non-null description.
+  - Same Description: different components sharing an identical description.
+  - Multiple URLs: identical components listing more than one URL.
+  - Same Source Pairs: enabling and dependent sources effectively the same document.
+- Error columns in Flagged Dataset:
+  - ERROR: Multiple Descriptions — ENABLING/DEPENDENT when a component group has conflicting descriptions.
+  - ERROR: Same Description — ENABLING/DEPENDENT when different components share the same description.
+  - ERROR: Multiple URLs — ENABLING/DEPENDENT when identical components list more than one URL.
+  - ERROR: Same Source Pair — YES when enabling and dependent sources match closely.
+
+Structure and content of the final output, plus validity checks:
+- Output file name includes timestamp to ensure uniqueness.
+- Each error sheet is filtered from the Flagged Dataset based on non-empty error flags.
+- READ_ME is generated programmatically to document sheets and error columns.
+- Valid run criteria: all required columns present; Excel file successfully written with all sheets; runtime messages show completion without uncaught exceptions.
+
+Successful outcome and execution criteria:
+- User can load data (local or URL) without errors.
+- Interactive prompts appear for similar components/sources/descriptions when conflicts exist.
+- Error flags populate correctly and output Excel is created with the timestamped name and all sheets present.
+
+Error handling logic:
+- Input choice loops until user provides 1 or 2.
+- File navigator allows retrying directory navigation.
+- HTTP fetch uses requests.get without special retries; failures will raise.
+- Similarity logic falls back to difflib if rapidfuzz is unavailable.
+- If required columns are missing, pandas will raise; no custom recovery is implemented.
+
+Correct learning-model behavior (what “working correctly” means):
+- Given this prompt, the model should generate a Python script that matches the described behavior, dependencies, interactive flow, outputs, and sheet/error definitions.
+- The regenerated script must maintain the blocking-based fuzzy grouping, interactive resolution for component/source/description, non-interactive URL handling (flag only), and timestamped Excel output with the documented sheets.
+
+Example scenarios / test cases:
+- Local file path case: User chooses 1, navigates to an Excel file with the required columns; script groups components, prompts for conflicts, and writes `error_flagged_dataset_YYYYMMDDHHMM.xlsx` with populated tabs.
+- URL case: User chooses 2, pastes a valid Google Sheets XLSX export URL; script downloads, processes, prompts, and outputs the Excel file with timestamped name.
+- Duplicate descriptions across components: Two different components share the same description -> entries appear in Same Description sheet and error column set to ENABLING/DEPENDENT accordingly.
+- Conflicting descriptions in one group: Same component group has differing descriptions -> Multiple Descriptions error flagged.
+- Multiple URLs for identical component: Component has more than one distinct URL -> Multiple URLs error flagged.
+- Same source pair: Enabling and dependent sources normalize to a similarity ratio > 95 -> Same Source Pair column set to YES.
+
+Notes on performance and dependencies:
+- rapidfuzz (if installed) provides faster similarity; otherwise difflib is used.
+- Blocking keys keep grouping and duplicate resolution closer to linear performance on typical datasets.
+- Dependencies: pandas, numpy (indirect), requests, tqdm, rapidfuzz (optional), openpyxl or xlrd/backends for Excel I/O via pandas, Python stdlib modules re, time, os, datetime, io.
+
+Execution reminders:
+- Run via Python 3: `python ivn_components_error_checker.py` and follow prompts.
+- Ensure required columns exist in the input workbook.
+- Output file is written to the current working directory with a timestamped name.
