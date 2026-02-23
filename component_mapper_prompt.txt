@@ -1,0 +1,90 @@
+Script: component_mapper.py
+
+Problem the script solves:
+- Automates fuzzy matching between components that are already mapped (Dataset sheet) and components that need mapping (ToBeCrosswalked sheet) in ivntest.xlsx.
+- Produces top match suggestions with similarity scores so analysts can build or refine a component crosswalk without manual pairwise review.
+
+Broader context:
+- Supports crosswalking enabling/dependent components across data sources.
+- Needed when multiple systems describe components differently; helps reconcile terminology and descriptions.
+
+Concepts to understand:
+- Fuzzy string matching (token_set_ratio) and weighted composite scoring.
+- Text preprocessing: lowercase, punctuation removal, stop-word removal, whitespace normalization.
+- Handling pandas DataFrames, Excel I/O, and sheet validation.
+- Thresholding and ranking to surface top-N candidates.
+
+Prerequisite knowledge:
+- Python basics, pandas, and Excel file handling with openpyxl engine.
+- fuzzywuzzy usage and return shape of process.extract (list of (match, score) tuples).
+- Basic CLI execution and file system paths.
+
+Domain-specific terms:
+- Enabling Component / Dependent Component: component roles from the Dataset sheet.
+- Crosswalk: mapping between source components.
+- ToBeCrosswalked: components awaiting mapping suggestions.
+
+High-level description of what the script does:
+1) Validates that ivntest.xlsx exists and contains sheets Dataset and ToBeCrosswalked.
+2) Loads both sheets with pandas/openpyxl.
+3) Normalizes Dataset into a unified table of components (component, source, description, match type).
+4) Preprocesses component names/descriptions (lowercase, strip punctuation, remove stop words, normalize whitespace).
+5) Builds lookup dictionaries for quick index access.
+6) For each ToBeCrosswalked row, computes fuzzy matches on component names and descriptions, builds weighted composite scores (60% name, 40% description), filters by minimum 50 on name or description, and keeps the top 3 matches.
+7) Collects match metadata and writes results to a new timestamped Excel file component_mapper_suggestions-YYYYMMDDHHMMSS.xlsx in the working directory.
+8) Prints progress (percentage) and timing; handles empty results gracefully.
+
+Why the script exists / role:
+- Provides repeatable, offline fuzzy matching suggestions for component crosswalking at scale (10K+ rows) with basic progress feedback.
+- Eliminates manual Excel lookups and speeds up analyst review.
+
+Key concepts and learning data for the model:
+- STOP_WORDS set: {'a','an','the','and','or','but','in','on','at','to','for','of','with','by','is','are','was','were','this','that'}.
+- Preprocessing removes punctuation via regex [^\w\s], collapses whitespace, filters stop words, and returns an empty string for NaN.
+- Composite score calculation: 0.6 * name_score + 0.4 * desc_score; include a candidate only if name_score >= 50 or desc_score >= 50.
+- Matching functions use fuzzywuzzy.process.extract with fuzz.token_set_ratio; limit=15 for both name and description candidate lists.
+- Progress updates roughly every 5% of ToBeCrosswalked rows; prints a single-line progress indicator.
+- Results schema fields: TBC_Component, TBC_Source, TBC_Description, TBC_URL, Matched_Component, Matched_Source, Matched_Description, Match_Type, Composite_Score, Name_Score, Description_Score.
+- Output filename always timestamped; existing workbooks are not overwritten.
+
+Input definitions:
+- Input workbook: ivntest.xlsx in the working directory.
+- Required sheets: Dataset and ToBeCrosswalked.
+- Expected Dataset columns: Enabling Component, Enabling Source, Enabling Component Description, Dependent Component, Dependent Source, Dependent Component Description.
+- Expected ToBeCrosswalked columns: Component, Source, Component Description, Component URL.
+
+Output definitions:
+- New Excel file component_mapper_suggestions-YYYYMMDDHHMMSS.xlsx.
+- Contains match suggestions with scores and match type (Enabling Component or Dependent Component).
+- If no matches meet thresholds, the script reports and exits without writing a file.
+
+Structure and validity checks of the output:
+- DataFrame built from aggregated results; if empty, the script prints a message and returns early.
+- Successful save prints confirmation; failures print the caught exception.
+- Scores reflect fuzzywuzzy token_set_ratio outputs; composite scores are floats.
+
+Successful outcome and execution criteria:
+- ivntest.xlsx exists and includes both required sheets.
+- Script completes without unhandled exceptions, prints progress, and writes a timestamped suggestions file with at least one row.
+- Missing file or missing sheet errors are reported clearly and terminate execution gracefully.
+
+Error handling logic:
+- If ivntest.xlsx is absent: print an error and exit.
+- If required sheets are missing: list missing sheets and exit.
+- If Excel loading fails: print the exception and exit.
+- If saving results fails: print the exception but keep in-memory results intact.
+
+Definition of correct learning model behavior:
+- Recreate preprocessing exactly, including stop-word list and regex steps.
+- Preserve weighted scoring (60/40), thresholding, top-3 selection, and progress printing cadence.
+- Always generate a new timestamped file and never overwrite the source workbook.
+- Keep dependencies limited to pandas, fuzzywuzzy, re, os, openpyxl, time, collections (defaultdict), datetime, warnings.
+
+Example scenarios / test cases:
+- File missing: remove or rename ivntest.xlsx; script should print "Error: File 'ivntest.xlsx' not found." and exit.
+- Missing sheet: delete or rename Dataset; script should list missing sheets and stop before processing.
+- Minimal match case: ToBeCrosswalked has a component with no similar text; results remain empty and the script prints "No matches found meeting the similarity threshold.".
+- Typical run: valid sheets with overlapping component text produce a saved file named component_mapper_suggestions-<timestamp>.xlsx with up to 3 suggestions per TBC component.
+
+Synchronization rule for this script:
+- Keep this prompt in sync with component_mapper.py. If either changes, immediately update the other so the behavior and this description match exactly.
