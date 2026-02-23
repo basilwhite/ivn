@@ -1,0 +1,422 @@
+ivn_extract_components_from_pdf.py prompt
+Date: 2026-02-04
+
+================================================================================
+DEVELOPMENT WORKFLOW AND SYNCHRONIZATION RULES
+================================================================================
+
+This prompt file is the authoritative specification for ivn_extract_components_from_pdf.py. The following synchronization rules MUST be followed:
+
+1. When the script (.py file) changes:
+   - Immediately review and update this prompt file to accurately reflect the script's new state.
+   - Ensure no outdated information remains in this prompt file.
+   - If a function is added, renamed, or refactored, update this prompt accordingly.
+
+2. When this prompt file (_prompt.txt) changes:
+   - Immediately review the prompt changes and update the script to accurately reflect the new requirements.
+   - Treat this prompt as the authoritative specification.
+
+3. When output files change:
+   - Review the output structure and update both the script and this prompt if the output format has evolved.
+
+4. Detection and synchronization:
+   - When any of the three artifacts (script, prompt, output) changes, immediately synchronize the others.
+   - The goal is perfect synchronization where script, prompt, and output always match.
+
+================================================================================
+PROBLEM THE SCRIPT SOLVES
+================================================================================
+
+This script transforms unstructured PDF requirements documents (such as government policy documents, legislation, and regulatory guidance) into two structured IVN-ready component inventories (Enabling and Dependent). The challenge is that PDF documents often lose their hierarchical structure during extraction, making it difficult to identify discrete requirements and their organizational context.
+
+The script addresses:
+- Extracting text while preserving layout and font information for structure detection.
+- Identifying document sections based on visual cues (font size, boldness, positioning).
+- Detecting policy-relevant requirement statements using natural language patterns.
+- Cleaning PDF extraction artifacts (hyphenation breaks, OCR errors, whitespace issues).
+- Producing standardized output with mandatory fields: Source, Component, Component Description, Component URL.
+
+================================================================================
+BROADER CONTEXT
+================================================================================
+
+Within the USDA OCIO-STRATUS governance framework, policy and regulatory requirements must be tracked in Inventory of Value Networks (IVN) tables. These tables distinguish between:
+- Enabling Components: capabilities, authorities, or resources that support mission functions.
+- Dependent Components: obligations, constraints, or dependencies that must be satisfied.
+
+Policy and governance PDFs (Executive Orders, USC titles, agency directives) often contain hundreds of requirement statements buried in dense text. Manual extraction is error-prone and time-consuming. This script automates the extraction pipeline while maintaining traceability back to source documents.
+
+================================================================================
+CONCEPTS TO UNDERSTAND
+================================================================================
+
+1. PDF Layout Extraction (pdfminer.six):
+   - LAParams: parameters controlling text box detection (line margin, character margin, word margin, boxes flow).
+   - LTTextBox: layout element representing a block of text with bounding box coordinates.
+   - LTChar: individual character with font name, size, and position attributes.
+   - Layout analysis preserves visual hierarchy that pure text extraction loses.
+
+2. Section Detection Heuristics:
+   - Font size ranking: larger fonts typically indicate headers and section titles.
+   - Bold/all-caps detection: visual emphasis patterns common in formal documents.
+   - Numbering patterns: "Section 1.2.3", "(a)", "IV.", Roman numerals, U.S. Code references.
+   - Positional ordering: elements are sorted by page and vertical position to establish reading order.
+   - Fallback patterns: regex-based detection when visual cues are insufficient.
+
+3. Requirement Detection:
+   - Policy verbs: establish, develop, implement, create, submit, report, coordinate, modernize, digitize, require, fund, enhance, allocate, deliver, plan, strengthen, provide, ensure.
+   - Obligation terms: shall, must, will, should, is required to, are required to, is to, are to.
+   - Timeframe cues: N days, N months, N years, annually, quarterly, within N.
+   - Agency mentions: agency, department, secretary, administrator, director, office.
+   - Scoring: sentences accumulate points based on presence of these patterns; threshold determines inclusion.
+
+4. Text Cleanup:
+   - Hyphenation repair: words split across lines with hyphens are rejoined.
+   - Whitespace normalization: multiple spaces/newlines collapsed to single spaces.
+   - Quote normalization: curly quotes converted to straight quotes.
+   - OCR error fixes: common substitutions like pipe (|) for capital I.
+
+5. Component Assembly:
+   - Section numbers preserved in component names for traceability.
+   - Policy action extraction: derive concise action phrase from requirement text.
+   - Context preservation: surrounding text retained for disambiguation.
+   - Validation: minimum description length, meaningful component names.
+
+6. Excel Export:
+   - pandas DataFrames for tabular data manipulation.
+   - xlsxwriter engine for Excel-specific formatting.
+   - Two sheets: "Enabling Components" and "Dependent Components" (identical content).
+   - Column widths and text wrapping for readability.
+   - Filename sanitization: invalid characters replaced, length limited.
+
+================================================================================
+PREREQUISITE KNOWLEDGE
+================================================================================
+
+- Python 3.x with virtual environment management (venv).
+- Package installation: pip install requests pdfminer.six pandas xlsxwriter.
+- Optional: pikepdf for PDF metadata extraction (installed at runtime if needed).
+- Standard library: tkinter for file dialogs, re for regex, pathlib for paths, datetime for timestamps, tempfile for temporary files, logging for diagnostics.
+- HTTP concepts: headers, retries, streaming downloads, content-length for progress tracking.
+- Regex: capturing groups, alternation, character classes, multiline matching.
+- Windows GUI: tkinter file dialog behavior, window focus management.
+
+================================================================================
+DOMAIN-SPECIFIC TERMS
+================================================================================
+
+- IVN (Inventory of Value Networks): structured tables tracking organizational capabilities and dependencies.
+- Enabling Components: assets, authorities, or capabilities that enable mission execution.
+- Dependent Components: obligations, constraints, or external dependencies that must be managed.
+- Component: a discrete requirement statement with source attribution and URL reference.
+- Source: the formal name of the originating document (e.g., "21st Century IDEA Act").
+- Component Description: the full requirement statement text.
+- Component URL: the authoritative URL where the source document can be accessed.
+- FCEB: Federal Civilian Executive Branch.
+- FedRAMP: Federal Risk and Authorization Management Program.
+- CSP: Cloud Service Provider.
+- SBOM: Software Bill of Materials.
+- USC: United States Code.
+
+================================================================================
+HIGH-LEVEL DESCRIPTION OF WHAT THE SCRIPT DOES
+================================================================================
+
+1. INPUT ACQUISITION:
+   - Presents user with menu: download PDF from URL or select local file.
+   - For URL mode: downloads with browser-like headers, retry logic, and progress display.
+   - For local mode: opens file dialog; requires URL entry for Component URL field.
+   - Validates that PDF path exists before proceeding.
+
+2. DOCUMENT IDENTIFICATION:
+   - Attempts to extract title from PDF metadata using pikepdf (installed at runtime if needed).
+   - Falls back to regex patterns matching common document title formats.
+   - Falls back to sanitized filename if no title found.
+   - Always prompts user to confirm or override the suggested title.
+
+3. LAYOUT EXTRACTION:
+   - Uses pdfminer.six with custom LAParams for layout-aware text extraction.
+   - Custom LayoutCollector class captures text boxes with font information.
+   - Processes each page to extract text, bounding boxes, font names, sizes, and bold indicators.
+
+4. SECTION IDENTIFICATION:
+   - Groups text elements by font size to establish hierarchy.
+   - Identifies headers based on font size rank, bold/all-caps patterns, and numbering.
+   - Establishes parent-child relationships between sections.
+   - Assigns text content to appropriate sections based on position.
+   - Falls back to pattern-based detection if fewer than 3 sections found.
+
+5. COMPONENT EXTRACTION:
+   - Processes sections by hierarchy level (higher levels become component containers).
+   - Extracts policy-relevant requirements using keyword scoring.
+   - Falls back to generic requirement detection (is_likely_requirement).
+   - Falls back to best-sentence selection if no requirements found.
+   - Falls back to text-level extraction if no structure detected.
+
+6. VALIDATION:
+   - Filters out components with very short descriptions (<20 characters).
+   - Cleans and normalizes description text.
+   - Repairs component names that are too short using policy action extraction.
+   - Limits component name length to 50 characters.
+
+7. OUTPUT GENERATION:
+   - Formats validated components into rows with four columns: Source, Component, Component Description, Component URL.
+   - Creates pandas DataFrames for both Enabling and Dependent inventories (identical content).
+   - Saves to Excel file with xlsxwriter formatting.
+   - Filename pattern: ivn_requirements_{sanitized_title}_{timestamp}.xlsx
+   - Fallback filename on error: ivn_requirements_export_{timestamp}.xlsx
+
+================================================================================
+WHY THE SCRIPT EXISTS / ROLE
+================================================================================
+
+This script exists to:
+- Automate the labor-intensive process of extracting requirements from policy PDFs.
+- Ensure consistent output format meeting IVN inventory specifications.
+- Preserve traceability from extracted requirements back to source documents.
+- Reduce human error in manual transcription of complex regulatory language.
+- Support governance workflows that require structured requirement inventories.
+
+The script serves as a preprocessing tool in a larger governance document management pipeline, converting unstructured PDFs into structured data suitable for analysis, tracking, and compliance verification.
+
+================================================================================
+KEY CONCEPTS AND LEARNING DATA (FUNCTIONS/BEHAVIORS)
+================================================================================
+
+REQUIREMENT DETECTION:
+- is_likely_requirement(text): Returns True if text contains requirement language. Checks minimum word count (7), excludes short all-caps text, requires presence of policy verbs or obligation indicators. Returns True for sentences starting with ordinals ("First,") or containing U.S.C. references.
+
+PDF DOWNLOAD:
+- download_pdf_with_browser_headers(url): Downloads PDF with browser-mimicking headers (User-Agent, Accept, Referer). Uses requests.Session with Retry adapter (5 retries, backoff factor 1, retries on 429/500/502/503/504). Streams response to temporary file with progress percentage display. Returns Path to downloaded file or None on failure.
+
+USER INPUT:
+- ask_for_pdf_path(): Presents menu (1=URL, 2=local file). For URL mode: loops until non-empty URL provided, downloads file. For local mode: opens tkinter file dialog, requires mandatory URL entry. Returns tuple of (Path, component_url) or (None, "") on failure.
+
+TEXT CLEANUP:
+- fix_hyphenation(text): Removes hyphens at line breaks and rejoins words. Normalizes whitespace. Fixes "word- ization" patterns.
+- clean_text(text): Normalizes whitespace, converts curly quotes to straight quotes, fixes common OCR errors (| -> I).
+
+LAYOUT EXTRACTION:
+- extract_text_with_layout(pdf_path, laparams): Opens PDF with pdfminer, creates custom LayoutCollector device, processes each page, returns list of page dictionaries containing element lists.
+- LayoutCollector(TextConverter): Custom class that captures LTPage objects in self.result list.
+- process_layout(layout): Iterates LTTextBox elements, extracts text, bounding box, font info.
+- extract_font_info(text_element): Traverses element to find first LTChar, returns dict with font name, size, is_bold.
+
+DOCUMENT IDENTIFICATION:
+- identify_source_document(pdf_path, text): Attempts pikepdf metadata extraction (with runtime install). Falls back to regex patterns for act names, public laws, USC references, executive orders, all-caps titles. Normalizes result. Prompts user for confirmation/override. Returns final title string.
+
+SECTION DETECTION:
+- identify_sections(layout_elements): Groups elements by font size, identifies headers by size rank and pattern matching, assigns text to sections, establishes hierarchy, cleans text. Falls back to identify_sections_by_patterns if fewer than 3 sections.
+- establish_section_hierarchy(sections): For each section, finds potential parent based on level and position, establishes parent-child relationships.
+- identify_sections_by_patterns(layout_elements): Alternative method using regex patterns on concatenated text when visual analysis fails.
+
+REQUIREMENT EXTRACTION:
+- extract_policy_requirements(text): Splits into sentences, scores each based on policy verbs (3 pts), obligation terms (3 pts), timeframes (2 pts), agency mentions (2 pts). Returns requirements with score >= 5.
+- extract_policy_action(text): Extracts primary verb+noun phrase from text for component naming.
+- extract_best_sentence(text): Scores sentences by length, policy keywords, timeframes, measurements. Returns highest scoring.
+- get_sentence_context(sentences, target): Returns target sentence with preceding sentence if reasonably short.
+
+COMPONENT IDENTIFICATION:
+- identify_components(sections): Processes sections by level. For levels 1-2: extracts policy requirements, falls back to standard requirements, falls back to best sentence. For levels 3+: extracts only policy requirements with action-based component names. Falls back to extract_fallback_components if no structured components found.
+- extract_requirements_from_text(text): Uses is_likely_requirement filter on sentences.
+- extract_fallback_components(text): Creates components from policy requirements or any requirement-like sentences when structure is absent.
+
+UTILITY:
+- try_install_package(package_name): Attempts import, if fails runs pip install via subprocess. Returns True if package available.
+- clean_component_name(header): Limits length to 50 characters, preserves section numbers.
+
+VALIDATION:
+- validate_data(components): Filters short descriptions (<20 chars), cleans text, repairs short component names using policy action extraction.
+
+OUTPUT:
+- format_inventory_rows(components, source_name, component_url, mode_label): Builds list of dicts with Source, Component, Component Description, Component URL.
+- save_validated_excel(enabling_rows, dependent_rows, source_name): Creates Excel file with pandas + xlsxwriter. Two sheets with formatted columns. Sanitizes filename. Falls back to simplified filename on error.
+
+ORCHESTRATION:
+- main(): Calls ask_for_pdf_path, validates path, extracts raw text, identifies source document, extracts layout, identifies sections, identifies components, validates, formats rows, saves Excel, logs timing and output path.
+
+================================================================================
+INPUTS AND OUTPUTS
+================================================================================
+
+INPUTS:
+- User menu choice: "1" for URL download, "2" for local file selection.
+- PDF URL (required for option 1, required prompt for option 2): full URL to source document.
+- Local file path (option 2 only): selected via tkinter file dialog.
+- Document title confirmation: user presses Enter to accept suggested title or types override.
+
+OUTPUTS:
+- Excel file: ivn_requirements_{sanitized_title}_{YYYY-MM-DD_HHMM}.xlsx
+- Location: same directory as the script.
+- Sheet 1: "Enabling Components" with columns Source, Component, Component Description, Component URL.
+- Sheet 2: "Dependent Components" with identical columns and content.
+- Column formatting: text wrap enabled, description column width 80, other columns 15-50.
+
+INTERNAL DATA STRUCTURES:
+- layout_elements: list of dicts, each with page_num and elements (list of text elements with text, bbox, font, size, is_bold, x0, y0, x1, y1).
+- sections: dict keyed by section_id, values contain id, header, level, text, page, font_size, is_bold, x0, y0, optional children/parent.
+- components: list of dicts with section_id, section_name, component, description, context, level, id.
+- enabling_rows/dependent_rows: list of dicts with Source, Component, Component Description, Component URL.
+
+================================================================================
+OUTPUT VALIDITY CHECKS
+================================================================================
+
+1. PDF path must exist; script exits with error message if invalid.
+2. Section detection logs count; triggers fallback if fewer than 3 sections detected.
+3. Component count logged after extraction and after validation.
+4. Descriptions must be at least 20 characters to pass validation.
+5. Component names limited to 50 characters.
+6. Excel save logs row counts for both sheets.
+7. Fallback filename used if primary filename causes save error.
+
+================================================================================
+SUCCESSFUL OUTCOME / EXECUTION CRITERIA
+================================================================================
+
+A successful run is characterized by:
+1. User prompted for input method (1 or 2) and responds with valid choice.
+2. PDF acquired: URL download shows progress percentage OR local file path echoed.
+3. URL entered: non-empty URL accepted for Component URL field.
+4. Title suggested and user confirms or provides override.
+5. Layout extraction processes all pages with status messages.
+6. Section detection reports count (or fallback triggered).
+7. Component extraction reports count.
+8. Validation reports count of valid components.
+9. Excel file saved successfully with completion message showing path.
+10. Total elapsed time logged.
+
+Success output example:
+```
+Choose PDF input method:
+1. Paste a URL of a PDF
+2. Browse to a local PDF file
+Enter 1 or 2: 1
+Paste the full URL to the PDF: https://example.gov/document.pdf
+Download progress: Downloading PDF with retry support...
+  -> Downloaded 100%
+PDF saved to: C:\...\ivn_temp_1234567890.pdf
+Suggested document title: Example Policy Document
+Press Enter to accept this title, or type a new title: 
+Using document title: Example Policy Document
+Extracting text with layout information...
+  -> Processing page 1...
+  -> Processing page 2...
+Identifying document sections...
+  -> Detected 4 different font sizes
+Identified 15 document sections
+Identifying components from document structure...
+Identified 47 components
+Validating component data quality...
+42 valid components after validation
+Formatting Enabling component rows...
+42 Enabling components ready.
+Formatting Dependent component rows...
+42 Dependent components ready.
+Saving Excel file with both component tables...
+Excel file saved with both component sheets: C:\...\ivn_requirements_Example_Policy_Document_2026-02-04_1530.xlsx
+   - Enabling Components: 42 items
+   - Dependent Components: 42 items
+   - Save time: 0.5s
+All operations complete | Total elapsed: 12.3s
+Results saved to: C:\...\ivn_requirements_Example_Policy_Document_2026-02-04_1530.xlsx
+```
+
+================================================================================
+ERROR HANDLING LOGIC
+================================================================================
+
+1. Download errors:
+   - Retry adapter handles transient failures (429, 500-504).
+   - After 5 retries, exception caught, logged, returns None.
+   - Main function checks for None path and exits gracefully.
+
+2. File dialog errors:
+   - Exception caught if tkinter fails.
+   - Error message printed, returns (None, "").
+
+3. Empty inputs:
+   - URL input loops until non-empty string provided.
+   - Local file URL prompt loops until non-empty string provided.
+
+4. Invalid menu choice:
+   - Prints error, returns (None, "").
+
+5. PDF metadata extraction:
+   - pikepdf install attempted; failure logged, continues without metadata.
+   - pikepdf open errors caught, logged, falls back to regex detection.
+
+6. Section detection:
+   - Few sections (<3) triggers fallback pattern-based detection.
+   - Logs which method found more sections.
+
+7. Component extraction:
+   - No policy requirements: falls back to standard requirements.
+   - No standard requirements: falls back to best sentence.
+   - No structured components: falls back to text-level extraction.
+
+8. Excel save:
+   - Primary filename error: catches exception, tries simplified fallback filename.
+   - Fallback error: catches exception, logs failure, returns None.
+
+================================================================================
+CORRECT LEARNING MODEL BEHAVIOR / WORKING CORRECTLY
+================================================================================
+
+A learning model that correctly understands this prompt should be able to:
+
+1. Recreate the complete function set with equivalent logic and signatures.
+2. Maintain the dual-sheet output structure with identical content.
+3. Enforce mandatory URL prompt for both input modes.
+4. Preserve section numbers in component names.
+5. Implement the multi-level fallback chain for requirement extraction.
+6. Include metadata/regex title suggestion with user confirmation loop.
+7. Apply all text cleanup operations (hyphenation, whitespace, quotes, OCR fixes).
+8. Implement the scoring system for policy requirement detection.
+9. Handle all error cases with appropriate fallbacks.
+10. Generate properly formatted Excel output with column widths and text wrapping.
+
+The model should understand that both Enabling and Dependent sheets contain the same validated components - the distinction is semantic for downstream workflows, not a data difference.
+
+================================================================================
+EXAMPLE SCENARIOS / TEST CASES
+================================================================================
+
+SCENARIO 1: URL Download Mode
+- Input: Choose option 1, paste URL to Executive Order PDF.
+- Expected: Download progress shown, title extracted from metadata or content, sections detected based on font hierarchy, policy requirements scored and extracted, Excel saved with both sheets.
+
+SCENARIO 2: Local File Mode
+- Input: Choose option 2, select PDF from file dialog, enter authoritative URL when prompted.
+- Expected: File path confirmed, URL stored, extraction proceeds as above.
+
+SCENARIO 3: Sparse Document Structure
+- Input: PDF with minimal visual hierarchy (uniform font sizes).
+- Expected: Primary section detection finds few headers, fallback pattern detection triggered, components extracted from pattern-matched sections or text-level fallback.
+
+SCENARIO 4: Title Override
+- Input: Any PDF where suggested title is incorrect.
+- Expected: User types corrected title at prompt, new title used in filename and Source column.
+
+SCENARIO 5: Network Failure
+- Input: URL to unavailable server.
+- Expected: Retry attempts logged, eventual failure message, script exits gracefully.
+
+SCENARIO 6: Invalid PDF
+- Input: File that isn't actually a PDF.
+- Expected: pdfminer raises exception, script should handle gracefully (current implementation may need enhancement here).
+
+================================================================================
+EVALUATION CRITERIA FOR PROMPT FILE DELIVERY
+================================================================================
+
+This prompt file is successful if:
+1. A naive learning model given ONLY this file can regenerate a functionally equivalent script.
+2. All function names, parameters, and behaviors are documented.
+3. All data structures and their fields are specified.
+4. All user interactions and prompts are described.
+5. All error handling paths are enumerated.
+6. Output format and location are precisely defined.
+7. Success criteria are measurable and observable.
+8. The prompt remains in plain English without code blocks (except for example output).
+9. The prompt is complete enough that no external reference is needed.
