@@ -1,0 +1,89 @@
+Problem Explanation:
+This script implements a strict referential alignment management system for Components and Alignments across multiple Sources. It enforces referential integrity, alignment constraints, and transactional safety for updates.
+
+Broader Context:
+In data integration, mapping, or governance systems, it is critical to ensure that all relationships (alignments) between entities (components) are valid, unique, and non-circular, and that all entities reference valid sources. This script is designed for such environments, ensuring data quality and preventing partial or invalid updates.
+
+Concepts to Understand:
+- Referential Integrity: Ensuring all references point to valid, existing entities.
+- Transactional Updates: All-or-nothing application of changes.
+- Alignment Constraints: Directionality, uniqueness, non-reflexivity, and cross-source requirements.
+
+Prerequisite Knowledge:
+- Basic Python programming
+- JSON data structures
+- Transactional logic and error handling
+- Data validation principles
+
+Domain-Specific Terms:
+- Source: An origin or category to which a component belongs.
+- Component: An entity that can be aligned to another.
+- Alignment: A directional relationship from one component to another.
+
+
+High-Level Description:
+The script validates input data (JSON) for sources, components, and alignments. It checks all referential and alignment constraints, collects errors, and only applies updates if all checks pass. Updates are transactional: either all changes are applied, or none are. Errors are reported in detail if validation fails.
+
+The script now also provides detailed progress and timing information for each major operation (input parsing, validation, error reporting, transactional update). As each operation runs, it prints:
+- Which operation is being performed
+- How many minutes and seconds have elapsed in that operation
+- How many minutes and seconds are estimated to remain for that operation (using historical timing data)
+- How many operations are complete and how many remain
+- An estimated time to complete all operations
+The script records the actual time taken for each operation in a persistent file (ivn_component_alignment_management_system_timings.json) and uses this data to improve future time estimates.
+
+Why the Script Exists:
+To automate safe, strict management of component alignments, preventing data corruption and ensuring all relationships are valid before any changes are made.
+
+Role of the Script:
+Acts as a gatekeeper and transaction manager for component alignment updates.
+
+Key Concepts and Learning Data:
+- Referential integrity enforcement
+- Transactional update logic
+- Error collection and reporting
+- Input validation
+
+
+Input/Output Definitions:
+- Input: JSON via stdin (when no file argument provided) or from a specified file path (command-line argument). Keys: sources (list), components (list of dicts with id and source), alignments (list of dicts with from and to).
+- Output: JSON to stdout and saved file. Contains 'result' (status/summary or errors) and 'progress' (operation counts, timings, estimates).
+- Progress and timing information is printed to stdout as each operation runs and included in the output.
+- Operation timing data is stored in ivn_component_alignment_management_system_timings.json for future runs.
+
+Output Structure and Validity Checks:
+- Output must be valid JSON with 'result' and 'progress' keys.
+- 'result': On success, status is 'success' with summary including counts and full lists of sources, components, alignments applied. On error, status is 'error' with errors list.
+- 'progress': Includes operations_completed, total_operations, timings dict, and estimated_total_time.
+- Output is always saved to a timestamped file (e.g., output_202602082116.json) in the same directory as the script.
+- The full filepath of the output file is printed to stdout during and at the end of execution.
+
+Successful Outcome Definition:
+- All input data is valid and all updates are applied atomically.
+- No partial updates occur.
+- Errors are reported clearly and completely if validation fails.
+
+Error Handling Logic:
+- All validation errors are collected and reported before any changes are made.
+- No changes are made if any error is found.
+
+Successful Execution Criteria:
+- Script returns a success status and summary if all checks pass.
+- Script returns an error status and detailed error report if any check fails.
+
+
+Evaluation of Output:
+- Output must match the structure with 'result' and 'progress'.
+- 'result' must include full applied data on success, matching input counts and lists.
+- 'progress' must accurately reflect operations completed, timings, and estimates based on execution.
+- Progress improves over time with more timing data.
+
+Correct Learning Model Behavior:
+- The model should be able to regenerate the script to enforce all described rules and output formats.
+- The model should ensure transactional safety and strict validation.
+
+Example Scenarios/Test Cases:
+1. Valid input: 'result' includes success status, summary with counts and full lists of applied data, 'progress' with completed operations and timings.
+2. Invalid input: 'result' with error status and errors list, 'progress' data.
+3. Attempted partial update: Not allowed; full validation before any 'application'.
+4. Output upload: Evaluate alignment with prompt specifications.
