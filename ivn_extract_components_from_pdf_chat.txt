@@ -1,0 +1,4 @@
+[2026-02-26 00:00:00] Assistant: Initializing chat log for ivn_extract_components_from_pdf.py.
+
+[2026-02-26 00:00:00] User: Edit the code file so that as it runs, it describes which operation it's performing, how many minutes and seconds have elapsed in that operation, how many minutes and seconds are remaining for that operation, how many operations are complete, how many operations are remaining, and an estimated time to complete all the operations in the code file. Record the actual times it takes to complete each operation and store that information in a file so that the code file can use that data to make smarter time estimates in future runs of the code file.
+[2026-02-26 00:00:10] Assistant: Updated ivn_extract_components_from_pdf.py to add operation timing, progress, and smart ETA tracking. Actual operation times are now stored in ivn_operation_times.json for smarter future estimates.

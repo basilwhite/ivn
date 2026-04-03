@@ -1,3 +1,8 @@
+================================================================================
+VERSION CONTROL AND FILE MAINTENANCE POLICY
+================================================================================
+
+Only ivn_extract_components_from_pdf.py is maintained as the latest version. Older versions (e.g., ivn_extract_components_from_pdf-2026-01-05.py, ivn_extract_components_from_pdf20250921.py) and their support files are not referenced or updated. All synchronization, chat logs, and prompt documentation apply exclusively to ivn_extract_components_from_pdf.py.
 ivn_extract_components_from_pdf.py prompt
 Date: 2026-02-04
 
@@ -183,6 +188,15 @@ The script serves as a preprocessing tool in a larger governance document manage
 KEY CONCEPTS AND LEARNING DATA (FUNCTIONS/BEHAVIORS)
 ================================================================================
 
+OPERATION TIMING AND PROGRESS TRACKING:
+The script now tracks and reports the following for each major operation:
+   - Which operation is being performed
+   - Minutes and seconds elapsed in the operation
+   - Estimated minutes and seconds remaining for the operation
+   - Number of operations complete and remaining
+   - Estimated time to complete all operations
+Actual times for each operation are recorded in ivn_operation_times.json and used for smarter ETA calculations in future runs.
+All progress and timing information is printed to the console during execution.
 REQUIREMENT DETECTION:
 - is_likely_requirement(text): Returns True if text contains requirement language. Checks minimum word count (7), excludes short all-caps text, requires presence of policy verbs or obligation indicators. Returns True for sentences starting with ordinals ("First,") or containing U.S.C. references.
 
