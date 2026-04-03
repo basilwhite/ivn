@@ -369,7 +369,7 @@ def build_pairs_to_predict(
             if comp_source and tobe_source and comp_source == tobe_source:
                 continue
             enabling = str(comp.get("Component", comp.get("component_name", ""))).strip()
-            dependent = str(tobe.get("Component", "")).strip()
+            dependent = str(tobe.get("Component", tobe.get("component_name", ""))).strip()
             if not enabling or not dependent:
                 continue
             pairs.append((enabling, dependent))
@@ -857,57 +857,32 @@ def infer_alignments(
                     dependent_source = str(row.get("Source", "")).strip()
                     break
 
+        # If the pair was in the original alignments, use its data as a base
         al_row = align_lookup.get((en, de), {})
+        rec = al_row.copy()
 
-        similarity = pick(al_row, "Similarity")
-        if not similarity:
-            similarity = f"{similar(en, de):.3f}"
-        confidence = pick(al_row, "Confidence")
-        if not confidence:
-            confidence = f"{prob:.3f}"
-
-        def _num(v: object) -> float:
-            try:
-                return float(v)
-            except Exception:
-                return 0.0
-
-        sim_num = _num(similarity)
-        conf_num = _num(confidence)
+        # Always overwrite with freshly calculated values for consistency
+        sim_num = similar(en, de)
+        conf_num = prob
         sim_x_conf = sim_num * conf_num
 
-        rec: Dict[str, object] = {
+        rec.update({
             "Enabling Source": enabling_source,
             "Enabling Component": en,
             "Enabling Component Description": en_meta.get("description", ""),
             "Dependent Component": de,
             "Dependent Component Description": de_meta.get("description", ""),
             "Dependent Source": dependent_source,
-            "Linkage mandated by what US Code or OMB policy?": pick(
-                al_row,
-                "Linkage mandated by what US Code or OMB policy?",
-                "linkage_mandated",
-            ),
             "Enabling Component URL": en_meta.get("url", ""),
             "Dependent Component URL": de_meta.get("url", ""),
             "Enabling Source Agency": get_agency(enabling_source),
             "Dependent Source Agency": get_agency(dependent_source),
-            "Notes and keywords": pick(al_row, "Notes and keywords", "notes"),
-            "Keywords Tab Items Found": pick(al_row, "Keywords Tab Items Found", "keywords_found"),
             "Enabling Component Office of Primary Interest": en_meta.get("office", ""),
             "Dependent Component Office of Primary Interest": de_meta.get("office", ""),
-            "Edits": pick(al_row, "Edits"),
-            "Valid": pick(al_row, "Valid"),
             "Similarity": sim_num,
             "Confidence": conf_num,
-            "Transitive Support": pick(al_row, "Transitive Support"),
-            "Matched Enabling Index": pick(al_row, "Matched Enabling Index"),
-            "Matched Dependent Index": pick(al_row, "Matched Dependent Index"),
-            "Alignment Rationale": pick(al_row, "Alignment Rationale"),
-            "Enabling Fetch Status": pick(al_row, "Enabling Fetch Status"),
-            "Dependent Fetch Status": pick(al_row, "Dependent Fetch Status"),
             "SimilarityTimesConfidence": sim_x_conf,
-        }
+        })
         results.append(rec)
 
     print_verbose(f"Kept {kept:,} inferred alignments above threshold {threshold:.3f}")
@@ -933,36 +908,46 @@ def write_output_excel(
     inferred_alignments: pd.DataFrame,
     verification_issues_df: Optional[pd.DataFrame],
 ) -> None:
+    """Write dataframes to an Excel file with robust sanitization."""
     try:
         with pd.ExcelWriter(output_path, engine="openpyxl") as writer:
-            # Sanitize inferred alignments; fall back explicitly if sanitizer returns None
+            # Sanitize and write inferred alignments
             safe_inferred = sanitize_df_for_excel(inferred_alignments)
-            if safe_inferred is None:
+            if safe_inferred is None:  # Fallback if sanitizer fails
+                print_verbose("Warning: Sanitizer failed for Inferred_Alignments, attempting direct write.")
                 safe_inferred = inferred_alignments
-            safe_inferred.to_excel(writer, sheet_name="Inferred_Alignments"[:31], index=False)
+            
+            if len(safe_inferred) > MAX_EXCEL_ROWS:
+                print_verbose(f"Warning: Truncating Inferred_Alignments from {len(safe_inferred)} to {MAX_EXCEL_ROWS} rows for Excel.")
+                safe_inferred = safe_inferred.head(MAX_EXCEL_ROWS)
 
-            # Ensure we always have a verification_issues_df, even if empty
-            if verification_issues_df is None or verification_issues_df.empty:
-                empty_cols = [
-                    "row",
-                    "issue_type",
-                    "component",
-                    "field",
-                    "expected",
-                    "actual",
-                    "message",
-                ]
-                verification_issues_df = pd.DataFrame(columns=empty_cols)
+            safe_inferred.to_excel(writer, sheet_name="Inferred_Alignments"[:31], index=False)
+            print_verbose(f"Wrote {len(safe_inferred)} rows to Inferred_Alignments sheet.")
+
+            # Sanitize and write verification issues
+            if verification_issues_df is None:
+                verification_issues_df = pd.DataFrame(columns=["row", "issue_type", "message"])
 
             safe_ver = sanitize_df_for_excel(verification_issues_df)
-            if safe_ver is None:
+            if safe_ver is None: # Fallback if sanitizer fails
+                print_verbose("Warning: Sanitizer failed for verification_issues, attempting direct write.")
                 safe_ver = verification_issues_df
-            safe_ver.to_excel(writer, sheet_name="verification_issues"[:31], index=False)
-    except Exception:
-        import traceback
 
-        print_verbose("Error while writing Excel output:")
+            safe_ver.to_excel(writer, sheet_name="verification_issues"[:31], index=False)
+            print_verbose(f"Wrote {len(safe_ver)} rows to verification_issues sheet.")
+
+    except Exception as e:
+        import traceback
+        print_verbose(f"Error during Excel write to '{output_path}': {e}")
         traceback.print_exc()
+        # Attempt to save as CSV as a fallback
+        try:
+            csv_path = output_path.with_suffix('.csv')
+            print_verbose(f"Attempting to save main results as CSV to: {csv_path}")
+            inferred_alignments.to_csv(csv_path, index=False)
+            print_verbose("CSV fallback save successful.")
+        except Exception as csv_e:
+            print_verbose(f"CSV fallback save also failed: {csv_e}")
         raise
 
 
@@ -1154,8 +1139,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             "issues": [],
         })
 
-    write_output_excel(output_excel_path, final_df, ver_df)
-    print_verbose(f"Success. Excel output written to {output_excel_path}")
+    output_filename = f"IVN_Component_Crosswalk_Output({get_timestamp()}).xlsx"
+    output_path = script_dir / output_filename
+    write_output_excel(output_path, final_df, ver_df)
+    print_verbose(f"Output successfully written to {output_path}")
+
+    print_verbose("Done.")
     return 0
 
 

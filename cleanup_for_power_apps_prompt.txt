@@ -1,0 +1,91 @@
+**Overarching Problem:**
+The user needs to clean and prepare an Excel file to make it compatible with Microsoft Power Apps. The process is error-prone and tedious due to Power Apps' strict limitations on cell character counts and its inability to handle certain special characters or formatting. The goal is to automate this pre-processing to prevent data import errors.
+
+**Broader Context:**
+The script is a key component in a data pipeline for importing data into Power Apps. The source data is often inconsistent and contains formatting and characters that are non-compliant. This script serves as an intelligent, interactive pre-processing utility to ensure data integrity, significantly reducing the manual effort and iterative trial-and-error involved in the import process.
+
+**Evolution of Understanding:**
+1.  **Initial Request:** The user began with a simple need: trim cells and remove some special characters.
+2.  **Refined Requirements:** The request evolved to include a specific list of characters and a precise order of cleaning operations.
+3.  **Performance and UX:** The need for progress tracking and time estimation emerged to handle large files and provide better user feedback.
+4.  **Synchronization Workflow:** The user introduced the concept of a self-documenting system where chat logs and prompt files are synchronized with the code to aid a learning model.
+5.  **Proactive & Interactive Cleaning:** Analysis of the user's manual workflow in Power Apps revealed the true problem: a reactive, tedious cycle of fixing errors one by one. The script needed to become proactive by using a configuration for column lengths, interactive by prompting the user for missing information, and transparent by generating detailed reports.
+
+**Concepts to Understand:**
+*   **File I/O:** Reading/writing Excel files (`openpyxl`) and JSON files.
+*   **String Manipulation:** Advanced regular expressions for finding and removing control characters and special symbols.
+*   **GUI for File Selection:** Using `tkinter` for a native file dialog.
+*   **Configuration Management:** Using an external JSON file (`column_config.json`) to control script behavior.
+*   **Interactive Command-Line Interface:** Prompting the user for input during runtime to dynamically update the configuration.
+*   **Data Persistence:** Storing and retrieving performance data (`timings.json`) and configuration data (`column_config.json`).
+*   **Auditing and Reporting:** Generating a detailed JSON report of all changes made.
+*   **Iterative Workflow:** Looping the main process to allow for manual review and re-running the script.
+
+**Prerequisite Knowledge:**
+*   Solid Python programming skills.
+*   Experience with the `openpyxl` library.
+*   Strong understanding of regular expressions, including character classes and control characters.
+*   Knowledge of the JSON data format.
+*   Familiarity with creating interactive command-line applications.
+
+**Domain-Specific Terms:**
+*   **Power Apps:** A low-code platform for building business apps.
+*   **Control Characters:** Non-printable characters in a character set (e.g., `0x02`), which often cause issues in data imports.
+*   **Configuration File:** An external file (e.g., JSON) that stores parameters and settings for a program.
+
+**High-Level Description of the Code:**
+The Python script `cleanup_for_power_apps.py` is an intelligent, interactive command-line utility designed to clean and validate Excel files for import into Power Apps. It features a GUI for file selection and executes a series of configurable cleaning operations. Its key features include a self-learning mechanism for column length restrictions via interactive user prompts, detailed performance tracking, and a comprehensive JSON report that audits every change made. The script also supports an iterative "Fix and Re-run" workflow, allowing users to combine automated cleaning with manual review.
+
+**Why the Code Exists:**
+To transform a tedious, manual, and reactive data cleaning process into an efficient, proactive, and automated workflow. It saves significant time and dramatically reduces the errors encountered when importing data into Power Apps.
+
+**Role of the Code File:**
+To serve as a powerful, standalone data preparation utility that learns from user input and provides a transparent, auditable cleaning process.
+
+**Key Concepts and Learning Data for the Learning Model:**
+*   **Inputs:**
+    1.  An Excel file (`.xlsx`) selected by the user.
+    2.  A `column_config.json` file containing column names and their max character lengths.
+    3.  A `timings.json` file for historical performance data.
+    4.  Interactive user input from the command line.
+*   **Outputs:**
+    1.  The original Excel file, modified in place with cleaned data.
+    2.  An updated `column_config.json` file, which the script learns and enhances over time.
+    3.  An updated `timings.json` file.
+    4.  A `_cleanup_report.json` file detailing every modification made during the run.
+*   **Core Logic:**
+    1.  **Load Configuration:** Read `column_config.json` and `timings.json`.
+    2.  **Iterate Operations:** For each operation (special char removal, trimming, quote replacement, space replacement):
+        *   Iterate through every cell in every sheet.
+        *   Apply the operation.
+        *   **Interactive Trimming:** If the "Trim cells" operation finds a cell in an unknown column that exceeds the default length, it must pause and prompt the user for the correct limit, then save this new information to `column_config.json`.
+        *   **Log Changes:** If a cell's value is changed, log the "before" and "after" state to a report list.
+    3.  **Save Files:** Save the modified Excel file, the updated `timings.json`, and the new `_cleanup_report.json`.
+    4.  **Iterative Workflow:** After a run, prompt the user if they wish to manually open the file. If so, open it, wait for them to close it, and then ask if they want to re-run the entire process.
+
+**Successful Outcome and Execution Criteria:**
+*   **Successful Outcome:** The output Excel file is fully compliant with Power Apps requirements. The `column_config.json` is updated with any new column length information provided by the user. A detailed `_cleanup_report.json` is generated.
+*   **Successful Execution:** The script completes a full run (or multiple runs in a session) without unhandled exceptions.
+*   **Error Handling:** A top-level `try...except` block catches and reports any unexpected errors.
+
+**How to Evaluate the Output:**
+*   **Primary:** Attempt to import the cleaned Excel file into Power Apps. The import should succeed without any data truncation or invalid character errors for the columns processed.
+*   **Secondary:** Review the `_cleanup_report.json` to confirm that the changes made were correct and expected.
+*   **Tertiary:** Manually inspect the cleaned Excel file to spot-check the changes.
+
+**Correct Learning Model Behavior:**
+A "working correctly" learning model must generate a script that replicates this entire interactive and stateful workflow. The generated script must:
+1.  Read from and write to the three separate JSON files (`column_config`, `timings`, `cleanup_report`).
+2.  Correctly identify column headers and apply column-specific logic.
+3.  Implement the interactive command-line prompt to ask the user for column lengths.
+4.  Correctly update and save the configuration based on user input.
+5.  Generate a detailed JSON report of all changes.
+6.  Implement the main `while` loop for the "Fix and Re-run" workflow.
+
+**Example Scenarios/Test Cases:**
+*   **Scenario 1 (Interactive Learning):** An Excel file has a column named "Notes" (not in the config) with a cell containing 5000 characters.
+    *   **Expected Behavior:** The script should pause, print a message about the "Notes" column, and ask for the correct max length. The user enters `8000`. The script should then update `column_config.json` with `"notes": 8000`, truncate the cell to 8000 characters (if it was longer), and continue.
+*   **Scenario 2 (Reporting):** A cell contains a bullet point (`•`) and smart quotes.
+    *   **Expected Behavior:** The script removes the bullet point and replaces the quotes. The `_cleanup_report.json` file should contain entries for this cell, showing the original value and the new value for both the "Delete special characters" and "Replace smart quotes" operations.
+*   **Scenario 3 (Re-run Workflow):** The user runs the script. After completion, they choose to manually review the file, open it, make a change, and save it. They then choose to re-run the cleanup.
+    *   **Expected Behavior:** The script should start the entire process over again on the newly modified file.

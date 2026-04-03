@@ -1,0 +1,930 @@
+[
+  {
+    "rowNumber": 1,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Goal 1: Data Governance & Leadership USDA will strengthen enterprise data governance and data leadership to coordinate and enhance data and analytics development, management, infrastructure, and tools. Investing in data governance is key to navigate the increasing volume and complexity of data that USDA collects and shares. This investment will be driven by data leaders, especially the Assistant Chief Data Officers (ACDOs) at each Mission Area and Staff Office. These data leaders will promote best practices and frameworks across the Department to ensure USDA manages data effectively. Data governance processes driven by our data leaders will benefit USDA's stakeholders by supporting the preparation, integration, analysis, and sharing of data. Specifically, accurate and high-qual_x0002_ity data supports better resource allocation and strategic planning and enables data analytics. Data governance also promotes trans_x0002_parency by identifying clear data-related roles, responsibilities, and processes, while helping our organization comply with federal regulations and laws, including those related to data security. We aim to increase our support for data governance over the next three years by evolving the ACDO role in partnership with the Chief Data Officer (CDO), communicating the value of our data investment, and working with groups within USDA and across Government to strengthen the data program https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "acdo",
+      "data",
+      "governance",
+      "leaders",
+      "chief",
+      "organization",
+      "navigate",
+      "investment"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Goal",
+      "Data Governance",
+      "Leadership USDA",
+      "Assistant Chief Data Officers",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "ACDO",
+      "CDO"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Goal 1: Data Governance & Leadership",
+      "Component Description": "USDA will strengthen enterprise data governance and data leadership to coordinate and enhance data and analytics development, management, infrastructure, and tools. Investing in data governance is key to navigate the increasing volume and complexity of data that USDA collects and shares. This investment will be driven by data leaders, especially the Assistant Chief Data Officers (ACDOs) at each Mission Area and Staff Office. These data leaders will promote best practices and frameworks across the Department to ensure USDA manages data effectively. Data governance processes driven by our data leaders will benefit USDA's stakeholders by supporting the preparation, integration, analysis, and sharing of data. Specifically, accurate and high-qual_x0002_ity data supports better resource allocation and strategic planning and enables data analytics. Data governance also promotes trans_x0002_parency by identifying clear data-related roles, responsibilities, and processes, while helping our organization comply with federal regulations and laws, including those related to data security. We aim to increase our support for data governance over the next three years by evolving the ACDO role in partnership with the Chief Data Officer (CDO), communicating the value of our data investment, and working with groups within USDA and across Government to strengthen the data program",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 2,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 1.1: Evolve the USDA data governance structure We will continue maturing the data governance function at USDA by establishing department-wide data governance priorities, including mapping governance groups, respon_x0002_sibilities, and leadership. We will conduct data maturity assessments to continuously identify both targeted and enterprise-wide opportunities to improve the quality of data and analytics. We will also develop Mission Area-spe_x0002_cific data & analytics modernization plans covering the next five years to ensure strategic alignment. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "data",
+      "governance",
+      "strategy",
+      "analytics",
+      "objective",
+      "alignment",
+      "function",
+      "department-wide"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Evolve the USDA",
+      "Mission Area",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 1.1: Evolve the USDA data governance structure",
+      "Component Description": "We will continue maturing the data governance function at USDA by establishing department-wide data governance priorities, including mapping governance groups, respon_x0002_sibilities, and leadership. We will conduct data maturity assessments to continuously identify both targeted and enterprise-wide opportunities to improve the quality of data and analytics. We will also develop Mission Area-spe_x0002_cific data & analytics modernization plans covering the next five years to ensure strategic alignment.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 3,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 1.2:\nMeasure and maximize the organizational\nvalue of data analytics at USDA. We will measure and communicate the value of USDA's data investment. To measure the value that data and analytics add to USDA mission delivery, we will develop suitable metrics to quantify the value of datasets and data products, consistently track data quality, and report progress on these metrics as they relate to per_x0002_formance, evaluation, and risk. We will also collect and share success stories to find additional ways to share value and promote transparency and accountability. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "data",
+      "value",
+      "measure",
+      "strategy",
+      "analytics",
+      "consistently",
+      "maximize",
+      "suitable"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Measure and",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy",
+      "data analytics usda"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 1.2:\nMeasure and maximize the organizational\nvalue of data analytics at USDA.",
+      "Component Description": "We will measure and communicate the value of USDA's data investment. To measure the value that data and analytics add to USDA mission delivery, we will develop suitable metrics to quantify the value of datasets and data products, consistently track data quality, and report progress on these metrics as they relate to per_x0002_formance, evaluation, and risk. We will also collect and share success stories to find additional ways to share value and promote transparency and accountability.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 4,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 1.3:\nMature the ACDO role. We will work to further define the role and core respon_x0002_sibilities of Assistant Chief Data Officers (ACDOs) to help ensure they have access to the resources to continue to meet Mission Area needs for data, analytics, and governance. We will also mature and launch an ACDO Scorecard to provide a holistic view of strategic data priorities and ensure that the role is properly aligned to agency and Department needs. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "acdo",
+      "data",
+      "role",
+      "strategy",
+      "mature",
+      "holistic",
+      "scorecard",
+      "agency"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Mature the ACDO",
+      "Assistant Chief Data Officers",
+      "Mission Area",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "ACDO"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 1.3:\nMature the ACDO role.",
+      "Component Description": "We will work to further define the role and core respon_x0002_sibilities of Assistant Chief Data Officers (ACDOs) to help ensure they have access to the resources to continue to meet Mission Area needs for data, analytics, and governance. We will also mature and launch an ACDO Scorecard to provide a holistic view of strategic data priorities and ensure that the role is properly aligned to agency and Department needs.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 5,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 1.4:\nPromote cross-departmental & cross_x0002_government data & artificial intelligence\ncollaboration. We will continue to invest in partnerships both within USDA and with other agencies across the Federal Gov_x0002_ernment. Internally, we will continue to work with our staff offices, IT, evidence, performance, and customer experi_x0002_ence counterparts to find additional opportunities to work together and further the goals of data programs across USDA. We will expand collaboration and partnerships with Geospatial leaders and the C-suite via progress reports on data strategy implementation and align our data priorities to Cloud policy. We will also continue our participation in the Federal CDO Council and related work, and participate in other cross-government councils such as the White House Office of Science and Technology Policy (OSTP) and working groups to further data and AI at USDA. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "it",
+      "data",
+      "strategy",
+      "continue",
+      "collaboration",
+      "agencies",
+      "experi_x0002_ence",
+      "performance"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Federal CDO Council and",
+      "White House Office of Science and Technology Policy",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "IT",
+      "CDO",
+      "OSTP",
+      "AI"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 1.4:\nPromote cross-departmental & cross_x0002_government data & artificial intelligence\ncollaboration.",
+      "Component Description": "We will continue to invest in partnerships both within USDA and with other agencies across the Federal Gov_x0002_ernment. Internally, we will continue to work with our staff offices, IT, evidence, performance, and customer experi_x0002_ence counterparts to find additional opportunities to work together and further the goals of data programs across USDA. We will expand collaboration and partnerships with Geospatial leaders and the C-suite via progress reports on data strategy implementation and align our data priorities to Cloud policy. We will also continue our participation in the Federal CDO Council and related work, and participate in other cross-government councils such as the White House Office of Science and Technology Policy (OSTP) and working groups to further data and AI at USDA.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 6,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Goal 2: Data & Analytics Workforce USDA will strengthen data fluency across the Department, understand key drivers for data workplace retention, and hire for the future to build a strong, data-informed workforce. The USDA workforce is our most important asset. Without a diverse and data-informed workforce, USDA cannot deliver on its various missions. USDA must continue investing in recruitment, retention, and upskilling efforts and make USDA the best place to work in the public sector for data scientists, data analysts, geographic information system (GIS) analysts, and the data workforce at large. Our planned investments in the data and analytics workforce include formal training events, but also inclusion in various Communities of Practice, participating in our annual Ag Data Viz Day and GeoSymposium, competing in various data challenges and hackathons, and more. We must also strengthen our data workforce to handle new and emerging tools and techniques to keep their skills relevant to what's needed for USDA. Lastly, we will continue to make USDA a magnet for bright talent looking to serve and find ways to recruit top talent more efficiently. Agency leaders across USDA will play a crucial role in recruiting and retaining the data workforce. We will work over the next three years to build and keep a strong, data-informed workforce. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "gis",
+      "data",
+      "workforce",
+      "data-informed",
+      "various",
+      "recruiting",
+      "challenges",
+      "scientists"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Goal",
+      "Analytics Workforce USDA",
+      "The USDA",
+      "Communities of Practice",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "GIS"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Goal 2: Data & Analytics Workforce",
+      "Component Description": "USDA will strengthen data fluency across the Department, understand key drivers for data workplace retention, and hire for the future to build a strong, data-informed workforce. The USDA workforce is our most important asset. Without a diverse and data-informed workforce, USDA cannot deliver on its various missions. USDA must continue investing in recruitment, retention, and upskilling efforts and make USDA the best place to work in the public sector for data scientists, data analysts, geographic information system (GIS) analysts, and the data workforce at large. Our planned investments in the data and analytics workforce include formal training events, but also inclusion in various Communities of Practice, participating in our annual Ag Data Viz Day and GeoSymposium, competing in various data challenges and hackathons, and more. We must also strengthen our data workforce to handle new and emerging tools and techniques to keep their skills relevant to what's needed for USDA. Lastly, we will continue to make USDA a magnet for bright talent looking to serve and find ways to recruit top talent more efficiently. Agency leaders across USDA will play a crucial role in recruiting and retaining the data workforce. We will work over the next three years to build and keep a strong, data-informed workforce.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 7,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 2.1:\nExpand our ability to recruit and retain the USDA \nfederal data workforce We will continue to make USDA the best place to work for our data workforce. We will facilitate a conversation with stakeholders to share best practices for recruitment initiatives and retention of data practitioners across the Department. Additionally, USDA will leverage Department and Federal-wide hiring actions and explore rapid-hire options for data scientists. These efforts will allow USDA to recruit top candidates more efficiently. We will also explore developing a human capital plan, in partnership with the Chief Human Capital Officer (CHCO), that defines and maps steps to strengthen the data workforce. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "chco",
+      "data",
+      "workforce",
+      "strategy",
+      "recruit",
+      "conversation",
+      "additionally",
+      "efficiently"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Department and Federal",
+      "Chief Human Capital Officer",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "CHCO"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 2.1:\nExpand our ability to recruit and retain the USDA \nfederal data workforce",
+      "Component Description": "We will continue to make USDA the best place to work for our data workforce. We will facilitate a conversation with stakeholders to share best practices for recruitment initiatives and retention of data practitioners across the Department. Additionally, USDA will leverage Department and Federal-wide hiring actions and explore rapid-hire options for data scientists. These efforts will allow USDA to recruit top candidates more efficiently. We will also explore developing a human capital plan, in partnership with the Chief Human Capital Officer (CHCO), that defines and maps steps to strengthen the data workforce.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 8,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 2.2:\nPromote USDA-wide workforce training & \nupskilling initiatives. We will continue promoting workforce training and upskilling initiatives by scaling and transitioning the Food and Nutrition Service's (FNS) Data Science Training Program pilot to a USDA-wide program. We will conduct a follow-up skills assessment survey to understand growth and changes to our data workforce and help us prioritize future initiatives. We will also partner with the USDA Digital Service to align data and IT workforce strategies for mutual benefit. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "fns",
+      "data",
+      "workforce",
+      "training",
+      "initiatives",
+      "nutrition",
+      "skills",
+      "survey"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Promote USDA",
+      "Food and Nutrition Service",
+      "Data Science Training Program",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "FNS",
+      "IT"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 2.2:\nPromote USDA-wide workforce training & \nupskilling initiatives.",
+      "Component Description": "We will continue promoting workforce training and upskilling initiatives by scaling and transitioning the Food and Nutrition Service's (FNS) Data Science Training Program pilot to a USDA-wide program. We will conduct a follow-up skills assessment survey to understand growth and changes to our data workforce and help us prioritize future initiatives. We will also partner with the USDA Digital Service to align data and IT workforce strategies for mutual benefit.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 9,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 2.3:\nSupport centralized analytics teams to handle \nfuture challenges. We will outline responsibilities for centralized analytics teams and identify the minimum viable resources needed by ACDOs to oversee centralized analytics priorities within their Mission Area. We will share best practices for estab_x0002_lishing Mission Area-level communities of practice and promote existing USDA-wide communities of practice to ensure collaboration, innovation, and coordination across the Department. We will provide capacity where program areas are not resourced to stand up their own analytics teams and enable them to address cross-cutting analytics issues in the organization. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "analytics",
+      "data",
+      "centralized",
+      "teams",
+      "strategy",
+      "coordination",
+      "needed",
+      "responsibilities"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Mission Area",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy",
+      "centralized analytics teams"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 2.3:\nSupport centralized analytics teams to handle \nfuture challenges.",
+      "Component Description": "We will outline responsibilities for centralized analytics teams and identify the minimum viable resources needed by ACDOs to oversee centralized analytics priorities within their Mission Area. We will share best practices for estab_x0002_lishing Mission Area-level communities of practice and promote existing USDA-wide communities of practice to ensure collaboration, innovation, and coordination across the Department. We will provide capacity where program areas are not resourced to stand up their own analytics teams and enable them to address cross-cutting analytics issues in the organization.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 10,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 2.4:\nUpskill USDA to support advanced analytics and \nartificial intelligence (AI). We will work with stakeholders across the Department to support the training of the data workforce on advanced analytics and AI, including ethical and responsible use of data as well as avoidance of risk and bias. We will also coordinate across data and research communities to identify how we can build comprehensive training capabilities that include the proper use of artificial intelligence. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "ai",
+      "data",
+      "strategy",
+      "support",
+      "advanced",
+      "include",
+      "ethical",
+      "upskill"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Upskill USDA",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy",
+      "fy2024-2026 usda"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "AI"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 2.4:\nUpskill USDA to support advanced analytics and \nartificial intelligence (AI).",
+      "Component Description": "We will work with stakeholders across the Department to support the training of the data workforce on advanced analytics and AI, including ethical and responsible use of data as well as avoidance of risk and bias. We will also coordinate across data and research communities to identify how we can build comprehensive training capabilities that include the proper use of artificial intelligence.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 11,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Goal 3: Common Data & Analytics Toolset USDA will expand and mature EDAPT, while also exploring new enterprise architecture, infrastructure, and analytics tools to enable shared access and use of data to achieve our mission and drive innovation. USDA invests in shared data platforms and analytics tools to eliminate data silos, promote enterprise data integrity and governance, enhance decision-making, and drive innovation. Shared data and analytics infrastructure helps ensure we proactively manage data as we collect it and make the best use of the data we collect and generate. Launched in 2017, the Enterprise Data Analytics Platform & Toolset (EDAPT) serves as USDA's centralized hub for storing, sharing, analyzing, and visualizing Departmental data. The deployment of EDAPT was central to USDA's first data strategy, since it provided a common platform for data analytics and data management. More recently, USDA launched the Open Data Platform (ODP), a common way to share data visualizations with the public. More opportunities remain to identify and deliver common enterprise services across USDA at an overall better value. Over the next three years, USDA will continue to scale and mature EDAPT while identifying additional tools, products, processes, and service offerings to help the Department improve operational efficiency. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "edapt",
+      "data",
+      "analytics",
+      "common",
+      "enterprise",
+      "enhance",
+      "storing",
+      "visualizing"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Goal",
+      "Common Data",
+      "Analytics Toolset USDA",
+      "Enterprise Data Analytics Platform",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "EDAPT",
+      "ODP"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Goal 3: Common Data & Analytics Toolset",
+      "Component Description": "USDA will expand and mature EDAPT, while also exploring new enterprise architecture, infrastructure, and analytics tools to enable shared access and use of data to achieve our mission and drive innovation. USDA invests in shared data platforms and analytics tools to eliminate data silos, promote enterprise data integrity and governance, enhance decision-making, and drive innovation. Shared data and analytics infrastructure helps ensure we proactively manage data as we collect it and make the best use of the data we collect and generate. Launched in 2017, the Enterprise Data Analytics Platform & Toolset (EDAPT) serves as USDA's centralized hub for storing, sharing, analyzing, and visualizing Departmental data. The deployment of EDAPT was central to USDA's first data strategy, since it provided a common platform for data analytics and data management. More recently, USDA launched the Open Data Platform (ODP), a common way to share data visualizations with the public. More opportunities remain to identify and deliver common enterprise services across USDA at an overall better value. Over the next three years, USDA will continue to scale and mature EDAPT while identifying additional tools, products, processes, and service offerings to help the Department improve operational efficiency.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 12,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 3.1:\nModernize Enterprise Data Analytics Platform \n& Toolset (EDAPT) in a cost-effective manner. We will continue to mature the EDAPT cost model and communicate the current and expected business value. We will look at ways to deliver a cost-effective enterprise data analytics infrastructure to USDA through partner_x0002_ship with the USDA Chief Technology Officer, OCIO's Digital Infrastructure Service Center (DISC), the Cloud Working Group, and by evaluating proofs-of-concept and opportunities to continuously improve EDAPT's existing processes, capabilities, and cost model. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "edapt",
+      "data",
+      "strategy",
+      "enterprise",
+      "analytics",
+      "current",
+      "cost-effective",
+      "digital"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Modernize Enterprise Data Analytics Platform",
+      "Chief Technology Officer",
+      "Digital Infrastructure Service Center",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "EDAPT",
+      "OCIO",
+      "DISC"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 3.1:\nModernize Enterprise Data Analytics Platform \n& Toolset (EDAPT) in a cost-effective manner.",
+      "Component Description": "We will continue to mature the EDAPT cost model and communicate the current and expected business value. We will look at ways to deliver a cost-effective enterprise data analytics infrastructure to USDA through partner_x0002_ship with the USDA Chief Technology Officer, OCIO's Digital Infrastructure Service Center (DISC), the Cloud Working Group, and by evaluating proofs-of-concept and opportunities to continuously improve EDAPT's existing processes, capabilities, and cost model.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 13,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 3.2:\nAdvance an enterprise data architecture that pro_x0002_motes data integration, standardization, & security. We will continue to promote data integration, standard_x0002_ization, and security, including exploring additional standardized data sharing agreements, standard operating procedures (SOPs), and training on enterprise platform usage and connectivity. We will map how EDAPT will interface with select emerging technologies and promote, when appropriate, conducting “analysis of alternatives” assessments to compare existing tools with alternatives to ensure USDA is using the best available tools for its needs. We will also work closely with the USDA Chief Privacy Officer to strengthen data privacy and with the Chief Information Security Officer (CISO) to promote zero trust principles across the data analytics portfolio. We will also work with the USDA Geospatial Information Officer (GIO) to improve EDAPT's geospatial capabilities and improve geospatial data integration across USDA. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "edapt",
+      "data",
+      "officer",
+      "integration",
+      "security",
+      "standardized",
+      "interface",
+      "compare"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Chief Privacy Officer",
+      "Chief Information Security Officer",
+      "Geospatial Information Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "EDAPT",
+      "CISO",
+      "GIO"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 3.2:\nAdvance an enterprise data architecture that pro_x0002_motes data integration, standardization, & security.",
+      "Component Description": "We will continue to promote data integration, standard_x0002_ization, and security, including exploring additional standardized data sharing agreements, standard operating procedures (SOPs), and training on enterprise platform usage and connectivity. We will map how EDAPT will interface with select emerging technologies and promote, when appropriate, conducting “analysis of alternatives” assessments to compare existing tools with alternatives to ensure USDA is using the best available tools for its needs. We will also work closely with the USDA Chief Privacy Officer to strengthen data privacy and with the Chief Information Security Officer (CISO) to promote zero trust principles across the data analytics portfolio. We will also work with the USDA Geospatial Information Officer (GIO) to improve EDAPT's geospatial capabilities and improve geospatial data integration across USDA.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 14,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 3.3:\nImprove geospatial data capabilities and\nintegrations. We will continue to integrate the Enterprise Geospatial Management Office (EGMO) into the Office of the Chief Data Officer. We will align initiatives, investments, and knowledge management with the USDA Geospatial Strat_x0002_egy, including initiatives for the improved integration of geospatial data and products with EDAPT and other tools. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "egmo",
+      "data",
+      "geospatial",
+      "office",
+      "strategy",
+      "integrate",
+      "improved",
+      "integrations"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Enterprise Geospatial Management Office",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy",
+      "office chief data"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "EGMO",
+      "EDAPT"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 3.3:\nImprove geospatial data capabilities and\nintegrations.",
+      "Component Description": "We will continue to integrate the Enterprise Geospatial Management Office (EGMO) into the Office of the Chief Data Officer. We will align initiatives, investments, and knowledge management with the USDA Geospatial Strat_x0002_egy, including initiatives for the improved integration of geospatial data and products with EDAPT and other tools.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 15,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 3.4:\nMonitor and, where applicable, reduce the cost and \ncomplexity of the data and analytics tool ecosystem. We will promote rationalization and standardization of analytics tools and award blanket purchase agreements (BPAs) to decrease license costs, eliminate barriers to access, and make the use of enterprise tools more efficient. We will continue to assess the data and analytics tool ecosystem to ensure maximum efficiency and value. USDA will also explore tools to help us understand tool capabilities and better predict and plan costs and to proactively incorporate requirements into our budget planning cycle. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "data",
+      "analytics",
+      "tool",
+      "tools",
+      "strategy",
+      "purchase",
+      "license",
+      "predict"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Monitor and",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy",
+      "data analytics tool"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 3.4:\nMonitor and, where applicable, reduce the cost and \ncomplexity of the data and analytics tool ecosystem.",
+      "Component Description": "We will promote rationalization and standardization of analytics tools and award blanket purchase agreements (BPAs) to decrease license costs, eliminate barriers to access, and make the use of enterprise tools more efficient. We will continue to assess the data and analytics tool ecosystem to ensure maximum efficiency and value. USDA will also explore tools to help us understand tool capabilities and better predict and plan costs and to proactively incorporate requirements into our budget planning cycle.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 16,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Goal 4: Open Data USDA will enable effective data sharing, underpinned by the FAIR principles, to provide internal and external stakeholders with deeper insights, value, and transparency. Open data that is findable, accessible, interoperable, and reusable (FAIR) reduces barriers to collaboration, innovation, and trans_x0002_parency. Open data allows USDA employees and stakeholders to answer questions, perform analyses and evaluations, and promote visibility of program operations and successes. Enabling open data internally will reduce the time USDA Mission Areas spend performing ad hoc reporting requests to respond to data calls. Making priority data open across the Department will promote visibility into ongoing data-related initiatives, reduce duplicative efforts, and identify opportunities for collaboration. Externally, increasing public access to USDA's data will help pro_x0002_mote transparency and accountability, ensure organizations and researchers have the data they need to make informed decisions, and spur research innovation and collaboration between USDA and the public that will further our mission. For both internal and external data sharing, we will work to strike the right balance between privacy, security, and openness. In this way, committing to open data will unlock new transformative insights, not only for USDA, but for external stakeholders and the public at large. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "fair",
+      "data",
+      "open",
+      "external",
+      "stakeholders",
+      "committing",
+      "requests",
+      "operations"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Goal",
+      "Open Data USDA",
+      "Mission Areas",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "FAIR"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Goal 4: Open Data",
+      "Component Description": "USDA will enable effective data sharing, underpinned by the FAIR principles, to provide internal and external stakeholders with deeper insights, value, and transparency. Open data that is findable, accessible, interoperable, and reusable (FAIR) reduces barriers to collaboration, innovation, and trans_x0002_parency. Open data allows USDA employees and stakeholders to answer questions, perform analyses and evaluations, and promote visibility of program operations and successes. Enabling open data internally will reduce the time USDA Mission Areas spend performing ad hoc reporting requests to respond to data calls. Making priority data open across the Department will promote visibility into ongoing data-related initiatives, reduce duplicative efforts, and identify opportunities for collaboration. Externally, increasing public access to USDA's data will help pro_x0002_mote transparency and accountability, ensure organizations and researchers have the data they need to make informed decisions, and spur research innovation and collaboration between USDA and the public that will further our mission. For both internal and external data sharing, we will work to strike the right balance between privacy, security, and openness. In this way, committing to open data will unlock new transformative insights, not only for USDA, but for external stakeholders and the public at large.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 17,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 4.1:\nCentralize and catalog data assets. We will continue to centralize and catalog data assets by domain areas to make sharing data with internal and external stakeholders more efficient. USDA will prioritize the entry of key metadata from across every Mission Area and Departmental Administration / Staff Office in the USDA Data Catalog and create a review process to allow key datasets to be shared department-wide. Lastly, USDA will implement data quality tools and processes that improve data quality for our most critical datasets. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "data",
+      "catalog",
+      "strategy",
+      "centralize",
+      "assets",
+      "review",
+      "administration",
+      "internal"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Centralize and",
+      "Mission Area and Departmental Administration",
+      "Staff Office",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 4.1:\nCentralize and catalog data assets.",
+      "Component Description": "We will continue to centralize and catalog data assets by domain areas to make sharing data with internal and external stakeholders more efficient. USDA will prioritize the entry of key metadata from across every Mission Area and Departmental Administration / Staff Office in the USDA Data Catalog and create a review process to allow key datasets to be shared department-wide. Lastly, USDA will implement data quality tools and processes that improve data quality for our most critical datasets.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 18,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 4.2.\nImprove access to data across USDA. We will improve the data access experience by collab_x0002_orating with stakeholders to develop a comprehensive tracker and toolkit to facilitate faster and more stream_x0002_lined access to data, including template data sharing agreements, material transfer agreements and memo_x0002_randums of understanding (MOUs). We will also increase awareness of open data assets for use by our federal, state, and local government partners, civic tech, public policy organizations, and other external organizations. We will also promote the use of multiple data sharing formats where appropriate, such as the use of Applica_x0002_tion Programming Interfaces (APIs). https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "data",
+      "access",
+      "strategy",
+      "improve",
+      "sharing",
+      "partners",
+      "collab_x0002_orating",
+      "faster"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Programming Interfaces",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy",
+      "fy2024-2026 usda"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 4.2.\nImprove access to data across USDA.",
+      "Component Description": "We will improve the data access experience by collab_x0002_orating with stakeholders to develop a comprehensive tracker and toolkit to facilitate faster and more stream_x0002_lined access to data, including template data sharing agreements, material transfer agreements and memo_x0002_randums of understanding (MOUs). We will also increase awareness of open data assets for use by our federal, state, and local government partners, civic tech, public policy organizations, and other external organizations. We will also promote the use of multiple data sharing formats where appropriate, such as the use of Applica_x0002_tion Programming Interfaces (APIs).",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 19,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 4.3: USDA will ensure assets are regularly reviewed \nby creating a process for updating metadata and \nfixing broken links, prioritizing key public data \nassets. We will maintain and ensure the accuracy and quality of open data assets, including USDA data in data.gov, the Open Data Platform, and other public data assets. USDA will ensure assets are regularly reviewed by creating a process for updating data and links that are broken/out-of_x0002_date prioritizing key public data assets. USDA will assess processes for soliciting public commentary and requests for additional data access. USDA will promote external data sharing and explore potential partnership with privacy groups and the Chief Information Security Officer to ensure data privacy and protection of our open data assets. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "data",
+      "assets",
+      "ensure",
+      "public",
+      "open",
+      "reviewed",
+      "requests",
+      "broken"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Open Data Platform",
+      "Chief Information Security Officer",
+      "Office of the Chief Data Officer",
+      "public data assets",
+      "fy2024-2026 usda data"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 4.3: USDA will ensure assets are regularly reviewed \nby creating a process for updating metadata and \nfixing broken links, prioritizing key public data \nassets.",
+      "Component Description": "We will maintain and ensure the accuracy and quality of open data assets, including USDA data in data.gov, the Open Data Platform, and other public data assets. USDA will ensure assets are regularly reviewed by creating a process for updating data and links that are broken/out-of_x0002_date prioritizing key public data assets. USDA will assess processes for soliciting public commentary and requests for additional data access. USDA will promote external data sharing and explore potential partnership with privacy groups and the Chief Information Security Officer to ensure data privacy and protection of our open data assets.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 20,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 4.4:\nIdentify data to bring into EDAPT. We will work to identify key data sources not in EDAPT, including those aligned to the Quarterly Strategic Review (QSR), and develop a plan to bring that data into EDAPT, with the goal of improving access to data, taking advan_x0002_tage of economies of scale, and make analytics work more efficient. We will work with data domain executive sponsors to develop a template for and publish a data management plan. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "edapt",
+      "data",
+      "strategy",
+      "identify",
+      "bring",
+      "review",
+      "advan_x0002_tage",
+      "template"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Quarterly Strategic Review",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy",
+      "fy2024-2026 usda"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "EDAPT",
+      "QSR"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 4.4:\nIdentify data to bring into EDAPT.",
+      "Component Description": "We will work to identify key data sources not in EDAPT, including those aligned to the Quarterly Strategic Review (QSR), and develop a plan to bring that data into EDAPT, with the goal of improving access to data, taking advan_x0002_tage of economies of scale, and make analytics work more efficient. We will work with data domain executive sponsors to develop a template for and publish a data management plan.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 21,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Goal 5: Analytics for a Purpose USDA will intentionally adapt to and invest in analytics processes, techniques, and products to inform decision-making for key business questions. The ability to use data to draw insights and inform decision-mak_x0002_ing underpins all of our investments in governance, workforce, tools and platforms, and open data. This new Goal 5 was added to the USDA Data Strategy to recognize that data has long played an important role in achieving USDA's mission. Analytics and data visualizations help USDA practitioners and leaders quickly digest complex datasets through key trends, patterns, and relationships. Advanced analytics (including, but not limited to, artificial intelligence and machine learning) can gener_x0002_ate useful insights and also help decision-makers identify process improvements or risks to mitigate. USDA will continue to analyze different options available for gaining insights from data and selecting the right analytical approach for the business needs at hand. We commit to extracting meaningful insights from organizational data through analytics in order to support mission delivery. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "data",
+      "analytics",
+      "insights",
+      "strategy",
+      "goal",
+      "inform",
+      "learning",
+      "options"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Goal",
+      "Analytics for",
+      "Purpose USDA",
+      "Analytics and",
+      "usda data strategy",
+      "fy2024-2026 usda data"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Goal 5: Analytics for a Purpose",
+      "Component Description": "USDA will intentionally adapt to and invest in analytics processes, techniques, and products to inform decision-making for key business questions. The ability to use data to draw insights and inform decision-mak_x0002_ing underpins all of our investments in governance, workforce, tools and platforms, and open data. This new Goal 5 was added to the USDA Data Strategy to recognize that data has long played an important role in achieving USDA's mission. Analytics and data visualizations help USDA practitioners and leaders quickly digest complex datasets through key trends, patterns, and relationships. Advanced analytics (including, but not limited to, artificial intelligence and machine learning) can gener_x0002_ate useful insights and also help decision-makers identify process improvements or risks to mitigate. USDA will continue to analyze different options available for gaining insights from data and selecting the right analytical approach for the business needs at hand. We commit to extracting meaningful insights from organizational data through analytics in order to support mission delivery.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 22,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 5.1:\nFurther integrate data visualization and advanced \nanalytics into USDA's culture of decision-making. We will prioritize collaboration with stakeholders such as the evidence/evaluation community and research community to further integrate data visualization and analytics into USDA's decision-making. We will ensure that consistent and accurate data is at the forefront of USDA's processes to evaluate performance and plan for the future. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "data",
+      "strategy",
+      "further",
+      "integrate",
+      "visualization",
+      "performance",
+      "accurate",
+      "evidence"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy",
+      "further integrate data",
+      "integrate data visualization"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 5.1:\nFurther integrate data visualization and advanced \nanalytics into USDA's culture of decision-making.",
+      "Component Description": "We will prioritize collaboration with stakeholders such as the evidence/evaluation community and research community to further integrate data visualization and analytics into USDA's decision-making. We will ensure that consistent and accurate data is at the forefront of USDA's processes to evaluate performance and plan for the future.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 23,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 5.2:\nStandardize principles and best practices for ana_x0002_lytics and artificial intelligence (AI). We will establish Al Principles and ensure organizational commitment to the ethical and responsible use of AI. USDA will explore creating AI code repositories, devel_x0002_oping shared models, and creating a library of use cases and tool descriptions. Additionally, USDA will consider standing up a community forum for discussion of advanced analytics techniques and developing a govern_x0002_ing body for AI in consultation with USDA stakeholders. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "ai",
+      "data",
+      "strategy",
+      "principles",
+      "creating",
+      "additionally",
+      "ana_x0002_lytics",
+      "ethical"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Al Principles and",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy",
+      "fy2024-2026 usda"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "AI"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 5.2:\nStandardize principles and best practices for ana_x0002_lytics and artificial intelligence (AI).",
+      "Component Description": "We will establish Al Principles and ensure organizational commitment to the ethical and responsible use of AI. USDA will explore creating AI code repositories, devel_x0002_oping shared models, and creating a library of use cases and tool descriptions. Additionally, USDA will consider standing up a community forum for discussion of advanced analytics techniques and developing a govern_x0002_ing body for AI in consultation with USDA stakeholders.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 24,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 5.3:\nPromote data and artificial intelligence (AI) ethics, \nresponsible use, and transparency. We will continue to promote tracking data and AI proj_x0002_ects/products through the AI Use Case Inventory and help data practitioners understand requirements for the responsible use of data and AI. USDA will prioritize train_x0002_ing on data and AI ethics and bias through active invest_x0002_ments such as the USDA Data Science Training Program and the AgLearn platform, as well as new programs. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "ai",
+      "data",
+      "strategy",
+      "promote",
+      "ethics",
+      "inventory",
+      "aglearn",
+      "proj_x0002_ects"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Use Case Inventory and",
+      "Data Science Training Program and the",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "AI"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 5.3:\nPromote data and artificial intelligence (AI) ethics, \nresponsible use, and transparency.",
+      "Component Description": "We will continue to promote tracking data and AI proj_x0002_ects/products through the AI Use Case Inventory and help data practitioners understand requirements for the responsible use of data and AI. USDA will prioritize train_x0002_ing on data and AI ethics and bias through active invest_x0002_ments such as the USDA Data Science Training Program and the AgLearn platform, as well as new programs.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  },
+  {
+    "rowNumber": 25,
+    "text": "FY2024-2026 USDA Data Strategy FY2024-2026 USDA Data Strategy Objective 5.4:\nIncrease number of enterprise analytics tools\nin EDAPT. We will increase the enterprise analytics tools and capa_x0002_bilities within EDAPT to ensure practitioners have access to the tools they need to utilize data. We will research analytics tools and sandboxes for experimentation and collaboration within EDAPT. We will also assess architec_x0002_ture which allows the greatest access to data to the lowest appropriate level, with the goal of promoting data transpar_x0002_ency and autonomy and the democratization of data. https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf USDA Office of the Chief Data Officer",
+    "keywords": [
+      "fy2024-2026",
+      "usda",
+      "edapt",
+      "data",
+      "tools",
+      "analytics",
+      "strategy",
+      "architec_x0002_ture",
+      "allows",
+      "promoting"
+    ],
+    "phrases": [
+      "Data Strategy",
+      "Data Strategy Objective",
+      "Office of the Chief Data Officer",
+      "fy2024-2026 usda data",
+      "usda data strategy",
+      "enterprise analytics tools",
+      "analytics tools"
+    ],
+    "acronyms": [
+      "FY2024-2026",
+      "USDA",
+      "EDAPT"
+    ],
+    "original_columns": {
+      "Source": "FY2024-2026 USDA Data Strategy",
+      "Component": "FY2024-2026 USDA Data Strategy Objective 5.4:\nIncrease number of enterprise analytics tools\nin EDAPT.",
+      "Component Description": "We will increase the enterprise analytics tools and capa_x0002_bilities within EDAPT to ensure practitioners have access to the tools they need to utilize data. We will research analytics tools and sandboxes for experimentation and collaboration within EDAPT. We will also assess architec_x0002_ture which allows the greatest access to data to the lowest appropriate level, with the goal of promoting data transpar_x0002_ency and autonomy and the democratization of data.",
+      "Component URL": "https://www.usda.gov/sites/default/files/documents/fy-2024-2026-usda-data-strategy.pdf",
+      "Component Office of Primary Interest": "USDA Office of the Chief Data Officer"
+    }
+  }
+]
