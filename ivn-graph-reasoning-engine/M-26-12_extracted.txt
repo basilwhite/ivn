@@ -1,0 +1,374 @@
+EXECUTIVE OFFICE OF THE PRESIDENT 
+OFFICE OF MANAGEMENT AND BUDGET 
+WASHINGTON, D.C. 20503 
+THE DIRECTOR 
+April 17, 2026 
+M-26-12 
+MEMORANDUM TO THE HEADS OF EXECUTIVE DEPARTMENTS AND AGENCIES 
+FROM: Russell T. Vought � � � 
+Director 
+SUBJECT: Increasing the Acquisition of Commercial Products and Services 
+On April 15, 2025, President Trump issued Executive Order 14271 (the Order), Ensuring 
+Commercial, Cost-Effective Solutions in Federal Contracts, which reaffirms and reinforces the 
+policy that agencies shall procure commercially available products and services, including those 
+that can be modified to fill agencies' needs, to the maximum extent practicable, including 
+pursuant to the Federal Acquisition Streamlining Act (F ASA). The appendix to this 
+memorandum provides guidance addressing the Order's requirement for reporting to the Office 
+of Management and Budget (0MB), addresses additional steps to promote aggressive leveraging 
+of the commercial marketplace, and explains the process for voluntary consulting with 0MB 
+during the agency's acquisition planning for non-commercial products and services. 
+For more than three decades, F ASA has required federal buyers to give a preference to 
+commercial products and services and Part 12 of the Federal Acquisition Regulation (FAR) has 
+set forth supporting policies to facilitate broad access to the commercial marketplace. In 
+addition, agency competition advocates have long been responsible for promoting the acquisition 
+of commercial products and commercial services. Despite this clear direction, in FY 2024, more 
+than two-thirds of total federal contract spending reported by agencies in the Federal 
+Procurement Data System (FPDS) was for non-commercial products and services. This includes 
+more than $130 billion of non-commercial contracting for common services, such as professional 
+support services, information technology and telecom services, and operation of facilities, much 
+of which was acquired using cost-reimbursement contracts that often allow undefined 
+deliverables that increase the Government's exposure to loss. 
+To stop the wasteful expenditure of taxpayer dollars on costly custom products where a 
+suitable or superior commercial solution could meet the Government's needs, the Order required 
+agencies to conduct a review of all open agency solicitations, pre-solicitation notices, solicitation 
+notices, award notices, and sole-source notices issued on or after April 15, 2025, where non­
+commercial 
+
+===== PAGE BREAK =====
+
+products or services are contemplated. The agency's senior procurement executive (SPE) was 
+directed to: 
+• Assess recently awarded and in-process acquisitions for non-commercial products and 
+services for compliance with F ASA, including the sufficiency of the market research 
+and price analysis provided in support of the procurement of non-commercial products 
+or services; 
+• Make appropriate recommendations to advance the solicitation of commercial products or 
+services where those products or services would be sufficient to serve the applicable 
+procurement need; 
+• Establish procedures requiring SPE review and approval whenever an agency is seeking 
+to solicit a non-commercial product or service; and 
+• Submit a report annually to 0MB describing the agency's ongoing compliance with 
+F ASA and its progress toward implementing the policies of the Order. 
+The attached guidance outlines ongoing steps for significantly increasing the 
+acquisition of commercial products and services, consistent with the Order. Agencies should 
+act expeditiously to implement these important stewardship actions. 
+Appendix 
+2 
+
+===== PAGE BREAK =====
+
+  
+  
+ 
+ 
+   
+    
+ 
+ 
+  
+ 
+          
+  
+ 
+ 
+   
+ 
+    
+    
+ 
+    
+  
+ 
+  
+ 
+ 
+ 
+ 
+  
+ 
+   
+ 
+   
+ 
+ 
+ 
+    
+ 
+     
+ 
+ 
+  
+ 
+   
+     
+ 
+      
+    
+ 
+Appendix: Guidance to Implement Executive Order 14271 
+Ensuring Commercial, Cost-Effective Solutions in Federal Contracts 
+Agencies must take the following actions to strengthen their management and 
+oversight of decision-making associated with the acquisition of commercial products and 
+services. 
+1. REPORTING 
+A covered agency 1 should submit a report to OMB by May 4, 2026, that provide s the 
+following information . The reporting should not include any source selection sensitive 
+information .2 
+A. Recent awards for non -commercial items 
+i) State the total value and number of noncommercial contracts awarded on or after 
+April 15, 2025, through September 30, 2025, by product service code (PSC); 
+ii) Provide a list of Procurement Instrument Identifiers (PIIDs) associated with each 
+award identified in (i); and 
+iii) For any award covered in (i) over $10 million, provide: 
+A. The PIID, a description of the requirement, type of contract pricing, and total 
+contract value, including base and all options; 
+B. The date of the next contract option; and 
+C. Action planned by the SPE as a result of the review; and 
+D. An explanation if a shift to a commercial solution is not planned at the next 
+contract option, making references to market research and price analysis that 
+support the conclusion to remain with the non-commercial solution. 
+B. Acquisition Planning for near-term awards for non-commercial items 
+i) State the total number of all open (pre-award) actions for non-commercial products or 
+services that were in process
+3 on or after April 15, 2025, and were initiated by 
+1 A covered agency is an executive department, a military department, or any independent 
+establishment within the meaning of 5 U.S.C. 101, 102, and 104(1), respectively, and any wholly 
+owned Government corporation within the meaning of 31 U.S.C. 9101(c). 
+2 Agencies that have previously provided transactional reporting to OMB should submit an updated report 
+that conforms to the requirements of this memorandum. Follow-on guidance will be provided to address 
+future annual reporting. 
+3 For purposes of this memo, a pre-award procurement action is “in process” if one or more of the 
+following steps in the acquisition lifecycle have occurred: substantial market research has been 
+Page 1 of 4 
+
+===== PAGE BREAK =====
+
+ 
+ 
+  
+ 
+       
+ 
+  
+  
+ 
+   
+ 
+  
+  
+ 
+ 
+  
+ 
+ 
+    
+ 
+     
+ 
+ 
+    
+ 
+ 
+  
+  
+   
+       
+    
+   
+ 
+   
+    
+ 
+   
+    
+  
+   
+      
+  
+ 
+ 
+     
+ 
+March 31, 2026; and 
+ii) For each action covered by (i) with an estimated value over $10 million, provide: 
+A. A description of the requirement, planned contract type, and the Government’s 
+independent cost estimate; 
+B. A description of the action planned by the SPE as a result of the review; and 
+C. If a commercial solution is not planned, the SPE’s explanation of why the 
+market research and other factors justify the agency’s determination to 
+purchase a non-commercial solution. 
+C. Future procurements 
+Describe internal mechanisms put in place, including guidance, to ensure any 
+future planned award of a non- commercial award is reviewed by the SPE . 
+Agencies should submit their report using the template provided in MAX at 
+https://community.connect.gov/x/2gqyo. 
+2. STRENGTHENED RESPONSIBILITIES OF THE AGENCY COMPETITION 
+ADVOCATE 
+To ensure sufficient agency leadership attention is being given to maximizing 
+acquisition of commercial products and services, agencies must confirm that the policy 
+official serving as the competition advocate is at a level not lower than the head of the 
+contracting activity or deputy SPE. Agencies should submit the name, position title, and 
+contact information of the competition advocate into the MAX template identified above by 
+May 4, 2026. 
+The competition advocate should support activities associated with the successful 
+implementation of the Order, that include , at a minimum, the following : 
+• Making recommendations to the SPE on improvements to internal policies and 
+practices for maximizing commercial buying, such as by centrally collecting and 
+sharing market research , supporting efficient commerciality determinations – 
+including the manner by which the government reviews the prime contractor’s 
+evaluation of its subcontractors’ commerciality determinations – best practices for 
+determining price reasonableness, leveraging innovative buying practices built 
+conducted, a pre-solicitation notice, solicitation notice, or open solicitation has been issued; an award 
+notice or sole source notice has been issued (but contract not yet awarded). 
+Page 2 of 4 
+
+===== PAGE BREAK =====
+
+ 
+ 
+   
+   
+  
+ 
+    
+    
+   
+   
+ 
+ 
+      
+   
+  
+   
+ 
+     
+ 
+     
+ 
+ 
+ 
+ 
+    
+     
+  
+     
+ 
+  
+ 
+     
+  
+  
+  
+ 
+  
+ 
+ 
+   
+   
+ 
+ 
+     
+ 
+   
+  
+   
+around proven commercial practices, and guarding against the unnecessary use of 
+cost-reimbursement  contacts that preclude application of FAR Part 12 commercial 
+buying policies ; 
+• Working with the agency’s acquisition innovation advocate and category 
+management lead to support implementation of the deviation to streamline FAR 
+Part 12 in accordance with E.O. 14275, Restoring Common Sense to Federal 
+Procurement, and OMB Memorandum M -25-26, Overhauling the Federal 
+Acquisition Regulation ;4 
+• Coordinating with the agency’s small business director on opportunities to lower 
+barriers to entry for commercial providers and encourage the participation of new 
+entrants offering commercial solutions , such as by improving the quality, timeliness, 
+and access to agency forecast information from a centralized access point; 
+• Working with the Procurement Committee on E -Government (PCE) to review and 
+make appropriate improvements to current data collection protocols associated 
+with tracking acquisitions of commercial products and services in FPDS ; and 
+• Supporting the SPE in developing annual progress reports to OMB on 
+strengthening compliance with FASA’s commercial buying preference. 
+OFPP will convene the competition advocates to share best practices and lessons 
+learned from federal organizations that facilitate increased commercial buying, such as the 
+Defense Contracting Management Agency’s Commercial Buying Group and chart the course 
+for future reporting and additional steps to implement the Order. 
+3. IMPROVED DATA COLLECTION AND BENCHMARKING 
+OFPP will work with the PCE, in coordination with agency competition advocate s, to 
+review opportunities to improve tracking of commercial product and services buying in FPDS, 
+and with GSA to evaluate how best to baseline and benchmark agency acquisitions of 
+commercial products and services. 
+4. CONSULTATION WITH OMB 
+Pursuant to section 5(b) of the Order, an agency contemplating the solicitation of a non-
+commercial product or service may seek the input of OMB, including the policy input of OFPP. 
+If the agency seeks consultation, the SPE (without delegation) or higher-level official may 
+submit a request to MBX.OMB.OFPPv2@OMB.eop.gov. The email line should read “Request 
+4 Under the Revolutionary FAR Overhaul, each FAR part is being streamlined back to its statutory roots and non-
+statutory rules that are essential to sound procurement. Best value decision-making is being supported with 
+government-wide non-regulatory guidance, such as guides with discretionary best practice practitioner tips for 
+implementing the FAR and tools specific to the different product and service areas tracked by category management. 
+Go to the Revolutionary FAR Overhaul website for updates on the status of FAR Part 12. 
+Page 3 of 4 
+
+===== PAGE BREAK =====
+
+ 
+ 
+    
+ 
+ 
+ 
+  
+ 
+ 
+  
+ 
+  
+ 
+  
+ 
+   
+  
+ 
+  
+     
+  
+ 
+    
+ 
+   
+  
+  
+ 
+ 
+  
+ 
+  
+  
+ 
+for consultation on planned non-commercial acquisition.” Before sending the request to OMB, 
+the SPE must obtain the concurrence of the senior non-career official responsible for acquisition 
+within the agency, which typically is the Chief Acquisition Officer (CAO). The request, which 
+should be submitted prior to the release of the solicitation, should include the following 
+information: 
+a) A description of the requirement, planned contract type, estimated contract value or 
+expected award amount and planned duration of the contract; 
+b) An explanation of how the requirement supports the agency’s mission; 
+c) A description of the market research conducted to find suitable commercial products 
+and/or services and a detailed explanation of why the requirement cannot be met with a 
+commercial solution; 
+d) Identification of whether the requirement will be competed and, if not, which exception 
+to competition will be used and why; 
+e) A description of the analysis conducted to develop the independent government cost 
+estimate and why the agency believes a fair and reasonable price can be achieved with a 
+non-commercial solution; 
+f) An explanation if contract length is expected to exceed 3 years; 
+g) An affirmative statement that the contemplated award of a non-commercial contract is 
+supported by the senior non-career official responsible for acquisition in the agency, or 
+other non-career official equivalent in rank to the CAO; and 
+h) The name and title of the highest-level program official supporting the award of a non-
+commercial contract. 
+Additional information may be sought on a case-by-case basis, such as a copy of the draft 
+solicitation and statement of work. The agency should provide OMB not less than 15 days for 
+review. 
+Page 4 of 4 
