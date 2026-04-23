@@ -1,0 +1,6 @@
+Reasoning Log
+This file stores concise rationale summaries and observable evidence only.
+Hidden chain-of-thought and private scratchpad content are not stored.
+
+[2026-04-23 03:14:30 UTC] Assistant: Purpose-priority reinforcement added: URL-to-alignment extraction must optimize for governance value-path discovery and authority lineage, not just lexical match density.
+

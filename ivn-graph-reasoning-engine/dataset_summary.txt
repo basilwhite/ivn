@@ -1,0 +1,63 @@
+Workbook: IVN-dataset.xlsb
+
+Sheet count: 15
+
+Sheet 1: Sources
+Headers (row 1): source_name, source_agency, source_id
+Row count estimate: 1048575
+
+Sheet 2: Alignments
+Headers (row 1): Enabling Source, Enabling Component, Enabling Component Description, Dependent Component, Dependent Component Description, Dependent Source, Linkage mandated by what US Code or OMB policy?, Enabling Component URL, Dependent Component URL, Enabling Source Agency, Dependent Source Agency, Notes and keywords, Keywords Tab Items Found, Enabling Component Office of Primary Interest, Dependent Component Office of Primary Interest, edits, valid, similarity, confidence, transitive_support, matched_enabling_index, matched_dependent_index, alignment_rationale, Enabling Fetch Status, Dependent Fetch Status, SimilarityTimesConfidence
+Row count estimate: 236513
+
+Sheet 3: Components
+Headers (row 1): component_name, component_description, component_url, component_agency, component_ofc_of_primary_interest, source_id, component_id, fetch_status
+Row count estimate: 6278
+
+Sheet 4: Description Similarity
+Headers (row 1): component_description_1, component_id_1, component_name_1, component_description_2, component_id_2, component_name_2, description similarity score
+Row count estimate: 497
+
+Sheet 5: Inferred_Alignments
+Headers (row 1): Enabling Source, Enabling Component, Enabling Component Description, Dependent Component, Dependent Component Description, Dependent Source, Linkage mandated by what US Code or OMB policy?, Enabling Component URL, Dependent Component URL, Enabling Source Agency, Dependent Source Agency, Notes and keywords, Keywords Tab Items Found, Enabling Component Office of Primary Interest, Dependent Component Office of Primary Interest, edits, valid, similarity, confidence, transitive_support, matched_enabling_index, matched_dependent_index, alignment_rationale, Enabling Fetch Status, Dependent Fetch Status, SimilarityTimesConfidence
+Row count estimate: 135540
+
+Sheet 6: Recent-Alignments
+Headers (row 1): Enabling Source, Enabling Component, Enabling Component Description, Enabling Component URL, Enabling Source Agency, Enabling Component Office of Primary Interest, Enabling Fetch Status, Dependent Source, Dependent Component, Dependent Component Description, Dependent Component URL, Column4, Dependent Source Agency, Dependent Component Office of Primary Interest, Dependent Fetch Status, Linkage mandated by what US Code or OMB policy?, Notes and keywords, Keywords Tab Items Found, Edits, Valid, Similarity, Confidence, Transitive Support, Matched Enabling Index, Matched Dependent Index, Alignment Rationale
+Row count estimate: 898
+
+Sheet 7: Nonaligned-Edge-Cases
+Headers (row 1): Enabling Source, Enabling Component, Enabling Component Description, Dependent Component, Dependent Component Description, Dependent Source, Linkage mandated by what US Code or OMB policy?, Enabling Component URL, Dependent Component URL, Enabling Source Agency, Dependent Source Agency, Notes and keywords, Keywords Tab Items Found, Enabling Component Office of Primary Interest, Dependent Component Office of Primary Interest, Edits, Valid, Similarity, Confidence, Transitive Support, Matched Enabling Index, Matched Dependent Index, Alignment Rationale, Enabling Fetch Status, Dependent Fetch Status, SimilarityTimesConfidence, Similarity_Score, Confidence_Bucket, Match_Direction
+Row count estimate: 97167
+
+Sheet 8: ToBeCrosswalked
+Headers (row 1): Source, Component, Component Description, Component URL, Component Office of Primary Interest
+Row count estimate: 3184
+
+Sheet 9: Crosswalk-Backlog
+Headers (row 1): Source, Source URL, Why is this source a priority / requestor to index the source, Status, Notes from Arianne
+Row count estimate: 133
+
+Sheet 10: Data Dictionary
+Headers (row 1): Element display name, Description, Data type, Character length, Acceptable values, Required, Accepts null value​
+Row count estimate: 41
+
+Sheet 11: unaligned_components_with_commo
+Headers (row 1): Component_A, Component_A_Name, Component_A_Description, Component_A_Source_ID, Component_A_Source_Name, Component_B, Component_B_Name, Component_B_Description, Component_B_Source_ID, Component_B_Source_Name, Common_Targets_Count, Common_Targets, Exclusive_to_A_Count, Exclusive_to_A, Exclusive_to_B_Count, Exclusive_to_B
+Row count estimate: 989
+
+Sheet 12: Normalization
+Headers (row 1): Enabling Source normalizes to the source_name column in the Sources tab.
+Row count estimate: 25
+
+Sheet 13: COPY AND HIDE FIRST! Checklist
+Headers (row 1): 1. Å (Capital A with ring)
+Row count estimate: 55
+
+Sheet 14: Help | About IVN
+Headers (row 1): What is the Integrated Value Network (IVN)?, The Integrated Value Network (IVN) is a graph database of strategies, laws, regulations, directives, orders and Executive Memoranda. The IVN methodology provides a structural proof system to identify regulatory targets, eliminate coordination waste, enforce strategic alignment, and consolidate control through mapped authority. IVN preserves enforcement while enabling policy change by separating intent from execution. It is the structural system to turn political objectives into measurable outcomes.
+Row count estimate: 9
+
+Sheet 15: backup
+Headers (row 1): Enabling Source, Enabling Component, Enabling Component Description, Dependent Component, Dependent Component Description, Dependent Source, Linkage mandated by what US Code or OMB policy?, Enabling Component URL, Dependent Component URL, Enabling Source Agency, Dependent Source Agency, Notes and keywords, Keywords Tab Items Found, Enabling Component Responsible Office, Dependent Component Responsible Office, Edits, Valid, Similarity, Confidence, Transitive Support, Matched Enabling Index, Matched Dependent Index, Alignment Rationale, Enabling Component ID, Dependent Component ID
+Row count estimate: 23251

@@ -1,0 +1,85 @@
+Prompt file for: _summarize_xlsb.py
+Workspace root: C:\basilwhite.com\ivn\ivn-graph-reasoning-engine
+
+Overarching problem:
+Maintain a synchronized, explainable code artifact where the prompt file is the plain-English specification, the reasoning log stores concise decision summaries, and the internal state file stores current observable status.
+
+Primary purpose:
+You compare components to discover and manage how value and authority flow through governance, so leaders can make better, evidence-grounded changes with systemic awareness.
+
+Purpose-priority rules:
+- Prefer alignments that preserve value-flow and authority-flow traceability over superficial text similarity.
+- Prioritize explicit enabling-to-dependent relationships that support measurable progress in dependent components.
+- Keep uncertainty visible; avoid over-linking when value contribution is unclear.
+
+Broader context:
+This workflow exists to make each code file reconstructable by a naive learning model and to make workspace drift visible. The workflow excludes archived versions that look like timestamped snapshots.
+
+How understanding improved over time:
+The reasoning log should capture short evidence-based updates about what changed, why it changed, and what remains uncertain. Do not store hidden chain-of-thought or private scratchpad content.
+
+Concepts that must be understood:
+- File synchronization between source code, prompt, reasoning, internal state, and any detected outputs
+- Prompt-authoritative specification management
+- Observable state tracking using hashes, timestamps, and drift flags
+- Safe reasoning summaries instead of hidden internal reasoning
+
+Prerequisite knowledge:
+- Basic file system navigation
+- The language used by the code file
+- Reading plain-English specifications and mapping them to code behavior
+
+Domain-specific terms:
+- Prompt file: the authoritative plain-English specification
+- Reasoning log: append-only decision summary log
+- Internal state: current observable synchronization status
+- Drift: mismatch caused by one artifact changing without synchronized updates elsewhere
+
+High-level description:
+Syntax error prevents structural extraction.
+
+Why this code file exists:
+It performs the work described in this prompt and should remain consistent with this file after every intentional change.
+
+Role of this code file:
+The file _summarize_xlsb.py is a managed source artifact in the workspace synchronization workflow.
+
+Key concepts and learning data for reconstruction:
+- No named symbols detected. Preserve the current file behavior and layout.
+
+Input and output definitions:
+- Inputs may include command-line arguments, interactive menu selections, and user-provided file paths or messages
+- Outputs include terminal status messages and synchronized companion text files
+- Detected output files near this source: None detected
+
+Structure and content of successful output:
+- The prompt file remains plain English and describes the current behavior accurately
+- The reasoning log appends a timestamped summary entry instead of overwriting history
+- The internal state file records timestamps, hashes, drift checks, and pending actions
+
+Validity checks:
+- Support files exist next to the code file
+- The prompt file describes the current symbols and responsibilities accurately
+- The internal state file reports current hashes and no unhandled drift
+- The reasoning log remains append-only
+
+Successful execution criteria:
+- The code completes without syntax or runtime errors for supported operations
+- Synchronization updates happen after code changes
+- Prompt-authoritative drift is flagged clearly when automatic implementation is not possible
+
+Error handling logic:
+- Missing files should be created when possible
+- Unsupported automatic prompt-to-code synthesis should be reported as manual review required
+- Syntax errors should be surfaced instead of hidden
+
+How to evaluate correct behavior:
+- Compare the code file against this prompt for functional alignment
+- Confirm that reasoning entries are concise, timestamped, and evidence-based
+- Confirm that internal state hashes match the current files
+
+Example scenarios or test cases:
+- Initialize a new workspace and create missing support files for each active code file
+- Modify a code file, run synchronization, and verify the prompt file is overwritten to match the new implementation
+- Modify a prompt file directly, run synchronization, and verify the internal state flags prompt-authoritative manual implementation work
+- Append a reasoning entry for a code change and verify that earlier entries remain intact

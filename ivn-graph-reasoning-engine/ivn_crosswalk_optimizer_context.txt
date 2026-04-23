@@ -1,0 +1,118 @@
+IVN Crosswalk Optimizer Script Context
+=====================================
+
+Problem the Script Solves:
+--------------------------
+This script automates the process of identifying and scoring potential enabling relationships between components in a large, cross-agency knowledge network. It is designed to process production data from an Excel workbook (ivntest.xlsx) and output a candidate crosswalk dataset for further review and integration.
+
+Broader Context:
+----------------
+The script is part of a broader effort to build and maintain a crosswalk (mapping) between components (e.g., policies, directives, instructions) from different sources within a government or enterprise knowledge network. The goal is to identify relationships (enabling/dependent) between these components to support knowledge integration, compliance, and analytics.
+
+Concepts to Understand:
+-----------------------
+- Text similarity scoring (using rapidfuzz or difflib)
+- Data filtering and early rejection of low-quality pairs
+- DataFrame operations in pandas
+- The structure of the input Excel workbook (tabs: ToBeCrosswalked, Components, Sources, Dataset)
+- The meaning of enabling and dependent relationships
+- The importance of non-blank fields for valid candidate pairs
+
+Prerequisite Knowledge:
+----------------------
+- Basic Python programming
+- pandas DataFrame manipulation
+- Text similarity concepts
+- Command-line argument parsing
+- Excel file formats and reading with pandas
+
+Domain-Specific Terms:
+----------------------
+- Enabling Component: A component that enables or supports another
+- Dependent Component: A component that is enabled or supported by another
+- Source: The origin or agency of a component
+- Crosswalk: A mapping between related items from different sources
+- Similarity Score: A numeric value representing the textual similarity between two components
+
+High-Level Description:
+-----------------------
+The script loads data from ivntest.xlsx, generates all possible pairs between ToBeCrosswalked and Components, scores them for similarity, and filters out pairs that do not meet strict criteria (non-blank names and descriptions, not from the same source, not self-matches, above a minimum similarity threshold). It outputs a CSV file in a standardized format, including similarity scores and confidence buckets.
+
+Why the Script Exists:
+----------------------
+Manual crosswalking of thousands of components is infeasible. This script automates the initial candidate generation, allowing human reviewers to focus on high-confidence matches and reducing manual effort.
+
+Role of the Script:
+-------------------
+- Automate candidate crosswalk generation
+- Enforce data quality and output validity
+- Provide a reproducible, configurable pipeline for production use
+
+Key Concepts and Learning Data:
+-------------------------------
+- Early filtering: Only generate pairs that meet all criteria, rather than filtering after generation
+- Combined similarity: Weighted average of name and description similarity
+- Confidence buckets: Categorize matches as High, Medium, or Low confidence
+- Output format: Standardized columns for downstream integration
+- Threshold estimation: Suggest a minimum score to yield a target number of rows, based on valid (non-blank) pairs
+
+Input/Output Definitions:
+-------------------------
+Input:
+- Excel file (ivntest.xlsx) with the following tabs:
+  - ToBeCrosswalked: Components to match
+  - Components: Master list to match against
+  - Sources: Metadata for sources
+  - Dataset: Existing alignments (for index lookups)
+- Command-line arguments:
+  - --input/-i: Path to input Excel file
+  - --output/-o: Path to output CSV file
+  - --min-score: Minimum similarity score threshold
+  - --verbose/-v: Enable verbose logging
+
+Output:
+- CSV file with columns:
+  - Enabling Source, Enabling Component, Enabling Component Description, Dependent Component, Dependent Component Description, Dependent Source, Linkage mandated by what US Code or OMB policy?, Notes and keywords, Keywords Tab Items Found, Enabling Component URL, Dependent Component URL, Enabling Source Agency, Dependent Source Agency, Enabling Component Office of Primary Interest, Dependent Component Office of Primary Interest, Matched Enabling Index, Matched Dependent Index, Enabling Fetch Status, Dependent Fetch Status, Similarity_Score, Confidence_Bucket, Match_Direction
+- Only includes pairs where both component names and both descriptions are non-blank
+- Only includes pairs above the minimum similarity threshold
+- No self-matches or same-source pairs
+
+Output Validity Checks:
+----------------------
+- All required columns are present and in the correct order (including Notes and keywords, Keywords Tab Items Found)
+- No blank Enabling/Dependent Component or Description fields
+- No duplicate or self-matching pairs
+- No pairs from the same source
+- Output is only written if there are rows
+
+Successful Outcome Definition:
+-----------------------------
+- The script completes without error
+- The output file contains only valid, high-quality candidate pairs
+- The number of pairs matches expectations based on the threshold and data
+- The script warns if the output would exceed Excel's row limit
+- The script prompts the user to adjust the threshold if no pairs are found
+
+Error Handling:
+---------------
+- File not found: Raises an error if the input file does not exist
+- Sheet not found: Handles missing Dataset tab gracefully
+- No valid pairs: Prompts user to lower the threshold or warns if no pairs can be generated
+- Logging: All major steps and counts are logged for traceability
+
+Correct LLM Behavior:
+---------------------
+- Faithfully regenerate the script with all logic and structure as described
+- Enforce all filtering and output validity rules
+- Maintain synchronization between the script and this context file
+- Update this context file with every code change
+
+Example Scenarios/Test Cases:
+-----------------------------
+1. Input file with valid data in all tabs: Output contains expected number of pairs, all fields non-blank.
+2. Input file with blank descriptions: No pairs generated, user is prompted to lower threshold, but still no pairs if blanks remain.
+3. Input file with all pairs below threshold: User is prompted to lower threshold, and output is generated if possible.
+4. Input file with self-matches or same-source pairs: These are excluded from the output.
+5. Output file is empty: Script completes, warns user, and does not write invalid output.
+
+This context file is always kept in sync with the script and is sufficient for a naive LLM to reconstruct the script and its intended behavior.

@@ -1,0 +1,122 @@
+ivn_governance_alignment_engine_prompt.txt
+
+System Context:
+You are an expert AI engineer specializing in policy analysis automation, natural language processing, and strategic decision support systems. You create pragmatic, production-ready code that balances scope, clarity, depth, and speed as defined in the following specifications.
+
+PROJECT SPECIFICATION: Governance Alignment Engine (GAE)
+
+1. CORE MISSION
+
+Generate a Python script ivn_governance_alignment_engine.py that automates the analysis of U.S. Federal governance to:
+
+· Find Alignment Vectors: Identify where delivering Component A from Document X directly progresses Component B from Document Y toward its intended state.
+· Discover & Deconstruct: Continuously crawl .gov domains to find new documents and break them into minimal measurable components.
+· Generate Actionable Intelligence: Produce cabinet agency-specific recommendations based on alignment patterns and detected gaps.
+
+2. OPERATING PERSONALITY (SOUL.md INFLUENCE)
+
+The script should embody these cognitive parameters:
+
+· Scope-First Architecture: Broad discovery before deep analysis. Design for horizontal scaling.
+· Atomic Deconstruction Mindset: Components are "just barely big enough to measure delivery."
+· Gap-Sensitive Logic: Missing expected connections are first-class findings, not just absence.
+· Pragmatic Output Orientation: Every analysis must conclude with "Therefore, for Agency Z: [action]".
+
+3. REQUIRED CAPABILITIES (SKILL.md IMPLEMENTATION)
+
+MODULE 1: GovDocument Crawler & Ingestion
+
+```python
+# PSEUDO-REQUIREMENTS:
+# - Respect robots.txt, prioritize .gov domains
+# - Focus on known document types: Public Laws, EOs, OMB Memos, Agency Strategic Plans, CFR updates
+# - Extract clean text from PDF, HTML, DOCX
+# - Maintain provenance metadata: source URL, publication date, issuing authority
+# - Implement incremental crawling (detect new/updated documents)
+```
+
+MODULE 2: Atomic Componentizer
+
+```python
+# PSEUDO-REQUIREMENTS:
+# - Break documents into "atomic components" using rule-based + ML approach
+# - COMPONENT DEFINITION: "A directive, requirement, or provision that can be independently tracked for delivery"
+# - Examples: "Submit report to Congress by Q4 2025", "Establish interagency working group", "Allocate $50M for pilot program"
+# - Tag each component with:
+#   * type: ['REQUIREMENT', 'DEADLINE', 'AUTHORITY', 'RESOURCE', 'REPORT', 'GOAL']
+#   * responsible_agencies: [list extracted from text]
+#   * delivery_metrics: [measurable outcomes implied]
+#   * source_document: reference
+```
+
+MODULE 3: Alignment Vector Analyzer
+
+```python
+# PSEUDO-REQUIREMENTS:
+# - Compare components across document pairs
+# - Identify "PROGRESSES" relationship when:
+#   1. Component A creates a resource Component B needs
+#   2. Component A establishes authority Component B requires
+#   3. Component A fulfills precondition for Component B
+#   4. Component A's output is explicitly referenced as input for Component B
+# - Score alignment strength (strong/explicit vs. weak/inferred)
+# - Generate alignment chains showing multi-step dependencies
+```
+
+MODULE 4: Gap Detection & Recommendation Engine
+
+```python
+# PSEUDO-REQUIREMENTS:
+# - Detect "GAPS" when:
+#   1. Alignment chain is broken (missing intermediate component)
+#   2. Component has dependencies but no responsible agency assigned
+#   3. Deadline exists without clear preceding milestones
+#   4. Resource allocation doesn't match requirement scale
+# - Generate agency-specific recommendations that:
+#   * Are pragmatic and immediately actionable
+#   * Include suggested messaging for strategic communication
+#   * Prioritize by: leverage (unblocks multiple alignments), urgency, resource efficiency
+```
+
+4. OUTPUT FORMATS (PRIORITIZE CLARITY)
+
+1. Executive Dashboard (JSON/CLI): Top 5 alignments, top 3 gaps, priority actions by agency
+2. Alignment Matrix (CSV/Network Graph): Document × Document matrix with alignment types and strengths
+3. Agency Action Memos (Markdown): For each cabinet agency, 1-page max with:
+   · Relevant alignments to leverage
+   · Critical gaps to address
+   · Recommended next steps (immediate/30d/90d)
+   · Suggested communication points
+
+5. CONSTRAINTS & DESIGN PRINCIPLES
+
+· Privacy/Security: Only public .gov documents, no authentication required
+· Resilience: Handle malformed documents gracefully, continue processing
+· Explainability: Every recommendation must be traceable to source components
+· Performance: Optimize for scope first, then depth (can process 1000s of documents)
+· Maintainability: Modular design with clear interfaces between components
+
+6. EXAMPLE WORKFLOW
+
+```
+1. CRAWL: Scan whitehouse.gov, agency.gov for new/updated documents
+2. DECONSTRUCT: Break EO 14110 into 15 atomic components with agencies/tags
+3. ALIGN: Match Component #7 from EO 14110 with Component #3 from DOE Strategic Plan
+   → "PROGRESSES: AI workforce training program enables DOE's grid security initiative"
+4. GAP DETECT: Find that Component #12 from EO has no clear agency assignment
+5. RECOMMEND: "For Department of Commerce: Assume lead on Component #12 via existing authority under XYZ Act. Coordinate with OMB by Q2 for resource alignment."
+```
+
+7. REQUEST FOR IMPLEMENTATION
+
+Generate a complete Python script that:
+
+· Implements the four modules with clear, documented code
+· Includes example/test data structures showing the expected inputs/outputs
+· Provides a CLI interface to run the full pipeline or individual modules
+· Demonstrates the analysis on at least 2-3 example documents (can be mocked)
+· Follows Python best practices with error handling and logging
+
+Focus the implementation on the pragmatic, action-oriented analysis style defined in the SOUL.md, prioritizing the capability stack from SKILL.md.
+
+Remember: The system's value is in finding actionable connections, not just academic correlations. Every line of code should serve the mission of delivering clear, agency-specific strategic guidance.

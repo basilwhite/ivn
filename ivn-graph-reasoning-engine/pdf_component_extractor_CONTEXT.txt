@@ -1,0 +1,406 @@
+PDF COMPONENT EXTRACTOR - LLM CONTEXT FILE
+============================================
+Last Updated: December 18, 2025
+
+================================================================================
+1. PROBLEM STATEMENT
+================================================================================
+
+The script solves the problem of extracting structured components (sections) from 
+PDF documents and saving them in a tabular format (Excel XLSX) for further 
+processing, analysis, or import into knowledge management systems.
+
+Many government and regulatory documents (e.g., FAR Companion, OMB circulars, 
+NIST publications) are distributed as PDFs with hierarchical section structures. 
+Manually extracting each section into a spreadsheet is time-consuming and 
+error-prone. This script automates that extraction.
+
+================================================================================
+2. BROADER CONTEXT
+================================================================================
+
+This tool is part of the IVN (Issuance and Versioning Network) Document Library 
+project for USDA's MRP P PM Knowledge Network. The goal is to parse policy 
+documents, regulations, and guidance materials into discrete "components" that 
+can be:
+  - Cataloged in a knowledge base
+  - Linked to responsible offices (Office of Primary Interest)
+  - Referenced by URL
+  - Searched and filtered
+
+The output format is designed for import into systems that track document 
+components with metadata like Source, Component Name, Description, URL, and 
+Office of Primary Interest.
+
+================================================================================
+3. PREREQUISITE KNOWLEDGE AND CONCEPTS
+================================================================================
+
+To understand this script, one must know:
+
+A. PDF Structure
+   - PDFs contain text, images, and metadata
+   - Text extraction from PDFs is imperfect; layout can affect reading order
+   - PDFs have metadata fields including "title"
+   - PyMuPDF (fitz) is a Python library for PDF manipulation and text extraction
+
+B. Regular Expressions (Regex)
+   - Pattern matching in text
+   - Multiline matching (re.MULTILINE flag)
+   - Capture groups for extracting matched substrings
+   - Alternation (|) for combining multiple patterns
+
+C. Document Structure Patterns
+   - Headings identify section boundaries
+   - Common heading patterns include:
+     * Numbered sections: "1. Introduction", "3. Citation System"
+     * Prefixed sections: "FC 1.000 Scope", "Part 5 – Title"
+     * ALL-CAPS headings: "DEFINITIONS", "SCOPE AND APPLICABILITY"
+     * Bold text (detected via PDF font metadata)
+
+D. Excel/XLSX Format
+   - Workbooks contain worksheets
+   - Worksheets have rows and columns
+   - openpyxl is a Python library for reading/writing XLSX files
+
+E. GUI File Dialogs
+   - tkinter is Python's standard GUI library
+   - filedialog.askopenfilename() opens a file picker dialog
+
+================================================================================
+4. DOMAIN-SPECIFIC TERMS
+================================================================================
+
+- Component: A discrete section of a document identified by a heading, treated 
+  as an independent unit of content.
+
+- Source: The title/name of the document from which components are extracted.
+  Example: "Federal Acquisition Regulation (FAR) Companion Version 2.0"
+
+- Component Name: A unique identifier combining the Source and the heading.
+  Format: "<Source>: <Heading>"
+  Example: "Federal Acquisition Regulation (FAR) Companion Version 2.0: FC 1.000 Scope"
+
+- Component Description: The text content of a component, starting after its 
+  heading and ending just before the next heading.
+
+- Component URL: An optional URL linking to the source document online.
+
+- Office of Primary Interest (OPI): The organizational unit responsible for 
+  maintaining or owning a component. May be the same for all components in a 
+  document or vary per component.
+
+- Page Header: Repeating text that appears at the top of each page in a PDF 
+  (e.g., "Federal Acquisition Regulation (FAR) Companion 5"). These should be 
+  stripped from component descriptions.
+
+================================================================================
+5. HIGH-LEVEL DESCRIPTION OF WHAT THE SCRIPT DOES
+================================================================================
+
+1. Opens a GUI file dialog for the user to select a PDF file.
+
+2. Prompts the user for:
+   - Source URL (optional)
+   - Page header regex pattern to strip from descriptions (optional)
+   - Office of Primary Interest value for all components (optional)
+   - Source name override (defaults to PDF metadata title)
+
+3. Extracts text from all pages of the PDF.
+
+4. Identifies component boundaries using regex patterns that match:
+   - Lines starting with "FC <number>.<number>" (e.g., "FC 1.000 Scope")
+   - Lines starting with "Part <number>" (e.g., "Part 5 – Publicizing...")
+   - Numbered headings like "<number>. <Title>" (e.g., "3. Citation System")
+   - ALL-CAPS headings (e.g., "DEFINITIONS")
+
+5. For each heading found:
+   - Captures the heading line as the component identifier
+   - Captures all text from after that heading until the next heading as the 
+     component description
+   - Optionally removes lines matching the page header pattern
+   - Normalizes whitespace and special characters
+
+6. Writes all components to an Excel XLSX file with columns:
+   - Source
+   - Component Name
+   - Component Description
+   - Component URL
+   - Component Office of Primary Interest
+
+7. Saves the file in the same directory as the script with a timestamped name.
+
+================================================================================
+6. WHY THE SCRIPT EXISTS / ROLE OF THE SCRIPT
+================================================================================
+
+Purpose:
+- Automate extraction of document sections into a structured format
+- Reduce manual effort in building knowledge bases from PDF documents
+- Ensure consistent formatting and naming conventions
+- Support batch processing of regulatory/policy documents
+
+Role in Workflow:
+- Input: A PDF document with structured headings
+- Output: An XLSX file ready for import into knowledge management systems
+- The output can be manually reviewed and enriched (e.g., adding per-component 
+  OPI values) before final use
+
+================================================================================
+7. INPUT/OUTPUT DEFINITIONS
+================================================================================
+
+INPUTS (via command-line prompts):
+
+1. PDF File Selection (GUI dialog)
+   - User selects a .pdf file using a file picker
+
+2. Source URL (text prompt)
+   - Optional URL string
+   - Press Enter to skip
+
+3. Page Header Pattern (text prompt)
+   - Optional regex pattern string
+   - Example: "^Federal Acquisition Regulation.*\d+$"
+   - Press Enter to skip
+
+4. Office of Primary Interest (text prompt)
+   - Optional string value
+   - If provided, applies to ALL rows
+   - Press Enter to leave blank for manual entry later
+
+5. Source Name Override (text prompt)
+   - Shows detected PDF title
+   - Press Enter to accept, or type a different value
+
+OUTPUT:
+
+File: <pdf_stem>_<YYYY-MM-DD-HH-MM>.xlsx
+
+Excel Structure:
+- One worksheet named after the source (truncated to 31 chars, special chars replaced)
+- Header row: Source | Component Name | Component Description | Component URL | Component Office of Primary Interest
+- One data row per detected component
+
+Example Row:
+| Source | Component Name | Component Description | Component URL | Component Office of Primary Interest |
+|--------|----------------|----------------------|---------------|--------------------------------------|
+| Federal Acquisition Regulation (FAR) Companion Version 2.0 | Federal Acquisition Regulation (FAR) Companion Version 2.0: FC 1.000 Scope | This part provides an overview of... | https://example.gov/far-companion | Office of Acquisition Policy |
+
+================================================================================
+8. STRUCTURE AND CONTENT OF FINAL OUTPUT
+================================================================================
+
+The XLSX file contains:
+
+Row 1 (Header):
+  A1: "Source"
+  B1: "Component Name"
+  C1: "Component Description"
+  D1: "Component URL"
+  E1: "Component Office of Primary Interest"
+
+Rows 2+N (Data):
+  Column A: The source name (same for all rows)
+  Column B: "<Source>: <heading line>" format
+  Column C: Cleaned text from after heading to before next heading
+  Column D: The URL entered by user (same for all rows, may be blank)
+  Column E: The OPI entered by user (same for all rows, may be blank)
+
+Text Normalization Applied to Column C:
+  - Em-dashes (—) replaced with double-hyphens (--)
+  - Smart quotes replaced with straight quotes
+  - Tabs replaced with spaces
+  - Multiple spaces/newlines collapsed to single space
+  - Leading/trailing whitespace trimmed
+  - Page header lines removed (if pattern provided)
+
+================================================================================
+9. VALIDITY CHECKS AND SUCCESS CRITERIA
+================================================================================
+
+A successful run means:
+1. User selected a valid PDF file (not cancelled)
+2. PDF was readable by PyMuPDF
+3. At least one heading pattern matched in the document
+4. XLSX file was successfully written to disk
+5. Console displays "✅ Processing completed successfully!"
+6. Console shows the output file path
+
+Validity Checks:
+- If no PDF selected: Script exits gracefully with message "No file selected"
+- If PDF unreadable: Exception caught, error displayed, script exits with code 1
+- If path too long for Windows: Fallback to shortened filename attempted
+- If no headings found: XLSX created with only header row (empty data)
+
+Error Handling:
+- All exceptions in main extraction/save logic are caught
+- Error message displayed to user
+- User prompted to press Enter before exit
+- Script exits with sys.exit(1) on error
+
+================================================================================
+10. CORRECT LLM BEHAVIOR / WHAT "WORKING CORRECTLY" MEANS
+================================================================================
+
+The script works correctly when:
+
+1. HEADING DETECTION:
+   - All lines matching FC/Part/numbered/ALL-CAPS patterns become component rows
+   - No heading is missed due to overly strict regex
+   - No false positives from body text matching heading patterns accidentally
+
+2. CONTENT EXTRACTION:
+   - Content starts immediately after the heading line
+   - Content ends just before the next heading line
+   - Page headers are stripped if pattern provided
+   - Whitespace is normalized, not lost
+
+3. OUTPUT FORMAT:
+   - Column headers exactly match specification
+   - Component Name follows "<Source>: <heading>" format
+   - Source is consistent across all rows
+   - URL and OPI are applied uniformly (may be blank)
+
+4. USER EXPERIENCE:
+   - GUI file picker appears and functions
+   - All prompts are clear and allow skipping with Enter
+   - Progress messages inform user of extraction status
+   - Final message confirms success and shows output path
+
+================================================================================
+11. EXAMPLE SCENARIOS / TEST CASES
+================================================================================
+
+SCENARIO 1: FAR Companion PDF
+  Input PDF: far-companion.pdf (with FC-numbered sections)
+  User Entries:
+    - URL: https://www.acquisition.gov/far-companion
+    - Header Pattern: ^Federal Acquisition Regulation.*\d+$
+    - OPI: (blank)
+    - Source Override: Federal Acquisition Regulation (FAR) Companion Version 2.0
+  
+  Expected Output:
+    - Multiple rows with headings like "FC 1.000 Scope", "FC 1.001 Purpose"
+    - Each Component Name prefixed with source title
+    - No page headers in descriptions
+    - OPI column blank for manual entry
+
+SCENARIO 2: NIST Publication
+  Input PDF: NIST.SP.800-63-4.pdf (with numbered sections)
+  User Entries:
+    - URL: https://pages.nist.gov/800-63-4/
+    - Header Pattern: (blank)
+    - OPI: NIST Information Technology Laboratory
+    - Source Override: (accept default)
+  
+  Expected Output:
+    - Rows for sections like "1. Purpose", "2. Introduction"
+    - OPI populated for all rows
+    - Source from PDF metadata
+
+SCENARIO 3: Document with No Recognized Headings
+  Input PDF: A PDF with no matching heading patterns
+  
+  Expected Output:
+    - XLSX file created
+    - Only header row, no data rows
+    - No error thrown
+
+SCENARIO 4: User Cancels File Selection
+  User Action: Clicks Cancel in file dialog
+  
+  Expected Output:
+    - Message: "No file selected. Exiting."
+    - Script exits cleanly (no error code)
+
+================================================================================
+12. KEY FUNCTIONS AND THEIR ROLES
+================================================================================
+
+clear_screen()
+  - Clears the terminal for clean output
+  - Uses 'cls' on Windows, 'clear' on Unix
+
+get_pdf_title(pdf_path)
+  - Opens PDF and extracts title from metadata
+  - Falls back to filename stem if no title metadata
+
+normalize_text(text)
+  - Applies character replacements (smart quotes, dashes, bullets)
+  - Collapses multiple whitespace to single space
+  - Strips leading/trailing whitespace
+
+extract_components(pdf_path, page_header_pattern=None)
+  - Main extraction logic
+  - Reads all pages into single text stream
+  - Applies combined regex for all heading patterns
+  - Iterates matches to extract heading + content pairs
+  - Optionally strips page header lines
+  - Returns list of {"heading": str, "content": str} dicts
+
+safe_filename(stem, suffix, timestamp)
+  - Creates a filesystem-safe filename
+  - Replaces invalid characters with underscores
+  - Truncates long names with hash for uniqueness
+
+main()
+  - Entry point orchestrating the workflow
+  - Handles GUI dialog, user prompts, extraction, and file writing
+
+================================================================================
+13. HEADING DETECTION PATTERNS (REGEX)
+================================================================================
+
+The script uses these regex patterns (combined with OR logic):
+
+1. FC Sections: ^(FC\s+\d+\.\d+.*)$
+   Matches: "FC 1.000 Scope", "FC 12.345 Some Title"
+
+2. Part Sections: ^(Part\s+\d+\b.*)$
+   Matches: "Part 5 – Publicizing Contract Actions", "Part 12 Title"
+
+3. Numbered Sections: ^(\d+\.\s+.+)$
+   Matches: "1. Introduction", "3. Citation System", "12. Appendix"
+
+4. ALL-CAPS Headings: ^([A-Z0-9][A-Z0-9\s,&\-]+)$
+   Matches: "DEFINITIONS", "SCOPE AND APPLICABILITY", "PART A - OVERVIEW"
+
+All patterns use re.MULTILINE so ^ matches start of any line.
+
+================================================================================
+14. DEPENDENCIES
+================================================================================
+
+Python Standard Library:
+  - re (regular expressions)
+  - os, sys (system operations)
+  - pathlib.Path (file path handling)
+  - datetime (timestamps)
+  - hashlib (filename hashing)
+  - tkinter, tkinter.filedialog (GUI file picker)
+
+Third-Party Libraries:
+  - fitz (PyMuPDF) - PDF text extraction
+  - openpyxl - Excel XLSX writing
+
+================================================================================
+15. FILE LOCATIONS AND NAMING
+================================================================================
+
+Script Location: 
+  .../ivn_pdf_component_extractor/pdf_component_extractor.py
+
+Output Location:
+  Same directory as the script
+
+Output Naming Convention:
+  <pdf_filename_stem>_<YYYY-MM-DD-HH-MM>.xlsx
+
+Example:
+  Input: far-companion.pdf
+  Output: far-companion_2025-12-18-14-30.xlsx
+
+================================================================================
+END OF CONTEXT FILE
+================================================================================

@@ -1,0 +1,6 @@
+Reasoning Log
+This file stores concise rationale summaries and observable evidence only.
+Hidden chain-of-thought and private scratchpad content are not stored.
+
+[2026-04-23 03:14:20 UTC] Assistant: Purpose-priority reinforcement added: summarize and QA outputs in ways that support identifying value and authority flow across governance components.
+

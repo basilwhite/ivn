@@ -1,0 +1,25 @@
+script: _summarize_xlsb.py
+workspace_root: C:\basilwhite.com\ivn\ivn-graph-reasoning-engine
+last_sync_utc: 2026-04-23 03:12:25 UTC
+status: manual_review_required
+note: Prompt file is newer than the code file. Prompt is authoritative, but automatic plain-English-to-code synthesis is not implemented. Review the prompt and update the code manually.
+primary_purpose: You compare components to discover and manage how value and authority flow through governance, so leaders can make better, evidence-grounded changes with systemic awareness.
+purpose_priority_order: value_and_authority_flow_first; explainability_second; convenience_third
+policy: safe_transparency
+chain_of_thought_storage: disabled
+reasoning_log_policy: concise observable summaries only
+code_sha256: 31f6c814fcca7d518b751d9ad3d5b50c72e163a8ecd265bac444a880ffe6afd4
+prompt_file: _summarize_xlsb_prompt.txt
+reasoning_file: _summarize_xlsb_reasoning.txt
+internal_state_file: _summarize_xlsb_internal_state.txt
+prompt_exists: True
+reasoning_exists: True
+detected_output_files:
+- none
+pending_actions:
+- Prompt file is newer than the code file. Prompt is authoritative, but automatic plain-English-to-code synthesis is not implemented. Review the prompt and update the code manually.
+verification_checks:
+- support files present
+- prompt regenerated from code when code is authoritative
+- prompt-authoritative drift flagged when prompt is newer than code
+- purpose statement preserved and reflected in analysis outputs

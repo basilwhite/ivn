@@ -1,0 +1,84 @@
+Purpose and Problem
+- Aligns "unaligned" components to a reference set by measuring semantic similarity between their descriptions so analysts can infer plausible crosswalks.
+- Broader context: supports IVN crosswalking by proposing matches between ToBeCrosswalked items and Components from an Excel workbook.
+
+Concepts and Prerequisites
+- Semantic similarity via TF-IDF vectors and cosine similarity; matrix-based scoring avoids nested loops.
+- Threshold-based filtering: only pairs with similarity >= user-specified threshold are kept (default 0.4 on invalid/blank input).
+- Data cleaning: remove tabs/newlines, coerce strings, drop rows with missing/blank names or descriptions.
+- Data handling: pandas DataFrames, NumPy matrices, scikit-learn TfidfVectorizer and cosine_similarity.
+- Prereqs: Python 3, pandas, numpy, scikit-learn installed; ability to read local Excel files; basic CLI input handling.
+
+Domain Terms
+- Components: reference items with name, description, source.
+- ToBeCrosswalked: unaligned items with component name/description/source/URL.
+- Dataset sheet: contains Enabling/Dependent components and URLs used to build a URL lookup.
+- Similarity score: cosine similarity between TF-IDF vectors of descriptions.
+
+Why This Script Exists and Its Role
+- Automates identifying likely matches between unaligned and reference components to accelerate documentation and crosswalking.
+- Produces a CSV detailing proposed matches, supporting review and downstream integration.
+
+High-Level Behavior
+1) Load Excel file `ivntest.xlsx` from the script directory; sheets: `Components`, `ToBeCrosswalked`, `Dataset`.
+2) Validate required columns:
+   - Components: component_name, component_description, source.
+   - ToBeCrosswalked: Component, Component Description, Source, Component URL.
+   - Dataset: Enabling Component, Enabling Component URL, Dependent Component, Dependent Component URL.
+3) Clean all fields (strip tabs/newlines; NaN -> empty string) for every DataFrame.
+4) Extract tuples:
+   - Reference components: (component_name, component_description, source) skipping blank names/descriptions.
+   - Unaligned: (Component, Component Description, Source, Component URL) skipping blank names/descriptions.
+5) Build URL lookup from Dataset for both enabling and dependent component names to their URLs (missing URLs become empty string).
+6) Prompt user for similarity threshold; fallback to 0.4 on invalid input or blank entry.
+7) If either list is empty, print counts and exit cleanly.
+8) Fit a single TfidfVectorizer on all descriptions (unaligned + reference) once; transform to vectors.
+9) Compute cosine similarity matrix between unaligned and reference vectors in one call.
+10) Find all index pairs with similarity >= threshold; iterate over those pairs only.
+11) Skip matches where unaligned source equals reference source.
+12) For each kept pair, build a result row (fields cleaned) with justification text and similarity score.
+13) Show a terminal progress indicator every 1000 processed pairs and at completion with ETA formatted as HH:MM:SS.
+14) Build a pandas DataFrame with strict column order, preview head to stdout, and save as UTF-8-SIG CSV named `ivn_inferred_causal_output_<timestamp>.csv` in the script directory.
+
+Inputs and Outputs
+- Inputs: Excel file `ivntest.xlsx` colocated with the script; user-entered threshold (optional, via stdin).
+- Output file: CSV `ivn_inferred_causal_output_<YYYYMMDD_HHMMSS>.csv` in script directory, UTF-8-SIG, comma-separated.
+- Output columns (order is fixed):
+  1) Unaligned Component
+  2) Unaligned Source
+  3) Unaligned Component Description
+  4) Unaligned Component URL
+  5) Reference Component Source
+  6) Reference Component
+  7) Reference Component Description
+  8) Reference Component URL
+  9) Justification ("'<unaligned>' and '<reference>' have a semantic similarity score of X.XXXX.")
+ 10) Similarity Score (float)
+
+Validity Checks and Error Handling
+- Column validation: raises ValueError if required columns are missing from any sheet; fix workbook or names to proceed.
+- File errors: missing `ivntest.xlsx` will raise an exception on load.
+- Threshold input: non-numeric or blank input triggers default 0.4 with a notice.
+- Empty data: if no unaligned or reference components after cleaning, script prints counts and exits without CSV; if there are components but no qualifying pairs at the chosen threshold, it reports that no output file is written.
+- Source conflict: pairs with identical sources are excluded to avoid self-matches.
+- Field cleaning: tabs/newlines removed from all output fields to keep CSV clean.
+
+Success Criteria and Correct Behavior
+- Successful run: required sheets/columns present; similarity computed; CSV written with ordered columns and UTF-8-SIG encoding; preview printed.
+- Correct model reconstruction must preserve: sheet names, required columns, cleaning functions, single TfidfVectorizer fit, matrix-based cosine similarity, threshold default 0.4, exclusion of same-source pairs, progress updates per 1000 pairs, timestamped filename pattern, and skipping CSV writing when no qualifying pairs.
+- Working correctly means: given valid data, the script finishes without unhandled exceptions and outputs matches meeting the threshold with proper justification strings and URLs populated from Dataset when available.
+
+Evaluating Output
+- Confirm output file exists in script directory, matches naming pattern, and opens with expected 10 columns in listed order.
+- Spot-check rows: similarity scores >= chosen threshold; justification text matches components and score formatting to four decimals; Reference Component URL aligns with lookup for that component.
+- For runs with no qualifying pairs or empty inputs, ensure the script exits gracefully and does not produce a CSV.
+
+Example Scenarios / Test Cases
+- Valid small dataset: one unaligned item "Pump" (desc "Water pump" source A), one reference "Pump Unit" (desc "Water pumping device" source B), threshold 0.3 -> expect one match with justification and URL lookup applied.
+- Same-source exclusion: unaligned source A and reference source A with high similarity -> expect zero results despite score.
+- Invalid threshold input: user enters "abc" -> script logs default 0.4 and proceeds.
+- Missing column: remove "Component Description" from ToBeCrosswalked -> script raises ValueError naming missing column.
+- Empty sheet: ToBeCrosswalked with no valid rows -> script prints counts and exits without CSV.
+
+Guidance for Regeneration
+- Keep the prompt text as the authoritative spec; any script changes must be mirrored here immediately and vice versa so a naive model can recreate the script exactly from this description.

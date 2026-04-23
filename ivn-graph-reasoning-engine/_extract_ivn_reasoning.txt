@@ -1,0 +1,6 @@
+Reasoning Log
+This file stores concise rationale summaries and observable evidence only.
+Hidden chain-of-thought and private scratchpad content are not stored.
+
+[2026-04-23 03:14:15 UTC] Assistant: Purpose-priority reinforcement added: alignments should be evaluated by likely measurable effect on dependent components and by authority traceability from enabling sources.
+

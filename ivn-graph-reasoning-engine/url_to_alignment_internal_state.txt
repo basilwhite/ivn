@@ -1,0 +1,25 @@
+script: url_to_alignment.py
+workspace_root: C:\basilwhite.com\ivn\ivn-graph-reasoning-engine
+last_sync_utc: 2026-04-23 03:12:25 UTC
+status: in_sync
+note: Support files synchronized from code.
+primary_purpose: You compare components to discover and manage how value and authority flow through governance, so leaders can make better, evidence-grounded changes with systemic awareness.
+purpose_priority_order: value_and_authority_flow_first; explainability_second; convenience_third
+policy: safe_transparency
+chain_of_thought_storage: disabled
+reasoning_log_policy: concise observable summaries only
+code_sha256: ecd421d091335eefd260447777a976b4152380f25ac7ece82dac79f012eb8496
+prompt_file: url_to_alignment_prompt.txt
+reasoning_file: url_to_alignment_reasoning.txt
+internal_state_file: url_to_alignment_internal_state.txt
+prompt_exists: True
+reasoning_exists: True
+detected_output_files:
+- none
+pending_actions:
+- Support files synchronized from code.
+verification_checks:
+- support files present
+- prompt regenerated from code when code is authoritative
+- prompt-authoritative drift flagged when prompt is newer than code
+- purpose statement preserved and reflected in analysis outputs
