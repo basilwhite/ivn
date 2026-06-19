@@ -1,0 +1,613 @@
+IVN KEYWORD EXTRACTOR - CONTEXT FILE FOR LEARNING MODEL
+=======================================================
+
+PROBLEM STATEMENT
+-----------------
+Organizations need to analyze large Excel spreadsheets containing textual data to identify important keywords, phrases, and acronyms. Manually reading through hundreds or thousands of rows is time-consuming and prone to missing critical terms. There is a need for an automated tool that can extract meaningful keywords from Excel files while filtering out common words that don't provide value.
+
+BROADER CONTEXT
+---------------
+This script is used by the USDA (United States Department of Agriculture) in the DAD (Deputy Administrator for Data) IVN (Information Vetting Network) context. Government agencies often work with large policy documents, reports, and data tables stored in Excel format. These documents contain technical terms, acronyms, and specialized vocabulary that need to be identified for indexing, categorization, or further analysis. The script helps knowledge workers quickly identify the most important terms in their documents without manual review.
+
+CONCEPTS THAT MUST BE UNDERSTOOD
+---------------------------------
+
+1. Natural Language Processing (NLP) Basics
+   - Tokenization: Breaking text into individual words
+   - Stopwords: Common words like "the", "and", "is" that carry little meaning
+   - Keyword extraction: Identifying the most important or distinctive words in text
+   - N-grams: Sequences of N consecutive words (bigrams = 2 words, trigrams = 3 words)
+
+2. Text Preprocessing
+   - Normalization: Converting text to a standard form (lowercase, removing punctuation)
+   - Cleaning: Removing noise and irrelevant characters
+   - Unicode handling: Dealing with special characters and apostrophe variants
+
+3. Excel File Structure
+   - Workbooks: The entire Excel file
+   - Worksheets/Tabs: Individual sheets within a workbook
+   - Cells: Individual data units in a spreadsheet
+   - Rows and columns: Organization of cells
+
+4. Frequency Analysis
+   - Word counting: Tracking how often each word appears
+   - Ranking: Ordering words by frequency to find the most common terms
+
+5. Pattern Recognition
+   - Acronyms: All-uppercase abbreviations (USDA, NASA, API)
+   - Proper nouns: Capitalized names and titles
+   - Multi-word phrases: Meaningful sequences of words that often appear together
+
+PREREQUISITE KNOWLEDGE
+----------------------
+
+Technical Prerequisites:
+- Basic Python programming (functions, loops, conditionals, data structures)
+- Understanding of strings and text manipulation
+- Regular expressions (regex) for pattern matching
+- File I/O operations
+- Working with lists, dictionaries, sets, and counters in Python
+
+Domain Prerequisites:
+- Understanding that Excel files can contain multiple sheets/tabs
+- Knowledge that text analysis often requires filtering common words
+- Awareness that acronyms and capitalized phrases often indicate important concepts
+- Understanding that frequency of occurrence can indicate keyword importance
+
+Library Prerequisites:
+- openpyxl: Library for reading Excel (.xlsx) files
+- tkinter: Python's standard GUI library for file dialogs
+- collections.Counter: Built-in Python class for counting occurrences
+- pathlib.Path: Modern Python library for file path manipulation
+- re (regex): Built-in Python library for pattern matching
+
+DOMAIN-SPECIFIC TERMS
+----------------------
+
+Stopwords: A predefined list of common words (like "the", "is", "and") that are filtered out because they don't carry significant meaning in keyword extraction.
+
+Acronym: A word formed from the initial letters of other words, typically written in all uppercase (e.g., USDA, GAO, FITARA). In this context, acronyms are 2 or more consecutive uppercase letters.
+
+Bigram: A sequence of two consecutive words (e.g., "cloud computing", "service level").
+
+Trigram: A sequence of three consecutive words (e.g., "service level agreement").
+
+Capitalized Phrase: A multi-word phrase where each significant word starts with a capital letter, often indicating proper nouns or technical terms (e.g., "Federal Information Technology", "Cloud Computing Policy").
+
+Paragraph: In this context, a row from the Excel file with at least 50 characters of text. The 50-character minimum filters out headers or short labels.
+
+Token: An individual word extracted from text during the tokenization process.
+
+WHAT THE SCRIPT DOES (HIGH-LEVEL)
+----------------------------------
+
+The IVN Keyword Extractor is a Python application that:
+
+1. Opens a graphical file dialog for users to select an Excel (.xlsx) file
+2. Reads all worksheet tabs from the selected file
+3. Presents a list of tabs and lets the user select which one to analyze
+4. Extracts all text from the selected worksheet (filtering rows with fewer than 50 characters)
+5. For each text paragraph (row), performs keyword extraction by:
+   - Identifying acronyms (uppercase letter sequences)
+   - Finding capitalized phrases (proper nouns and technical terms)
+   - Counting word frequencies after removing stopwords
+   - Extracting common bigrams and trigrams
+   - Extract uncommon words from each paragraph
+6. Displays the results in the console
+7. Exports results to both CSV and JSON files
+8. Shows a completion message with file locations
+
+WHY THE SCRIPT EXISTS
+---------------------
+
+Manual keyword extraction from large documents is tedious and error-prone. This script automates the process, saving time and ensuring consistency. It's specifically designed for government workers who need to quickly understand the key topics and terms in policy documents, reports, and data tables. The script preserves important formatting (like acronyms in uppercase) while making the data accessible in multiple formats for downstream analysis or reporting.
+
+THE ROLE OF THE SCRIPT
+-----------------------
+
+This is a standalone desktop utility tool. It is not a library or module to be imported by other code. It is meant to be run directly by end users who have Excel files they want to analyze. The script acts as a bridge between raw Excel data and structured keyword data that can be used for indexing, search, categorization, or feeding into other analysis tools.
+
+KEY CONCEPTS AND LEARNING DATA
+-------------------------------
+
+Concept 1: Stopword Filtering
+- Stopwords are common words that appear frequently but carry little semantic meaning
+- Examples: "the", "is", "and", "but", "will", "have"
+- The script maintains a large set of stopwords (100+ words)
+- Before counting word frequencies, stopwords are excluded
+- This ensures that only meaningful words are identified as keywords
+- Some domain-specific words are also added to stopwords (like "provides", "requires") because they appear often in formal documents but don't indicate specific topics
+
+Concept 2: Acronym Detection
+- Acronyms are identified by regex pattern: one or more uppercase letters, potentially with hyphens
+- The pattern is: \b[A-Z][A-Z0-9]{1,}(?:-[A-Z0-9]+)*\b
+- This matches: USDA, API, COVID-19, IT, GAO
+- This doesn't match: USA (too short), The (common word), Dr. (just a title)
+- A separate exclusion list filters out common uppercase words (THE, AND, FOR) that aren't acronyms
+- Acronyms are preserved in their original uppercase format in the output
+
+Concept 3: Capitalized Phrase Extraction
+- Looks for sequences of 2-5 words where most words are capitalized
+- Pattern: \b([A-Z][a-z]+(?:\s+(?:[A-Z][a-z]+|[A-Z]+|of|and|the|for))+)\b
+- Matches phrases like: "Cloud Computing Policy", "Federal Information Technology"
+- Allows small connector words (of, and, the, for) to be lowercase within the phrase
+- Also detects phrases with parenthetical acronyms: "Service Level Agreement (SLA)"
+- Filters out phrases that are only stopwords
+
+Concept 4: N-gram Extraction
+- After cleaning and tokenizing, the script examines word sequences
+- Bigrams: sliding window of 2 consecutive words (word[i], word[i+1])
+- Trigrams: sliding window of 3 consecutive words (word[i], word[i+1], word[i+2])
+- Only n-grams appearing more than once are kept (frequency > 1)
+- At least one word in the n-gram should not be a stopword
+- This finds common multi-word terms like "cloud service" or "information technology system"
+
+Concept 5: Unicode Normalization
+- Excel files can contain various Unicode apostrophe characters
+- Examples: ' (U+2019), ʼ (U+02BC), ` (grave accent), ´ (acute accent)
+- These can cause encoding errors when writing to CSV files
+- The normalize_apostrophes function replaces all variants with standard ASCII apostrophe (')
+- This is applied to all cell text immediately after reading from Excel
+
+Concept 6: Result Prioritization
+- Keywords list: Up to 10 items, prioritizing acronyms first (max 3), then most frequent words (up to 7), then uncommon words that appear in the paragraph
+- Phrases list: Up to 7 items, prioritizing capitalized phrases first (max 5), then common n-grams
+- This ensures the most distinctive and formally-named concepts appear first
+- Deduplication is performed to avoid showing the same keyword in different forms
+
+Concept 7: Uncommon Word Detection
+- Uncommon words are rare words that appear in only a small number of paragraphs across the entire document
+- Definition: Words that appear in 1-2 paragraphs (or up to 10% of paragraphs, whichever is smaller)
+- Must be longer than 5 characters to be considered meaningful
+- Must not be stopwords
+- These words often represent specialized terms, technical jargon, or unique concepts
+- The script first analyzes all paragraphs to identify uncommon words, then adds relevant ones to each paragraph's keywords
+- Only uncommon words that actually appear in a specific paragraph are added to that paragraph's keyword list
+- Example: In a 100-paragraph document about cloud computing, the word "orchestration" might appear in only 2 paragraphs, making it an uncommon but important term
+
+Algorithm for Uncommon Word Detection:
+1. Create a dictionary to track paragraph count for each word
+2. For each paragraph in the document:
+   a. Clean and tokenize the text
+   b. Get unique words in that paragraph (using a set to avoid counting duplicates within same paragraph)
+   c. For each unique word: if length > 5 and not a stopword, increment its paragraph count
+3. Calculate threshold: min(2, max(1, total_paragraphs // 10))
+   - For documents with 1-20 paragraphs: threshold = 1 (word must appear in only 1 paragraph)
+   - For documents with 21-100 paragraphs: threshold = 2 (word must appear in 1-2 paragraphs)
+   - For documents with 100+ paragraphs: threshold = 10% of paragraphs
+4. Filter to get uncommon words: words where paragraph_count <= threshold
+5. When extracting keywords for a specific paragraph, check if any of its words are in the uncommon set
+6. Add up to 3 uncommon words (that actually appear in the paragraph) to the keywords list
+
+Concept 8: Minimum Text Length Filtering
+- Only rows with 50+ characters are processed
+- This filters out header rows, labels, and short fragments
+- Focuses analysis on substantial text paragraphs
+- Ensures meaningful keyword extraction rather than analyzing isolated words
+
+INPUT/OUTPUT DEFINITIONS
+-------------------------
+
+INPUTS:
+
+1. User Selection (GUI): Excel file path
+   - Format: File system path ending in .xlsx
+   - Example: "C:\Users\JohnDoe\Documents\report.xlsx"
+   - Validation: Must exist and be readable
+   - Validation: Must have .xlsx extension
+
+2. User Selection (GUI): Worksheet tab name
+   - Format: String matching one of the workbook's sheet names
+   - Example: "Data Analysis", "Sheet1", "Q4 Report"
+   - Validation: Must exist in the selected workbook
+
+3. Excel Worksheet Content
+   - Format: Rows and columns of cells containing text, numbers, or formulas
+   - Processing: Each row is concatenated into a single paragraph
+   - Processing: Only rows with 50+ characters total are analyzed
+   - Processing: Cell values are converted to strings
+
+OUTPUTS:
+
+1. Console Display
+   - Shows progress messages for each step
+   - Displays results for each paragraph:
+     * Row number
+     * Text preview (first 300 characters)
+     * Extracted keywords (comma-separated)
+     * Extracted phrases (comma-separated)
+     * Extracted acronyms (comma-separated)
+   - Shows file paths where results are saved
+
+2. CSV File (filename_keywords.csv)
+   - Format: Standard CSV with UTF-8 encoding
+   - Columns: Row, [Original Excel Columns], Keywords, Key Phrases
+   - Preserves all original columns from the input Excel file
+   - All fields are quoted (csv.QUOTE_ALL)
+   - Example with original columns preserved:
+     "1","Source Component","Component Description","Component URL","Office of Primary Interest","FITARA, federal, information","Federal Information Technology"
+   - The script reads the first row of the Excel file as headers and includes all those columns in the output
+   - This allows users to maintain their original data structure while adding keyword analysis
+
+3. JSON File (filename_keywords.json)
+   - Format: Pretty-printed JSON with 2-space indentation
+   - Structure: Array of objects
+   - Each object contains:
+     * rowNumber: integer (1-based index)
+     * text: string (full paragraph text)
+     * keywords: array of strings
+     * phrases: array of strings
+     * acronyms: array of strings
+   - Example:
+     [
+       {
+         "rowNumber": 1,
+         "text": "The Federal Information Technology...",
+         "keywords": ["fitara", "federal", "information"],
+         "phrases": ["Federal Information Technology"],
+         "acronyms": ["FITARA"]
+       }
+     ]
+
+4. GUI Message Box
+   - Appears at completion
+   - Shows count of paragraphs processed
+   - Shows full paths to both output files
+   - User clicks OK to dismiss
+
+STRUCTURE AND CONTENT OF FINAL OUTPUT
+--------------------------------------
+
+The script produces two complementary output files:
+
+CSV Output Structure:
+- Header row contains: Row, [Original Excel Column Names], Keywords, Key Phrases
+- Each data row represents one paragraph from the Excel file
+- Row numbers match the original Excel row positions (after filtering, starting from row 2)
+- Original column values are preserved exactly as they appeared in the Excel file
+- Keywords column combines acronyms and keywords (acronyms appear first)
+- All text is properly escaped and quoted for CSV safety
+- This structure allows users to maintain their original data organization while adding keyword analysis
+
+JSON Output Structure:
+- Root element is an array
+- Each array element is an object representing one paragraph
+- Objects contain separate fields for acronyms, keywords, and phrases
+- This structure preserves the distinction between different types of extractions
+- More suitable for programmatic processing or feeding into other tools
+
+Both files:
+- Are saved in the same directory as the input Excel file
+- Use the input filename as a base (e.g., "report.xlsx" → "report_keywords.csv")
+- Use UTF-8 encoding to preserve special characters
+- Are overwritten if they already exist
+
+VALIDITY CHECKS OF OUTPUT
+--------------------------
+
+The output is considered valid if:
+
+1. CSV file is created and readable
+   - Can be opened in Excel or any spreadsheet application
+   - All quotes and special characters are properly escaped
+   - No encoding errors (no � characters or garbled text)
+   - Number of data rows matches number of processed paragraphs
+
+2. JSON file is created and parseable
+   - Valid JSON syntax (can be parsed by json.load())
+   - All objects have required fields: rowNumber, text, keywords, phrases, acronyms
+   - Arrays (keywords, phrases, acronyms) contain only strings
+   - No duplicate entries in each array
+
+3. Data integrity
+   - Keywords list contains only lowercase words (except when they were originally acronyms)
+   - Acronyms are preserved in uppercase
+   - Capitalized phrases retain their original capitalization
+   - No stopwords appear in the keywords list
+   - Word counts in keywords and phrases match expectations (max 7 each)
+   - No empty strings in any array
+
+4. Text quality
+   - All apostrophes are normalized to standard ASCII
+   - No encoding errors or replacement characters
+   - Text matches the original Excel content
+
+SUCCESSFUL OUTCOME DEFINITION
+------------------------------
+
+A successful run means:
+
+1. The user successfully selects an Excel file and worksheet tab
+2. At least one paragraph (50+ characters) is found in the selected tab
+3. Keywords, phrases, and acronyms are extracted from each paragraph
+4. Both CSV and JSON files are created without errors
+5. The completion message box appears with correct file paths
+6. The user can open both output files and see properly formatted data
+7. No Python exceptions or errors are raised during execution
+
+SUCCESS CRITERIA:
+- Program completes without crashing
+- Output files are created in the expected location
+- Output files contain data for all processed paragraphs
+- Keywords appear relevant to the text content (not just random words)
+- Acronyms are correctly identified and preserved in uppercase
+- Capitalized phrases are recognized when present
+
+FAILURE INDICATORS:
+- FileNotFoundError: Input file doesn't exist or can't be read
+- PermissionError: Can't write output files (directory is read-only)
+- UnicodeEncodeError: Encoding issues with special characters (should not happen after apostrophe normalization)
+- Empty output: No paragraphs met the 50-character minimum
+- Corrupted output: CSV or JSON files are malformed
+
+ERROR HANDLING LOGIC
+---------------------
+
+The script handles errors at multiple levels:
+
+1. Missing Dependencies
+   - Checks for openpyxl and tkinter imports
+   - If missing, prints clear error message and exits
+   - User is told exactly how to install (pip install openpyxl)
+
+2. File Selection Cancellation
+   - If user clicks Cancel in file dialog, returns empty string
+   - Script checks for empty string and exits gracefully with message
+   - No error is raised, just a clean exit
+
+3. Invalid File Format
+   - Checks file extension is .xlsx
+   - Prints error message if not
+   - Exits without attempting to read
+
+4. Workbook Reading Errors
+   - Wrapped in try/except block
+   - Catches any openpyxl exceptions (corrupt file, wrong format, etc.)
+   - Prints user-friendly error message
+   - Exits gracefully
+
+5. Empty Workbook
+   - Checks if tab_names list is empty
+   - Prints error message
+   - Exits gracefully
+
+6. Tab Selection Cancellation
+   - If user clicks Cancel, selected_tab is empty string
+   - Script checks and exits with message
+
+7. Worksheet Reading Errors
+   - Wrapped in try/except block
+   - Handles KeyError (tab doesn't exist), other exceptions
+   - Prints error message
+   - Exits gracefully
+
+8. No Paragraphs Found
+   - After filtering, checks if paragraphs list is empty
+   - Prints message about 50-character minimum
+   - Exits gracefully (not an error, just no qualifying data)
+
+9. Unicode and Encoding Errors
+   - Prevented by normalize_apostrophes function
+   - Applied before any text processing
+   - CSV uses utf-8 encoding explicitly
+   - JSON uses ensure_ascii=False to preserve Unicode characters
+
+WHAT "WORKING CORRECTLY" MEANS
+--------------------------------
+
+The script works correctly when:
+
+Functional Correctness:
+- Accurately identifies acronyms (all-uppercase sequences of 2+ letters)
+- Correctly extracts capitalized phrases (proper nouns, titles)
+- Properly filters out stopwords from keyword list
+- Ranks keywords by frequency, showing most common first
+- Finds meaningful bigrams and trigrams that appear multiple times
+- Preserves original text formatting in output
+
+User Experience Correctness:
+- File dialogs appear on top of other windows
+- Tab selection window is centered on screen
+- Progress is clearly shown in console
+- Completion message shows exact file locations
+- Process is intuitive (select file → select tab → automatic processing)
+
+Output Correctness:
+- CSV can be opened in Excel without errors
+- JSON is valid and parseable
+- Keywords make sense for the content (human judgment)
+- No common words like "the" or "is" in keywords list
+- Acronyms like USDA, GAO appear in uppercase, not lowercase
+- Multi-word technical terms are preserved as phrases
+
+Performance Correctness:
+- Completes in reasonable time (seconds for hundreds of rows)
+- Doesn't freeze or hang during processing
+- Memory usage is reasonable (doesn't load entire file into memory unnecessarily)
+- Uses read_only=True for openpyxl to improve performance
+
+EXAMPLE SCENARIOS AND TEST CASES
+----------------------------------
+
+Test Case 1: Simple Policy Document
+Input: Excel file with tab "Policy Text" containing:
+  Row 1: "The Federal Information Technology Acquisition Reform Act (FITARA) provides comprehensive guidance."
+  Row 2: "Cloud computing services must meet security requirements established by NIST."
+  
+Expected Output:
+  Paragraph 1:
+    - Keywords: fitara, federal, information, technology, acquisition
+    - Phrases: Federal Information Technology, Acquisition Reform Act
+    - Acronyms: FITARA
+  Paragraph 2:
+    - Keywords: nist, cloud, computing, services, security
+    - Phrases: Cloud computing, security requirements
+    - Acronyms: NIST
+
+Test Case 2: Technical Report with Acronyms
+Input: Excel file with many acronyms (API, REST, HTTP, JSON, XML)
+Expected Output:
+  - All acronyms should appear in uppercase in acronyms list
+  - Acronyms should also appear in lowercase in keywords list
+  - Technical terms like "Application Programming Interface" should be in phrases
+
+Test Case 3: Short Rows Filtered Out
+Input: Excel file with rows containing:
+  Row 1: "Title" (5 characters - too short)
+  Row 2: "This is a longer paragraph with more than fifty characters in total so it qualifies."
+Expected Output:
+  - Only Row 2 is processed
+  - Row count in output is 1, not 2
+
+Test Case 4: Unicode Apostrophes
+Input: Text containing: "user's data" with Unicode apostrophe (U+2019)
+Expected Output:
+  - Apostrophe is normalized to ASCII '
+  - CSV and JSON files contain standard apostrophe
+  - No encoding errors or � characters
+
+Test Case 5: Multiple Worksheet Tabs
+Input: Excel file with tabs "Summary", "Details", "Archive"
+Expected Output:
+  - Tab selection dialog shows all three tabs
+  - User can select any tab
+  - Only selected tab is processed
+
+Test Case 6: Empty Worksheet
+Input: Excel file with empty worksheet or only short rows
+Expected Output:
+  - Message: "No paragraphs found (minimum 50 characters per row)."
+  - No output files created
+  - Script exits gracefully
+
+Test Case 7: User Cancels Selection
+Input: User clicks Cancel on file dialog or tab selection
+Expected Output:
+  - Message: "No file selected. Exiting." or "No tab selected. Exiting."
+  - No errors raised
+  - Clean exit
+
+Test Case 8: Large File Performance
+Input: Excel file with 1000+ rows of text
+Expected Output:
+  - Completes in under 30 seconds
+  - All rows are processed
+  - Output files are created successfully
+
+Test Case 9: Special Characters in Filenames
+Input: Excel file named "Report Q4 2024 (Final).xlsx"
+Expected Output:
+  - Output files: "Report Q4 2024 (Final)_keywords.csv" and ".json"
+  - No file system errors
+
+Test Case 10: Capitalized Phrases with Connector Words
+Input: "Department of Agriculture and Food Safety Commission"
+Expected Output:
+  - Phrase: "Department of Agriculture"
+  - Phrase: "Food Safety Commission"
+  - The connector words "and", "of" are allowed within phrases
+
+Test Case 11: Uncommon Word Detection
+Input: Excel file with 10 paragraphs about cloud computing:
+  - 8 paragraphs mention "security", "cloud", "service" (common words)
+  - 2 paragraphs mention "containerization" (uncommon word)
+  - 1 paragraph mentions "orchestration" (uncommon word)
+Expected Output:
+  - The 2 paragraphs with "containerization" should include it in their keywords
+  - The 1 paragraph with "orchestration" should include it in its keywords
+  - Common words like "security" appear in keywords based on frequency
+  - Uncommon words are prioritized even if they appear only once in a paragraph
+
+Test Case 12: Uncommon Words Must Match Criteria
+Input: Multiple paragraphs with rare words:
+  - "auth" appears in 1 paragraph (too short - 4 chars, needs >5)
+  - "the" appears in all paragraphs (stopword, not uncommon)
+  - "cryptographic" appears in 1 paragraph (valid - >5 chars, not stopword)
+Expected Output:
+  - "auth" is not included as an uncommon word (too short)
+  - "the" is not included as an uncommon word (stopword)
+  - "cryptographic" is included as an uncommon word in the paragraph where it appears
+
+LEARNING MODEL RECONSTRUCTION GUIDANCE
+---------------------------------------
+
+To recreate this script from scratch, a learning model should:
+
+1. Start with imports and dependency checks
+   - Import openpyxl with try/except, exit with helpful message if missing
+   - Import tkinter with try/except, exit with helpful message if missing
+   - Import standard libraries: re, json, csv, Counter, Path, List, Dict, Set
+
+2. Define the STOPWORDS set
+   - Include 100+ common English words
+   - Add domain-specific words that appear often in formal documents
+   - Make it a set for O(1) lookup performance
+
+3. Define ACRONYM_EXCLUDES set
+   - Include common uppercase words that aren't acronyms
+   - Words like THE, AND, FOR, WILL, etc.
+
+4. Create GUI helper functions
+   - select_xlsx_file(): Use tkinter filedialog.askopenfilename
+   - select_tab(): Create Tk window with Listbox, Select/Cancel buttons
+   - Both should set topmost attribute and handle cancellation
+
+5. Create Excel reading functions
+   - get_workbook_tabs(): Use openpyxl to load workbook and get sheetnames
+   - read_xlsx_tab(): Returns tuple of (headers, paragraphs, row_data)
+     * First row is treated as headers
+     * Iterate through remaining rows, concatenate cells, filter by length
+     * Store original column values in a dictionary for each row
+     * Return headers list, paragraphs list, and row_data list
+   - Remember to close workbook after reading
+
+6. Create text processing functions
+   - normalize_apostrophes(): Replace Unicode variants with ASCII apostrophe
+   - clean_text_for_words(): Lowercase, remove special chars, normalize whitespace
+   - tokenize(): Split on whitespace, filter words <= 3 characters
+
+7. Create extraction functions
+   - extract_acronyms(): Use regex \b[A-Z][A-Z0-9]{1,}(?:-[A-Z0-9]+)*\b
+   - extract_capitalized_phrases(): Use regex for capitalized sequences
+   - extract_uncommon_words(): Analyze all paragraphs to find rare words (appear in ≤2 paragraphs, >5 chars, not stopwords)
+   - extract_keywords(): Orchestrate all extraction, accept uncommon_words parameter, return dict with keys/phrases/acronyms
+
+8. Create processing function
+   - process_paragraphs(): First call extract_uncommon_words() on all paragraphs
+   - Accept optional row_data parameter containing original column values from Excel
+   - Then loop through paragraphs, call extract_keywords() with uncommon_words set
+   - Return list of dicts with rowNumber, text, keywords, phrases, acronyms, and original_columns (if row_data provided)
+   - Uncommon words are added to keywords only if they appear in that specific paragraph
+
+9. Create output functions
+   - display_results(): Print formatted results to console
+   - export_csv(): Accept optional headers parameter for original column names
+     * If headers provided and results contain original_columns, write Row + original columns + Keywords + Key Phrases
+     * Otherwise use simple format: Row, Paragraph Text, Keywords, Key Phrases
+     * Write to CSV with QUOTE_ALL, utf-8 encoding
+   - export_json(): Write to JSON with indent=2, ensure_ascii=False
+
+10. Create main function
+    - Guide user through steps with print statements
+    - Call functions in sequence: select file → get tabs → select tab → read (returns headers, paragraphs, row_data) → process (pass row_data) → display → export (pass headers)
+    - Handle errors at each step
+    - Show completion message with file paths
+
+11. Add if __name__ == "__main__": block to call main()
+
+The script should feel like a guided interactive process, not a command-line tool with arguments. Each step should be clearly communicated to the user through console output and GUI dialogs.
+
+WORKFLOW INTEGRATION NOTES
+---------------------------
+
+This context file (ivn_keyword_extractor_prompt.txt) should be updated whenever:
+- The main script (ivn_keyword_extractor.py) is modified
+- New functions are added or existing functions are changed
+- The stopwords list is updated
+- Input/output formats change
+- Error handling logic is modified
+- New features are added
+
+The context file must always remain complete enough that a learning model with no prior knowledge of the code could recreate the entire script faithfully. If code changes, this file must be updated to reflect those changes immediately.
+
+This context file is version-controlled alongside the script and serves as the definitive specification of what the script does and how it should behave.
