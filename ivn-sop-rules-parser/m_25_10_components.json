@@ -1,0 +1,61 @@
+{
+  "M-24-10": {
+    "title": "Advancing Governance, Innovation, and Risk Management for Agency Use of Artificial Intelligence",
+    "components": [
+      {
+        "area": "Strengthening AI Governance",
+        "sub_area": "Chief AI Officers (CAIOs)",
+        "component": "Designate a Chief AI Officer (CAIO) within 60 days.",
+        "details": "CAIOs bear primary responsibility for implementing the memorandum and coordinating with other agencies. The memo describes roles, responsibilities, seniority, position, and reporting structures for CAIOs."
+      },
+      {
+        "area": "Strengthening AI Governance",
+        "sub_area": "Agency AI Governance Bodies",
+        "component": "Convene relevant senior officials to coordinate and govern issues tied to the use of AI within 60 days.",
+        "details": "CFO Act agencies must establish an AI Governance Board chaired by the Deputy Secretary and vice-chaired by the CAIO."
+      },
+      {
+        "area": "Strengthening AI Governance",
+        "sub_area": "Compliance Plans",
+        "component": "Submit a plan to achieve consistency with the memorandum within 180 days.",
+        "details": "Agencies must submit a plan to OMB and post it publicly on the agency’s website."
+      },
+      {
+        "area": "Strengthening AI Governance",
+        "sub_area": "AI Use Case Inventories",
+        "component": "Inventory each AI use case annually.",
+        "details": "Submit the inventory to OMB and post a public version on the agency’s website. Identify safety-impacting and rights-impacting AI."
+      },
+      {
+        "area": "Strengthening AI Governance",
+        "sub_area": "Reporting on AI Use Cases Not Subject to Inventory",
+        "component": "Report aggregate metrics about use cases not subject to inventory.",
+        "details": "Report on the number of such cases that impact rights and safety, and their compliance with Section 5(c) practices."
+      },
+      {
+        "area": "Advancing Responsible AI Innovation",
+        "sub_area": "AI Strategies",
+        "component": "Develop and release publicly an AI strategy within 365 days.",
+        "details": "The strategy should identify and remove barriers to the responsible use of AI and achieve enterprise-wide improvements in AI maturity."
+      },
+      {
+        "area": "Advancing Responsible AI Innovation",
+        "sub_area": "Removing Barriers to the Responsible Use of AI",
+        "component": "Remove unnecessary and unhelpful barriers to the use of AI.",
+        "details": "Focus on IT Infrastructure, Data, Cybersecurity, Workforce, and Generative AI."
+      },
+      {
+        "area": "Managing Risks from the Use of AI",
+        "sub_area": "Minimum Risk Management Practices",
+        "component": "Follow minimum practices when using safety-impacting AI and rights-impacting AI.",
+        "details": "The memorandum enumerates specific categories of AI that are presumed to impact rights and safety."
+      },
+      {
+        "area": "Managing Risks from the Use of AI",
+        "sub_area": "AI Risk Management in Procurement",
+        "component": "Manage AI risks in the context of Federal procurement.",
+        "details": "The memorandum establishes a series of recommendations for managing AI risks in procurement."
+      }
+    ]
+  }
+}
