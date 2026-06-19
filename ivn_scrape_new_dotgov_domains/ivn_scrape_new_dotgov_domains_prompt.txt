@@ -1,0 +1,490 @@
+================================================================================
+IVN .GOV DOMAIN SCRAPER - LLM CONTEXT FILE
+================================================================================
+Last Updated: 2026-01-05
+Script Version: 1.7
+Script File: ivn_scrape_new_dotgov_domains.py
+
+================================================================================
+SECTION 1: PROBLEM STATEMENT
+================================================================================
+
+1.1 THE PROBLEM
+---------------
+The USDA maintains an Integrated Value Network (IVN) graph database containing 
+components that reference governance documents hosted on various .gov websites. 
+These documents need to be discovered and cataloged to support policy alignment 
+analysis. Manual discovery of documents across hundreds of .gov URLs is 
+time-consuming and error-prone.
+
+1.2 BROADER CONTEXT
+-------------------
+The IVN (Integrated Value Network) is a knowledge management system that tracks:
+- Components: Individual elements of policy/governance frameworks
+- Sources: Original documents that define or reference components
+- Relationships: How components connect to each other
+
+Many components have URLs pointing to .gov websites containing PDF documents, 
+HTML pages, and other governance materials. This script automates the discovery 
+of document links from those .gov URLs to expand the IVN's source coverage.
+
+1.3 WHY THIS SCRIPT EXISTS
+--------------------------
+- To automate document discovery across .gov websites
+- To support both attended (interactive) and unattended (batch) operation
+- To provide resume capability for long-running scraping sessions
+- To work correctly in VS Code debugger (F5) without blocking prompts
+- To respect domain-level decisions (skip or scrape) without repeated prompts
+
+================================================================================
+SECTION 2: PREREQUISITE KNOWLEDGE
+================================================================================
+
+2.1 CONCEPTS TO UNDERSTAND
+--------------------------
+- Web scraping: Programmatically fetching and parsing web pages
+- URL parsing: Breaking URLs into components (scheme, domain, path, etc.)
+- DOM parsing: Extracting elements from HTML using BeautifulSoup
+- Threading: Running background tasks (keyboard monitoring) in parallel
+- State persistence: Saving progress to JSON for resume capability
+- Command-line arguments: Configuring script behavior via flags
+
+2.2 DOMAIN-SPECIFIC TERMS
+-------------------------
+- IVN: Integrated Value Network - the knowledge management system
+- Component: An individual element in the IVN graph database
+- Source: A document that provides evidence/definition for components
+- .gov domain: US government website (e.g., usda.gov, whitehouse.gov)
+- Scraping: Automatically extracting links from web pages
+- Domain hierarchy: www.usda.gov is a subdomain of usda.gov
+
+2.3 TECHNICAL PREREQUISITES
+---------------------------
+- Python 3.8+ with pandas, requests, beautifulsoup4, openpyxl
+- Understanding of Excel file structure (multiple sheets)
+- Familiarity with JSON for configuration/state storage
+- Windows-specific: winsound for audio alerts, msvcrt for keyboard monitoring
+
+================================================================================
+SECTION 3: SCRIPT DESCRIPTION
+================================================================================
+
+3.1 HIGH-LEVEL DESCRIPTION
+--------------------------
+This script reads an Excel file containing IVN components with URLs, filters for 
+.gov URLs, and scrapes each URL to discover document links (PDF, HTML, XML, TXT, 
+DOCX, JSON). It tracks progress in a JSON log file for resume capability and 
+outputs discovered documents to an Excel file.
+
+3.2 ROLE OF THE SCRIPT
+----------------------
+- Input processor: Reads ivntest.xlsx, extracts .gov URLs from Components sheet
+- Web scraper: Fetches web pages and extracts document links
+- State manager: Maintains progress log for resume and domain tracking
+- Output generator: Creates ivn_discovered_alignments.xlsx with results
+
+3.3 KEY FEATURES
+----------------
+- Two operation modes: Interactive (prompts for decisions) and Unattended (no prompts)
+- Domain-level decisions: Ask once per domain, apply to all URLs from that domain
+- Pause functionality: Press Enter to pause, with menu to continue/save/break
+- Checkpoint saves: Automatic save every 10 URLs processed
+- Debug mode detection: Auto-loads log when running in VS Code debugger
+- Audio alerts: DISABLED (beep_alert is now a no-op)
+- URL deduplication: Removes duplicate URLs from input before processing
+- Document URL filtering: Skips direct document URLs (PDFs, etc.) that can't be scraped
+- Progress indicator: Shows percentage complete and estimated time remaining
+- Failed domain tracking: Domains that timeout are tracked and skipped
+- Visited URL skip: URLs already in log from previous runs are skipped
+- Component tracking: Maps discovered documents back to source component
+- Retry logic: Failed requests retry up to MAX_RETRIES times with delay
+- URL normalization: Removes fragments, handles query strings properly
+- is_document_url(): Case-insensitive, handles query string file parameters
+- Domain summary: Prints top domains by document count at completion
+
+VERSION 1.6 ANTI-BOT FEATURES:
+- User-Agent rotation: Pool of 7 realistic browser User-Agents, rotated per request
+- Session persistence: Uses requests.Session() for cookie persistence and connection pooling
+- Realistic headers: Full browser-like headers including Sec-Fetch-*, DNT, etc.
+- Random delays: 0.5-2 second random delay between requests to appear human-like
+- Retry with rotation: On retry, a new User-Agent is selected
+
+VERSION 1.5 CONTENT EXTRACTION:
+- Link text extraction: Uses actual anchor text as document name (not placeholders)
+- Context extraction: Searches parent/sibling elements for descriptive text
+- Meta description: Falls back to page meta description for content
+- Filename parsing: Cleans up filenames to readable names (CamelCase, underscores)
+- URL path parsing: Generates descriptions from URL path structure
+
+VERSION 1.7 ACTUAL DOCUMENT CONTENT EXTRACTION (NEW):
+- fetch_document_content(): NEW function that fetches each discovered document
+- PDF text extraction: Uses pypdf/PyPDF2 to extract actual text from first 3 pages
+- HTML main content extraction: Strips nav/header/footer, extracts main body text
+- XML text extraction: Parses XML and extracts text content
+- Content truncation: First 800 chars, tries to end at sentence boundary
+- This produces UNIQUE descriptions like Components.xlsx (actual document text)
+
+3.4 CONSTANTS
+-------------
+- REQUEST_TIMEOUT = 30 seconds
+- MAX_RETRIES = 2 (total attempts = 3)
+- RETRY_DELAY = 2 seconds between retries
+- VALID_EXTENSIONS = [".pdf", ".html", ".xml", ".txt", ".docx", ".json", ".htm", ".doc"]
+
+================================================================================
+SECTION 4: INPUT/OUTPUT DEFINITIONS
+================================================================================
+
+4.1 INPUT FILES
+---------------
+File: ivntest.xlsx
+Location: Same directory as script
+Required Sheet: "Components"
+Required Column: One of ['component_url', 'URL', 'url', 'Link']
+Content: URLs to .gov websites
+
+4.2 OUTPUT FILES
+----------------
+File: ivn_discovered_alignments.xlsx
+Location: Same directory as script
+Columns (matches Components.xlsx format):
+  - component_name: Document title extracted from link text or filename
+  - component_description: Description extracted from page context/meta/URL
+  - component_url: The discovered document URL
+  - component_ofc_of_primary_interest: Domain of the discovered document
+  - source_id: Component name from input that led to this discovery
+  - component_id: Composite key "source::document_name"
+  - fetch_status: "DISCOVERED" for all newly found documents
+
+File: ivn_scraper_log.json
+Location: Same directory as script
+Structure:
+{
+  "run_id": "UUID string",
+  "start_time": "ISO datetime",
+  "end_time": "ISO datetime (when complete)",
+  "domains": {
+    "domain.gov": {
+      "last_scraped": "ISO datetime",
+      "docs_found": integer
+    }
+  },
+  "visited_urls": ["list", "of", "visited", "urls"],
+  "statistics": {
+    "urls_scraped": integer,
+    "docs_found": integer,
+    "errors": integer
+  }
+}
+
+4.3 COMMAND-LINE ARGUMENTS
+--------------------------
+--auto-load-log [yes|no|ask]
+  Default: ask
+  Controls whether to load existing log file
+  "yes" = auto-load without prompting
+  "no" = start fresh, ignore existing log
+  "ask" = prompt user (but auto-loads when debugging)
+
+--unattended
+  Default: False (interactive mode)
+  When set: Skips all domain re-scrape prompts, scrapes everything
+
+--no-debug-pause
+  Default: False
+  When set: Disables the "Press Enter to exit" pause when debugging
+
+--stay-open
+  Default: False
+  When set: Keeps terminal open after completion when debugging
+
+4.4 VALID DOCUMENT EXTENSIONS
+-----------------------------
+The script looks for links ending with:
+- .pdf
+- .html
+- .xml
+- .txt
+- .docx
+- .json
+
+================================================================================
+SECTION 5: EXECUTION FLOW
+================================================================================
+
+5.1 STARTUP SEQUENCE
+--------------------
+1. Parse command-line arguments
+2. Print header with configuration info
+3. Load or create log file (with debug-aware auto-loading)
+4. Set operation mode (unattended or interactive)
+5. Start keyboard monitoring thread
+6. Load Excel file
+7. Find URL column in Components sheet
+8. Filter for .gov URLs
+
+5.2 MAIN PROCESSING LOOP
+------------------------
+Before the loop:
+1. Deduplicate input URLs (preserving order)
+2. Filter out direct document URLs (.pdf, .docx, etc.) that can't be web-scraped
+3. Skip URLs already visited in previous runs (from log)
+
+For each URL in the filtered list:
+1. Check if pause requested (Enter key pressed)
+2. Display progress indicator (X/Y, %, estimated time remaining)
+3. Extract domain from URL
+4. Check if domain is in skip list -> skip if yes
+5. Check if domain is in failed_domains list -> skip if yes
+6. Check if domain needs re-scrape prompt (interactive mode only):
+   - If domain was previously scraped, ask user
+   - User says Y -> add to scrape list, continue
+   - User says N -> add to skip list, skip all URLs from this domain
+7. Initialize domain in log if new
+8. Mark URL as visited BEFORE scraping (so timeouts don't retry)
+9. Scrape URL for document links (with User-Agent header)
+10. If timeout occurs, add domain to failed_domains set
+11. Add discovered documents to collection
+12. Update statistics
+13. Save checkpoint every 10 URLs
+
+5.3 COMPLETION SEQUENCE
+-----------------------
+1. Print completion summary
+2. Save results to Excel (if any documents found)
+3. Save final log with end time
+4. Debug pause if in debugger
+5. Stay open if requested
+
+================================================================================
+SECTION 6: FUNCTION REFERENCE
+================================================================================
+
+6.1 UTILITY FUNCTIONS
+---------------------
+_is_debugging()
+  Returns True if script is running under a debugger (sys.gettrace)
+
+_debug_pause(reason)
+  Pauses execution with "Press Enter" prompt when debugging
+  Shows reason for pause
+
+beep_alert()
+  Plays audio beep (Windows: winsound.Beep, other: terminal bell)
+  Used to alert user when input is needed
+
+6.2 LOG MANAGEMENT
+------------------
+load_or_create_log(log_path, auto_choice)
+  Loads existing log or creates new one
+  auto_choice: "yes" = load, "no" = fresh, "ask" = prompt user
+  When debugging, "ask" becomes "yes" automatically
+
+save_log(log_data, log_path)
+  Saves log dictionary to JSON file
+
+6.3 DATA LOADING
+----------------
+load_excel(file_path)
+  Loads Excel file with all sheets
+  Returns dict of DataFrames keyed by sheet name
+  Returns empty dict on error
+
+6.4 SCRAPING
+------------
+scrape_domain(url, visited, log_data, timeout=30)
+  Fetches URL, parses HTML, extracts document links
+  Adds found URLs to visited set
+  Updates log_data with scrape timestamp and doc count
+  Returns list of discovered document URLs
+
+6.5 USER INTERACTION
+--------------------
+monitor_keyboard()
+  Background thread that watches for Enter key
+  Sets pause_event when Enter pressed
+  Windows-only (uses msvcrt)
+
+handle_pause(log_data, all_docs)
+  Displays pause menu with options:
+  - (C)ontinue: Resume processing
+  - (S)top & save: Break loop, save results
+  - (B)reak: Exit immediately without saving
+  Returns action string
+
+parse_args()
+  Configures and returns argument parser results
+
+6.6 MAIN FUNCTION
+-----------------
+main()
+  Orchestrates entire script execution
+  Manages global state variables
+  Handles all error conditions with debug pause
+
+================================================================================
+SECTION 7: GLOBAL STATE
+================================================================================
+
+7.1 CONSTANTS
+-------------
+INPUT_FILE = "ivntest.xlsx"
+OUTPUT_FILE = "ivn_discovered_alignments.xlsx"
+LOG_FILE = "ivn_scraper_log.json"
+VALID_EXTENSIONS = [".pdf", ".html", ".xml", ".txt", ".docx", ".json"]
+
+7.2 RUNTIME VARIABLES
+---------------------
+pause_event: threading.Event for pause signaling
+processed_urls: Counter of URLs processed
+total_urls: Total count of URLs to process
+start_time: Timestamp when processing began
+domains_to_skip: Set of domains user declined to re-scrape
+domains_to_scrape: Set of domains user approved to re-scrape
+failed_domains: Set of domains that have connection/timeout issues
+
+================================================================================
+SECTION 8: SUCCESS CRITERIA
+================================================================================
+
+8.1 SUCCESSFUL EXECUTION
+------------------------
+- Script loads Excel file without error
+- Script finds URL column in Components sheet
+- Script filters and finds at least one .gov URL
+- Script processes all URLs (or until user stops)
+- Script saves output Excel with discovered documents
+- Script saves final log with end_time set
+
+8.2 VALID OUTPUT
+----------------
+Output Excel file is valid if:
+- File exists and is readable by Excel/pandas
+- Contains columns: URL, Source
+- All URLs in URL column are valid URLs
+- All URLs in Source column are from input .gov URLs
+- No duplicate URLs in single run (visited set prevents this)
+
+8.3 ERROR HANDLING
+------------------
+Recoverable errors (continue processing):
+- Individual URL timeout (30 second default)
+- Individual URL HTTP errors (404, 500, etc.)
+- Individual URL parsing errors
+
+Fatal errors (stop processing):
+- Input Excel file not found
+- No Components sheet in Excel
+- No URL column found
+- No .gov URLs after filtering
+
+All fatal errors display debug pause when running in debugger.
+
+================================================================================
+SECTION 9: TEST SCENARIOS
+================================================================================
+
+9.1 BASIC OPERATION TEST
+------------------------
+Scenario: Run with valid input in unattended mode
+Command: python ivn_scrape_new_dotgov_domains.py --unattended --auto-load-log no
+Expected:
+- Processes all .gov URLs without prompts
+- Creates output Excel with discovered documents
+- Creates/updates log file
+
+9.2 INTERACTIVE MODE TEST
+-------------------------
+Scenario: Run interactively with existing log
+Command: python ivn_scrape_new_dotgov_domains.py
+Expected:
+- Prompts to load existing log (if exists)
+- Prompts once per previously-scraped domain
+- Remembers domain decisions for all URLs from that domain
+- Beeps before each prompt
+
+9.3 PAUSE FUNCTIONALITY TEST
+----------------------------
+Scenario: Press Enter during processing
+Expected:
+- Shows "PAUSE REQUESTED" message after current URL completes
+- Displays pause menu with Continue/Stop/Break options
+- Continue: Resumes processing
+- Stop: Saves results and exits gracefully
+- Break: Exits immediately
+
+9.4 DEBUG MODE TEST
+-------------------
+Scenario: Run via VS Code debugger (F5)
+Expected:
+- Detects debug mode (_is_debugging returns True)
+- Auto-loads existing log without prompting
+- Shows "Press Enter to exit" on completion or error
+- Terminal stays open for inspection
+
+9.5 RESUME TEST
+---------------
+Scenario: Script interrupted, then restarted
+Expected:
+- Prompts to load existing log
+- If loaded, resumes with visited_urls from log
+- Skips already-visited URLs (no duplicates)
+- Preserves domain scrape times
+
+================================================================================
+SECTION 10: LLM RECONSTRUCTION GUIDANCE
+================================================================================
+
+10.1 CRITICAL BEHAVIORS
+-----------------------
+1. Domain decisions are session-level, not persisted to log
+   - domains_to_skip, domains_to_scrape, failed_domains are runtime sets
+   - Each new run starts fresh for domain decisions
+
+2. Visited URLs ARE persisted to log
+   - Prevents re-scraping same document URLs across runs
+
+3. URLs are deduplicated before processing
+   - Uses dict.fromkeys() to preserve order while removing duplicates
+   - Shows count: "Deduplicated: X -> Y unique URLs"
+
+4. Direct document URLs are filtered out
+   - PDFs, DOCX, XLSX, PPTX, DOC, XLS, PPT, ZIP, CSV cannot be web-scraped
+   - Shows count: "Skipping X direct document URLs"
+
+5. URLs visited in previous runs are skipped
+   - Loaded from log_data['visited_urls']
+   - Shows count: "Skipping X URLs already visited"
+
+6. Progress indicator shows completion status
+   - Format: "[X/Y] Z.Z% | ~Mm remaining"
+   - Calculated from elapsed time and URLs processed
+
+7. Failed domains are tracked per-session
+   - Domains that timeout get added to failed_domains set
+   - Subsequent URLs from that domain are skipped immediately
+   - Prevents wasting time on unresponsive servers
+
+8. URLs are marked visited BEFORE the request
+   - Ensures timeouts don't cause infinite retries
+   - URL is in visited_urls even if request fails
+
+9. Debug mode changes behavior
+   - Auto-loads log without prompting
+   - Adds exit pause on completion/error
+
+10. Unicode characters avoided in print statements
+    - Windows CMD (cp1252) can't display some Unicode
+    - Use [OK], [X], [!] instead of checkmarks/crosses
+
+11. Checkpoint saves every 10 URLs
+    - Protects against data loss on crash
+    - Log file always has recent state
+
+12. User-Agent header makes requests look like a browser
+    - Reduces chance of being blocked by .gov servers
+    - Uses Chrome-like User-Agent string
+
+================================================================================
+END OF CONTEXT FILE
+================================================================================
