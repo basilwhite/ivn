@@ -1,0 +1,745 @@
+IVN_Normalize_Dataset.py Prompt File
+
+=== PROBLEM THE SCRIPT SOLVES ===
+
+This script provides robust normalization and denormalization of Excel workbooks for the Integrated Value Network (IVN) project. It ensures that data from a 'Dataset' tab is split into normalized 'Components', 'Sources', and 'Alignments' tabs, and can also reconstruct the original 'Dataset' tab from these normalized tabs. The script enforces strict schema and mapping rules, preserves nulls correctly, and provides an interactive menu for user operation.
+
+=== BROADER CONTEXT ===
+
+The IVN project requires consistent, lossless transformation between a denormalized dataset and a normalized relational structure. This is essential for data quality, interoperability, and downstream analytics. The script is used by analysts and data engineers working with policy, regulatory, and technical documentation in Excel format. The data represents relationships between components from different sources, with metadata about linkages, validity, and alignment rationale.
+
+=== CONCEPTS TO UNDERSTAND ===
+
+- Data normalization and denormalization in relational databases
+- Relational data modeling (entities: Components, Sources, Alignments)
+- Null value handling in pandas and Excel (None vs NaN vs string 'nan')
+- Schema enforcement and strict column mapping
+- Interactive command-line interfaces with menu navigation
+- File and directory navigation in Python
+- Error handling and validation in data pipelines
+- Composite keys and foreign key relationships
+- Duplicate record merging strategies
+- Timestamped output file naming
+- Keyword extraction and text analysis (stopwords, acronyms, n-grams)
+- Natural language processing basics (tokenization, phrase extraction)
+- Regular expressions for pattern matching
+
+=== PREREQUISITE KNOWLEDGE ===
+
+- Python programming (functions, dictionaries, lists, tuples, type annotations)
+- pandas library for data manipulation (DataFrames, Series, iterrows, ExcelFile, ExcelWriter)
+- Excel file formats (.xlsx, .xls)
+- Basic command-line usage and user input handling
+- Data modeling concepts (primary keys, foreign keys, merging records, referential integrity)
+- String manipulation and formatting
+- File system operations (os.path, os.listdir, os.path.abspath)
+- Exception handling and custom error messages
+- Regular expression syntax (re module, patterns like \b, [], +, *, (?:...))
+- Text processing concepts (tokenization, stopwords, n-grams, frequency analysis)
+- Collections module (Counter for frequency counting)
+
+=== DOMAIN-SPECIFIC TERMS ===
+
+- IVN: Integrated Value Network - a project tracking relationships between policy/regulatory components
+- Component: A functional or regulatory element in the dataset (e.g., a policy requirement, data standard)
+- Source: The origin or agency for a component (e.g., OMB, specific US Code)
+- Alignment: A relationship between two components (enabling and dependent), with metadata about the linkage
+- Normalization: Splitting a denormalized table into related tables to eliminate redundancy
+- Denormalization: Reconstructing a denormalized table from related tables for reporting/analysis
+- component_id: Unique identifier for a component, derived from source_name and component_name
+- source_id: Unique identifier for a source, derived from source_name
+- Enabling Component: The component that enables or supports another component
+- Dependent Component: The component that depends on or is enabled by another component
+- Linkage Mandate: The US Code or OMB policy that mandates the relationship between components
+- Fetch Status: Status of data retrieval for a component
+- Keywords: Significant individual words extracted from component descriptions (excluding stopwords)
+- Key Phrases: Multi-word expressions extracted from component descriptions (capitalized phrases, bigrams, trigrams)
+- Stopwords: Common words filtered out during keyword extraction (e.g., "the", "and", "is")
+- Acronyms: All-uppercase abbreviations extracted from text (e.g., "OMB", "USDA")
+- N-grams: Sequences of N consecutive words (bigrams = 2 words, trigrams = 3 words)
+- Common Keywords/Phrases: Keywords or phrases that appear in both enabling and dependent component descriptions
+
+=== HIGH-LEVEL DESCRIPTION ===
+
+The script provides an interactive menu with five options:
+1. Normalize the Dataset tab into Components, Sources, Alignments
+2. Generate (denormalize) the Dataset tab from the normalized tabs
+3. Evaluate output file against prompt specifications
+4. Explain what the script does (displays help text)
+5. Exit
+
+User workflow:
+1. User runs the script
+2. Script displays menu
+3. User selects option 1, 2, or 3
+4. Script prompts user to navigate to an Excel file using numbered navigation
+5. User selects file by number
+6. For options 1 and 2: Script prompts for explicit "yes" confirmation
+7. Script performs normalization, denormalization, or evaluation
+8. Script writes output to timestamped Excel file (options 1 and 2) or displays evaluation report (option 3)
+9. Script reports success or error
+
+Evaluation process (Option 3):
+- Read the selected output file
+- Detect if file is normalized output (has Sources, Components, Alignments) or denormalized (has Dataset tab)
+- Validate each tab against expected schema (columns, order)
+- Check for 'nan' or 'None' strings (should be blank cells)
+- Validate component_id format (should contain '::')
+- Report issues and warnings with specific details
+
+Normalization process:
+- Read Dataset tab from input Excel file
+- Validate all required columns are present
+- For each row, extract enabling and dependent side data
+- Build Sources dictionary (keyed by source_name, containing source_agency and source_id)
+- Build Components dictionary (keyed by source_name::component_name, containing component metadata)
+- Build Alignments dictionary (keyed by (enabling_component_id, dependent_component_id), containing alignment metadata)
+- Merge duplicate records by choosing longer string value for each field
+- Preserve all nulls (never write 'nan' or 'None' strings)
+- Write three DataFrames to output Excel file with correct column order
+
+Denormalization process:
+- Read Sources, Components, Alignments tabs from input Excel file
+- Validate all required columns are present in each tab
+- Build lookup dictionaries for sources and components by ID
+- For each alignment row, lookup enabling and dependent components and sources
+- Reconstruct Dataset row with all required columns
+- Preserve all nulls (never write 'nan' or 'None' strings)
+- Write Dataset DataFrame to output Excel file with correct column order, plus original normalized tabs
+
+=== WHY THE SCRIPT EXISTS ===
+
+To automate and enforce correct, lossless, and reversible transformation between denormalized and normalized data representations for IVN datasets, supporting data quality and downstream use. Manual transformation is error-prone and time-consuming. The script ensures consistency, preserves data integrity, and validates schema compliance.
+
+=== ROLE OF THE SCRIPT ===
+
+- Data transformation utility for IVN Excel workbooks
+- Schema and data quality enforcement tool
+- User-friendly, interactive tool for analysts and engineers
+- Validation and error reporting for data pipelines
+- Timestamped output generation for version control
+
+=== KEY CONCEPTS AND LEARNING DATA ===
+
+Column Mapping (Dataset to Normalized Tables):
+- Enabling Source → Sources.source_name
+- Enabling Component → Components.component_name
+- Enabling Component Description → Components.component_description
+- Enabling Component URL → Components.component_url
+- Enabling Source Agency → Sources.source_agency
+- Enabling Component Office of Primary Interest → Components.component_ofc_of_primary_interest
+- Enabling Fetch Status → Components.fetch_status
+- Enabling Keywords → Generated.computed (extracted from Enabling Component Description during denormalization)
+- Enabling Key Phrases → Generated.computed (extracted from Enabling Component Description during denormalization)
+- Dependent Source → Sources.source_name
+- Dependent Component → Components.component_name
+- Dependent Component Description → Components.component_description
+- Dependent Component URL → Components.component_url
+- Dependent Source Agency → Sources.source_agency
+- Dependent Component Office of Primary Interest → Components.component_ofc_of_primary_interest
+- Dependent Fetch Status → Components.fetch_status
+- Dependent Keywords → Generated.computed (extracted from Dependent Component Description during denormalization)
+- Dependent Key Phrases → Generated.computed (extracted from Dependent Component Description during denormalization)
+- Common Keywords → Generated.computed (intersection of Enabling and Dependent Keywords during denormalization)
+- Common Key Phrases → Generated.computed (intersection of Enabling and Dependent Key Phrases during denormalization)
+- Linkage mandated by what US Code or OMB policy? → Alignments.linkage_mandate
+- Notes and keywords → Alignments.notes_and_keywords
+- Keywords Tab Items Found → Alignments.keywords_tab_items_found
+- Edits → Alignments.edits
+- Valid → Alignments.valid
+- Similarity → Alignments.similarity
+- Confidence → Alignments.confidence
+- Transitive Support → Alignments.transitive_support
+- Matched Enabling Index → Alignments.matched_enabling_index
+- Matched Dependent Index → Alignments.matched_dependent_index
+- Alignment Rationale → Alignments.alignment_rationale
+
+Schema Definitions:
+
+Sources columns (in order):
+1. source_name (string)
+2. source_agency (string or null)
+3. source_id (string, derived from source_name verbatim)
+
+Components columns (in order):
+1. component_name (string)
+2. component_description (string or null)
+3. component_url (string or null)
+4. component_agency (string or null)
+5. component_ofc_of_primary_interest (string or null)
+6. source_id (string, verbatim from source_name)
+7. component_id (string or null, format: "source_name::component_name", null if either is null)
+8. fetch_status (string or null)
+
+Alignments columns (in order):
+1. enabling_component_id (string or null, format: "source_name::component_name")
+2. Enabling Component (string or null)
+3. Enabling Source (string or null)
+4. dependent_component_id (string or null, format: "source_name::component_name")
+5. Dependent Component (string or null)
+6. Dependent Source (string or null)
+7. linkage_mandate (string or null)
+8. notes_and_keywords (string or null)
+9. keywords_tab_items_found (string or null)
+10. edits (string or null)
+11. valid (string or null)
+12. similarity (number or null)
+13. confidence (number or null)
+14. transitive_support (string or null)
+15. matched_enabling_index (number or null)
+16. matched_dependent_index (number or null)
+17. alignment_rationale (string or null)
+
+Computed Columns (Generated During Denormalization):
+These 6 columns are NOT stored in normalized tables. They are computed at denormalization time from component descriptions:
+1. Enabling Keywords - comma-separated list of keywords extracted from Enabling Component Description
+2. Enabling Key Phrases - comma-separated list of phrases extracted from Enabling Component Description
+3. Dependent Keywords - comma-separated list of keywords extracted from Dependent Component Description
+4. Dependent Key Phrases - comma-separated list of phrases extracted from Dependent Component Description
+5. Common Keywords - keywords appearing in both Enabling and Dependent descriptions
+6. Common Key Phrases - phrases appearing in both Enabling and Dependent descriptions
+
+Keyword Extraction Algorithm:
+The script uses a multi-step text analysis process to extract keywords and phrases:
+
+1. Acronym Extraction (from original text, preserving case):
+   - Pattern: \b[A-Z][A-Z0-9]{1,}(?:-[A-Z0-9]+)*\b
+   - Excludes common uppercase words: THE, AND, FOR, THIS, THAT, WITH, FROM, WILL, HAVE, ARE, WAS, BEEN, HAS, HAD, ALL, NOT, BUT, CAN
+   - Returns up to 5 unique acronyms
+
+2. Capitalized Phrase Extraction (from original text):
+   - Pattern for multi-word proper nouns: \b([A-Z][a-z]+(?:\s+(?:[A-Z][a-z]+|[A-Z]+|of|and|the|for))+)\b
+   - Pattern for terms with acronyms: ([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\s*\([A-Z]{2,}\)
+   - Requires at least 2 words with at least 1 non-stopword
+   - Returns up to 5 unique phrases
+
+3. Text Cleaning (for word frequency analysis):
+   - Convert to lowercase
+   - Remove all non-word characters except spaces and hyphens
+   - Normalize whitespace
+
+4. Tokenization:
+   - Split on whitespace
+   - Filter out words with 3 or fewer characters
+
+5. Word Frequency Analysis:
+   - Count occurrences of each word (excluding stopwords)
+   - Return up to 10 most common words
+
+6. N-gram Analysis (bigrams and trigrams):
+   - Extract sequences of 2-3 consecutive words
+   - At least one word in each n-gram must NOT be a stopword
+   - Only include n-grams appearing more than once
+   - Return up to 7 total n-gram phrases
+
+Stopwords List (filtered from keyword extraction):
+the, be, to, of, and, a, in, that, have, i, it, for, not, on, with, he, as, you, do, at,
+this, but, his, by, from, they, we, say, her, she, or, an, will, my, one, all, would, there, their,
+what, so, up, out, if, about, who, get, which, go, me, when, make, can, like, time, no, just, him, know,
+take, people, into, year, your, good, some, could, them, see, other, than, then, now, look, only, come, its, over,
+think, also, back, after, use, two, how, our, work, first, well, way, even, new, want, because, any, these, give, day,
+most, us, is, was, are, been, has, had, were, said, did, having, may, should, must, shall, being, does, such, each,
+through, where, both, those, during, before, herself, himself, itself, between, under, above, below, within, without, against,
+none, more, very, still, here, too, own, same, been, being, including, based, using, available, provides, provide, requires,
+addresses, supports, enable, enables, meet, meets, needs, dr, it
+
+Common Keywords/Phrases Calculation:
+- Find intersection of keywords from enabling and dependent descriptions (case-insensitive comparison)
+- Find intersection of phrases from enabling and dependent descriptions (case-insensitive comparison)
+- Return original case from first list for matching items
+
+Null Handling Rules:
+- All nulls must be preserved as Python None (not pandas NaN string representation)
+- is_null helper function checks for both None and math.isnan for floats
+- When building output rows, check is_null and set None explicitly
+- Never convert None to string "nan" or "None"
+- pandas to_excel preserves None as blank cells in Excel
+
+Merging Logic (choose_longer function):
+- If both values are null, return None
+- If one value is null, return the non-null value
+- If both values are non-null, convert to strings and return the longer one
+- Used for merging duplicate records during normalization
+
+ID Generation Rules:
+- source_id: Use verbatim source_name (preserve case and whitespace)
+- component_id: Format "source_name::component_name" (verbatim, no lowercasing)
+- If either source_name or component_name is null for component_id, set component_id to None
+- safe_id helper function returns None if either input is null, else returns component_key
+
+Interactive Navigation:
+- Start at script directory
+- List directories and files with numbers
+- User enters number to select file or directory
+- 0 = go up one directory
+- q = quit
+- Invalid input = prompt again
+- Return selected file path when user selects a file
+
+Confirmation Prompt:
+- Display action description
+- Prompt "Please review your workbook tabs for any errors before proceeding."
+- Prompt 'Type "yes" to proceed: '
+- If user enters anything other than "yes" (case-insensitive), exit cleanly
+- Otherwise, continue with operation
+
+Output File Naming:
+- Normalization: "ivntest_normalized_YYYYMMDDHHMM.xlsx"
+- Denormalization: "DatasetYYYYMMDDHHMM.xlsx"
+- Timestamp format: datetime.now().strftime('%Y%m%d%H%M')
+
+Output Sheet Naming:
+- Normalization: Sources, Components, Alignments
+- Denormalization: DatasetYYYYMMDDHHMM, Sources, Components, Alignments
+
+Error Handling:
+- File not found: raise FileNotFoundError with clear message
+- Path is directory: raise PermissionError with clear message
+- Invalid file type: raise ValueError with clear message
+- Missing required columns: raise ValueError listing missing columns
+- Missing required tabs: raise ValueError listing missing tabs
+- User cancellation: raise SystemExit with clear message
+- Any other exception: propagate with original message
+
+=== INPUT/OUTPUT DEFINITIONS ===
+
+Input for Normalization:
+- File type: Excel workbook (.xlsx or .xls)
+- Required tab: First sheet (treated as 'Dataset')
+- Required columns: 25 non-computed columns (computed columns like Keywords and Key Phrases are skipped during normalization validation)
+- Data types: Strings, numbers, nulls (blanks in Excel)
+
+Output for Normalization:
+- File type: Excel workbook (.xlsx)
+- File name: ivntest_normalized_YYYYMMDDHHMM.xlsx
+- Tabs: Sources, Components, Alignments
+- Column order: As defined in SOURCES_ORDER, COMPONENTS_ORDER, ALIGNMENTS_ORDER
+- No 'nan' or 'None' strings for nulls
+
+Input for Denormalization:
+- File type: Excel workbook (.xlsx or .xls)
+- Required tabs: Sources, Components, Alignments
+- Required columns: As defined in SOURCES_ORDER, COMPONENTS_ORDER, ALIGNMENTS_ORDER
+- Data types: Strings, numbers, nulls (blanks in Excel)
+
+Output for Denormalization:
+- File type: Excel workbook (.xlsx)
+- File name: DatasetYYYYMMDDHHMM.xlsx
+- Tabs: DatasetYYYYMMDDHHMM, Sources, Components, Alignments
+- Dataset column order: 31 columns (25 stored + 6 computed), as defined in DATASET_ORDER
+- Computed columns (Keywords, Key Phrases, Common Keywords, Common Key Phrases) are generated at denormalization time
+- No 'nan' or 'None' strings for nulls
+
+Command-line prompts:
+1. Menu prompt: "Enter choice (1/2/3/4/5): "
+2. Navigation prompt: "Enter number: "
+3. Confirmation prompt: 'Type "yes" to proceed: ' (only for options 1 and 2)
+
+=== STRUCTURE AND CONTENT OF FINAL OUTPUT ===
+
+Normalized Output Structure:
+Sources tab:
+- Rows: One per unique source_name
+- Columns: source_name, source_agency, source_id
+- source_agency merged by longest value if duplicates exist
+
+Components tab:
+- Rows: One per unique (source_name, component_name) pair
+- Columns: component_name, component_description, component_url, component_ofc_of_primary_interest, source_id, component_id, fetch_status
+- All metadata fields merged by longest value if duplicates exist
+- component_id is null if source_name or component_name is null
+
+Alignments tab:
+- Rows: One per unique (enabling_component_id, dependent_component_id) pair
+- Columns: enabling_component_id, dependent_component_id, linkage_mandate, notes_and_keywords, keywords_tab_items_found, edits, valid, similarity, confidence, transitive_support, matched_enabling_index, matched_dependent_index, alignment_rationale
+- No component or source attributes duplicated here
+- IDs are null if corresponding source_name or component_name is null
+
+Denormalized Output Structure:
+Dataset tab:
+- Rows: One per alignment (one per row in Alignments tab)
+- Columns: 31 Dataset columns in DATASET_ORDER (see below)
+- All fields populated from Sources, Components, Alignments lookups
+- Computed columns generated from component descriptions using keyword extraction
+- Nulls preserved (not 'nan' or 'None' strings)
+
+DATASET_ORDER (31 columns):
+1. Enabling Source
+2. Enabling Component
+3. Enabling Component Description
+4. Enabling Component URL
+5. Enabling Source Agency
+6. Enabling Component Office of Primary Interest
+7. Enabling Fetch Status
+8. Enabling Keywords (computed)
+9. Enabling Key Phrases (computed)
+10. Dependent Source
+11. Dependent Component
+12. Dependent Component Description
+13. Dependent Component URL
+14. Dependent Source Agency
+15. Dependent Component Office of Primary Interest
+16. Dependent Fetch Status
+17. Dependent Keywords (computed)
+18. Dependent Key Phrases (computed)
+19. Common Keywords (computed)
+20. Common Key Phrases (computed)
+21. Linkage mandated by what US Code or OMB policy?
+22. Notes and keywords
+23. Keywords Tab Items Found
+24. Edits
+25. Valid
+26. Similarity
+27. Confidence
+28. Transitive Support
+29. Matched Enabling Index
+30. Matched Dependent Index
+31. Alignment Rationale
+
+=== VALIDITY CHECKS ===
+
+Input Validation:
+- File exists (not directory)
+- File has .xlsx or .xls extension
+- For normalization: Dataset tab has all 25 required columns
+- For denormalization: Sources, Components, Alignments tabs exist and have all required columns
+
+Output Validation (implicit):
+- All DataFrames have correct column order
+- All nulls are None (not 'nan' or 'None' strings)
+- Output file is created successfully
+- Output file contains expected tabs
+
+Data Integrity:
+- No data loss during normalization/denormalization cycle
+- All nulls preserved
+- All non-null values preserved (except merged by longest value)
+- All IDs correctly derived from source/component names
+
+=== SUCCESSFUL OUTCOME DEFINITION ===
+
+Normalization Success:
+- Script runs without exceptions
+- Output file ivntest_normalized_YYYYMMDDHHMM.xlsx is created
+- File contains Sources, Components, Alignments tabs
+- All tabs have correct columns in correct order
+- All nulls are preserved (blank cells in Excel, not 'nan' strings)
+- All duplicate records merged by longest value
+- All IDs correctly derived
+- Console displays: "Output file: ivntest_normalized_YYYYMMDDHHMM.xlsx"
+
+Denormalization Success:
+- Script runs without exceptions
+- Output file DatasetYYYYMMDDHHMM.xlsx is created
+- File contains DatasetYYYYMMDDHHMM, Sources, Components, Alignments tabs
+- Dataset tab has all 25 columns in correct order
+- All nulls are preserved (blank cells in Excel, not 'nan' strings)
+- All data correctly reconstructed from normalized tabs
+- Console displays: "Output file: DatasetYYYYMMDDHHMM.xlsx"
+
+User Cancellation Success:
+- User enters anything other than "yes" at confirmation prompt
+- Script exits cleanly with message: "Operation cancelled: explicit "yes" confirmation required."
+- No output file created
+
+=== ERROR HANDLING LOGIC ===
+
+File Not Found:
+- Trigger: os.path.exists(path) returns False
+- Action: Raise FileNotFoundError with message "File not found: {path}"
+- Script halts
+
+Path Is Directory:
+- Trigger: os.path.isdir(path) returns True
+- Action: Raise PermissionError with message "Provided path is a directory, not an Excel file: {path}"
+- Script halts
+
+Invalid File Type:
+- Trigger: path does not end with .xlsx or .xls (case-insensitive)
+- Action: Raise ValueError with message "Input must be an Excel file (.xlsx/.xls). Got: {path}"
+- Script halts
+
+Missing Dataset Columns:
+- Trigger: Any required column not in df.columns
+- Action: Raise ValueError with message "Dataset is missing required columns: {missing}"
+- Script halts
+
+Missing Normalized Tabs:
+- Trigger: Sources, Components, or Alignments tab not in xls.sheet_names
+- Action: Raise ValueError with message "Normalized workbook missing required tabs: {missing_tabs}"
+- Script halts
+
+Missing Tab Columns:
+- Trigger: Any required column not in tab's df.columns
+- Action: Raise ValueError with message "{tab_name} tab missing columns: {miss}"
+- Script halts
+
+User Cancellation:
+- Trigger: User enters anything other than "yes" at confirmation prompt
+- Action: Raise SystemExit with message "Operation cancelled: explicit "yes" confirmation required."
+- Script exits cleanly
+
+Excel Read Error:
+- Trigger: pd.read_excel fails
+- Action: Raise RuntimeError with message "Failed to read Excel file '{path}': {exception}"
+- Script halts
+
+=== CORRECT LEARNING MODEL BEHAVIOR ===
+
+When reconstructing this script, a learning model must:
+
+1. Import all required libraries:
+   - pandas as pd
+   - datetime (datetime class)
+   - os
+   - sys
+   - re (for regular expressions)
+   - typing (Dict, List, Tuple, Any, Set)
+   - math
+   - collections (Counter)
+
+2. Define constants:
+   - STOPWORDS: Set of ~110 common English words to filter from keywords
+   - ACRONYM_EXCLUDES: Set of common uppercase words not to treat as acronyms
+   - DATASET_COLUMNS_EXPECTED: List of 31 Dataset columns (25 stored + 6 computed)
+   - DATASET_TO_NORMALIZED: Dict mapping each Dataset column to normalized destination (or 'Generated.computed')
+   - COMPONENTS_ORDER: List of 8 component columns
+   - SOURCES_ORDER: List of 3 source columns
+   - ALIGNMENTS_ORDER: List of 17 alignment columns
+   - DATASET_ORDER: Same as DATASET_COLUMNS_EXPECTED
+
+3. Define keyword extraction functions:
+   - clean_text_for_words(text): Lowercase and clean text for analysis
+   - tokenize(text): Split into words, filter short words (3 or fewer chars)
+   - extract_acronyms(text): Find all-uppercase words (2+ chars) from original text
+   - extract_capitalized_phrases(text): Find multi-word proper nouns and technical terms
+   - extract_keywords_from_text(text): Main function returning {'keywords': [...], 'phrases': [...]}
+   - find_common_keywords(keywords1, keywords2): Case-insensitive intersection
+   - find_common_phrases(phrases1, phrases2): Case-insensitive intersection
+
+4. Define helper functions:
+   - timestamp(): Returns YYYYMMDDHHMM string
+   - canonical(s): Returns lowercased, trimmed string (used in comments, not in ID generation)
+   - require_yes_confirmation(action_desc): Prompts user, exits if not "yes"
+
+5. Define validation function:
+   - validate_dataset_columns(df): Checks all required non-computed columns present and mapped
+
+6. Define normalization function:
+   - normalize_workbook(input_path): Implements full normalization logic
+   - Helper: source_key(name): Returns str(name) or ''
+   - Helper: component_key(source_name, component_name): Returns "source::component" string
+   - Helper: safe_id(source_name, component_name): Returns None if either is null, else component_key
+   - Helper: choose_longer(a, b): Returns longest string, handling nulls
+   - Build Sources, Components, Alignments dictionaries
+   - Convert to DataFrames with correct column order
+   - Write to ivntest_normalized_YYYYMMDDHHMM.xlsx
+
+7. Define denormalization function:
+   - denormalize_workbook(input_path): Implements full denormalization logic
+   - Helper: is_null(x): Returns True if x is None or NaN
+   - Build source_by_id and comp_by_id lookup dictionaries
+   - Iterate Alignments rows, reconstruct Dataset rows
+   - For each alignment: extract keywords/phrases from enabling and dependent descriptions
+   - Calculate common keywords and phrases
+   - Format keyword/phrase lists as comma-separated strings or None if empty
+   - Convert to DataFrame with correct column order (31 columns)
+   - Write to DatasetYYYYMMDDHHMM.xlsx
+
+8. Define navigation function:
+   - navigation_prompt(start_path): Interactive file/directory navigation
+   - Returns selected file path
+
+9. Define evaluation function:
+   - evaluate_output_file(file_path): Validates output against prompt specifications
+   - Detects normalized vs denormalized files based on sheet names
+   - Validates Sources, Components, Alignments tabs against expected schemas (SOURCES_ORDER, COMPONENTS_ORDER, ALIGNMENTS_ORDER)
+   - Validates Dataset tab against DATASET_ORDER if present
+   - Checks for 'nan' or 'None' strings that should be blank
+   - Validates component_id format contains '::'
+   - Reports issues (errors) and warnings with specific details
+   - Prints evaluation summary with pass/fail status
+
+10. Define menu function:
+   - interactive_menu(): Main menu loop with 5 options
+   - Option 3: Evaluate output file against specifications (no confirmation prompt)
+   - Option 4: Display help text explaining what the script does
+   - Calls navigation_prompt, require_yes_confirmation, normalize_workbook, denormalize_workbook, or evaluate_output_file
+
+11. Main block:
+    - if __name__ == '__main__': interactive_menu()
+
+12. Ensure all null handling is correct:
+    - Use is_null helper everywhere
+    - Never write 'nan' or 'None' strings
+    - Always set None explicitly for nulls
+
+13. Ensure all error handling is correct:
+    - Validate file paths, file types, columns, tabs
+    - Raise clear exceptions with descriptive messages
+    - Handle user cancellation gracefully
+
+13. Ensure all type annotations are correct:
+    - Use Dict, List, Tuple, Any, Set from typing
+    - Annotate all function parameters and return types
+    - Use type: ignore comments for pandas type issues
+
+=== EXAMPLE SCENARIOS/TEST CASES ===
+
+Test Case 1: Normalize Valid Dataset
+- Input: ivntest.xlsx with valid Dataset tab (all 25 columns, mixed nulls and values)
+- Expected: ivntest_normalized_YYYYMMDDHHMM.xlsx created with Sources, Components, Alignments tabs
+- Validation: All nulls preserved, all duplicates merged, all IDs correct, no 'nan' strings
+
+Test Case 2: Denormalize Valid Normalized Workbook
+- Input: ivntest_normalized_YYYYMMDDHHMM.xlsx with valid Sources, Components, Alignments tabs
+- Expected: DatasetYYYYMMDDHHMM.xlsx created with DatasetYYYYMMDDHHMM tab (plus normalized tabs)
+- Validation: All nulls preserved, all data reconstructed, no 'nan' strings
+
+Test Case 3: Normalize with Missing Column
+- Input: Excel file with Dataset tab missing "Edits" column
+- Expected: ValueError raised with message "Dataset is missing required columns: ['Edits']"
+- Script halts, no output file created
+
+Test Case 4: Denormalize with Missing Tab
+- Input: Excel file missing Alignments tab
+- Expected: ValueError raised with message "Normalized workbook missing required tabs: ['Alignments']"
+- Script halts, no output file created
+
+Test Case 5: User Cancels at Confirmation
+- Input: User selects normalization, navigates to file, enters "no" at confirmation
+- Expected: SystemExit raised with message "Operation cancelled: explicit "yes" confirmation required."
+- Script exits cleanly, no output file created
+
+Test Case 6: File Not Found
+- Input: User navigates to file, then file is deleted before confirmation
+- Expected: FileNotFoundError raised with message "File not found: {path}"
+- Script halts
+
+Test Case 7: Path Is Directory
+- Input: User provides directory path instead of file path (manual override)
+- Expected: PermissionError raised with message "Provided path is a directory, not an Excel file: {path}"
+- Script halts
+
+Test Case 8: Invalid File Type
+- Input: User provides .csv file path (manual override)
+- Expected: ValueError raised with message "Input must be an Excel file (.xlsx/.xls). Got: {path}"
+- Script halts
+
+Test Case 9: Null Handling in Normalization
+- Input: Dataset row with null Enabling Source, null Dependent Source Agency, null Similarity
+- Expected: Sources tab has null source_agency, Alignments tab has null similarity
+- Validation: Excel shows blank cells, not 'nan' or 'None' strings
+
+Test Case 10: Null Handling in Denormalization
+- Input: Alignments row with null enabling_component_id or dependent_component_id
+- Expected: Dataset row reconstructed with nulls for all enabling or dependent fields
+- Validation: Excel shows blank cells, not 'nan' or 'None' strings
+
+Test Case 11: Duplicate Merging
+- Input: Two Dataset rows with same Enabling Source and Component, different descriptions (one longer)
+- Expected: Components tab has single row with longer description
+- Validation: All other fields also merged by longest value
+
+Test Case 12: ID Generation with Nulls
+- Input: Dataset row with null Enabling Component
+- Expected: Components tab has null component_id for that row
+- Validation: Alignments tab has null enabling_component_id
+
+Test Case 13: Keyword Extraction from Description
+- Input: Component description "The Federal Risk and Authorization Management Program (FedRAMP) provides security assessment guidelines."
+- Expected Keywords: ['FedRAMP', 'federal', 'risk', 'authorization', 'management', 'program', 'security', 'assessment', 'guidelines']
+- Expected Phrases: ['Federal Risk and Authorization Management Program']
+- Validation: Acronyms extracted first, then frequency-based keywords, then capitalized phrases
+
+Test Case 14: Common Keywords Calculation
+- Input: Enabling description contains "security assessment compliance" and Dependent description contains "compliance verification security"
+- Expected Common Keywords: ['security', 'compliance']
+- Validation: Case-insensitive matching, returns original case from enabling side
+
+Test Case 15: Empty Description Handling
+- Input: Component with null or empty description
+- Expected: Enabling Keywords = null, Enabling Key Phrases = null
+- Validation: No 'nan' string, blank cell in Excel
+
+Test Case 16: Menu Option 3 (Evaluate Output)
+- Input: User selects option 3, navigates to a normalized output file
+- Expected: Script displays evaluation report showing:
+  - Sheets found in file
+  - Column validation for each tab (Sources, Components, Alignments)
+  - Check for 'nan'/'None' strings
+  - component_id format validation
+  - Summary with issues and warnings counts
+- Validation: No confirmation prompt required, read-only operation
+
+Test Case 17: Menu Option 4 (Explain)
+- Input: User selects option 4 from menu
+- Expected: Script displays explanation text about normalization and denormalization
+- Validation: No file operations performed, returns to menu or exits cleanly
+
+Test Case 18: Evaluate Output with Schema Mismatch
+- Input: Output file missing 'Enabling Component' column in Alignments tab
+- Expected: Evaluation reports "Alignments tab missing columns: ['Enabling Component']"
+- Validation: Issue is clearly identified with specific column name
+
+=== MAINTENANCE INSTRUCTIONS ===
+
+This prompt file MUST be updated whenever IVN_Normalize_Dataset.py is modified. Changes to track:
+
+- New functions or helper functions added
+- Changes to constants (column lists, mapping dictionaries, stopwords, acronym excludes)
+- Changes to validation logic
+- Changes to null handling logic
+- Changes to merging logic
+- Changes to ID generation logic
+- Changes to error messages
+- Changes to output file naming
+- Changes to menu options
+- Changes to navigation logic
+- Changes to confirmation prompts
+- Changes to keyword/phrase extraction algorithms
+- Bug fixes that change behavior
+
+When updating this prompt file:
+1. Review entire script for changes
+2. Update relevant sections of this prompt file
+3. Ensure no outdated information remains
+4. Verify completeness: Could a naive learning model reconstruct the script from this file alone?
+5. Add new test cases if behavior changed
+6. Update example scenarios if workflows changed
+7. Save and commit prompt file with script changes
+
+=== SYNCHRONIZATION WORKFLOW ===
+
+This development workflow maintains perfect synchronization between:
+- Script (.py file): The executable Python code
+- Prompt file (_prompt.txt): Documentation and specifications for learning model reconstruction
+- Output files: Generated Excel workbooks from script execution
+
+CRITICAL SYNCHRONIZATION RULES:
+
+When the script (.py file) changes:
+1. After successfully modifying the script, immediately review and update the prompt file
+2. Ensure no outdated information remains in the prompt file
+3. If you add a function, rename a variable, or refactor a module, update the prompt file accordingly
+4. Document any new column mappings, constants, or algorithm changes
+5. Add or update test cases to reflect new behavior
+
+When the prompt file (_prompt.txt) changes:
+1. Immediately review the prompt file changes and update the script to match
+2. Treat the prompt file as the authoritative specification
+3. If the prompt describes behavior that the script doesn't implement, update the script to match
+4. Keep the prompt file in plain English, not code
+
+When the output changes:
+1. When script changes modify output format, structure, or content
+2. Request the latest output file from the user to evaluate alignment
+3. Compare output against prompt specifications
+4. Update prompt file to document expected output structure
+
+Synchronization Detection:
+- When the script is modified, the prompt file must be updated in the same session
+- When the prompt file is modified, the script must be updated to match
+- When output file format changes, both prompt and script should reflect expected structure
+
+This prompt file must always be sufficient for a naive learning model to reconstruct IVN_Normalize_Dataset.py from scratch with full fidelity to the current implementation.
