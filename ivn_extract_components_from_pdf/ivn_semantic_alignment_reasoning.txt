@@ -1,0 +1,17 @@
+﻿================================================================================
+WORKSPACE TOP PRIORITY (PERSISTENT)
+================================================================================
+Top priority: Automate end-to-end processing for Executive Order 14402 (Eliminating Waste and Saving Taxpayer Dollars by Consolidating Procurement), including:
+1) component inventory extraction,
+2) IVN crosswalk alignment discovery,
+3) leadership reporting with specific alignments and compliance-management/communication recommendations.
+This priority should be treated as persistent and first-order in this workspace.
+RELATIONSHIP-ROLE PRINCIPLE (PERSISTENT)
+No component has an inherent ""Enabling"" or ""Dependent"" feature.
+A component is simply a deliverable in a governance document that is large enough to measure delivery, but too small to split into two independently deliverable items.
+""Enabling"" and ""Dependent"" are pair-specific relationship roles only.
+A component is enabling in a specific pair when it is >50% likely to progress the other component toward delivery.
+Recorded: 2026-05-05
+================================================================================
+[2026-04-29 17:00:13] Assistant: Initializing reasoning log for the semantic alignment script.
+

@@ -1,0 +1,59 @@
+﻿================================================================================
+WORKSPACE TOP PRIORITY (PERSISTENT)
+================================================================================
+Top priority: Automate end-to-end processing for Executive Order 14402 (Eliminating Waste and Saving Taxpayer Dollars by Consolidating Procurement), including:
+1) component inventory extraction,
+2) IVN crosswalk alignment discovery,
+3) leadership reporting with specific alignments and compliance-management/communication recommendations.
+This priority should be treated as persistent and first-order in this workspace.
+RELATIONSHIP-ROLE PRINCIPLE (PERSISTENT)
+No component has an inherent ""Enabling"" or ""Dependent"" feature.
+A component is simply a deliverable in a governance document that is large enough to measure delivery, but too small to split into two independently deliverable items.
+""Enabling"" and ""Dependent"" are pair-specific relationship roles only.
+A component is enabling in a specific pair when it is >50% likely to progress the other component toward delivery.
+Recorded: 2026-05-05
+================================================================================
+This document is the authoritative specification for the master script `ivn_governance_toolkit.py`.
+
+## Overarching Problem & Context
+
+The IVN governance workflow requires automation of the following:
+1. Reviewing IVN dataset sources for outdatedness.
+2. Searching for updated U.S. Federal governance documents in the .gov domain.
+3. Breaking new sources into individually-deliverable components.
+4. Learning traits of aligned and nonaligned pairs from the IVN dataset.
+5. Applying these traits to identify new alignments.
+6. Generating an executive report for leadership.
+
+## High-Level Script Description
+
+This script presents a menu-driven interface to the user, with one function for each major goal. Each function will be implemented as a robust, modular pipeline, with error handling and logging. The script will orchestrate the entire workflow, calling specialized scripts or functions as needed.
+
+## Input/Output Definitions
+
+- **Input:**
+    - IVN dataset Excel file (USDA-IVN-dataset.xlsx)
+    - New governance documents (PDF, DOCX, or plain text)
+    - User input for menu selection and file paths
+- **Output:**
+    - Reports on outdated sources
+    - Tables of new components
+    - Alignment tables
+    - Executive report (Markdown/CSV)
+
+## Success Criteria
+
+A successful run will:
+- Identify outdated sources and suggest updates
+- Extract components from new documents
+- Train and apply an alignment model
+- Generate a leadership-ready report
+
+## Key Concepts
+- Menu-driven workflow
+- Modular pipeline
+- Automated document search
+- Robust extraction (text/PDF)
+- Machine learning for alignment
+- Automated reporting
+

@@ -1,0 +1,34 @@
+﻿================================================================================
+WORKSPACE TOP PRIORITY (PERSISTENT)
+================================================================================
+Top priority: Automate end-to-end processing for Executive Order 14402 (Eliminating Waste and Saving Taxpayer Dollars by Consolidating Procurement), including:
+1) component inventory extraction,
+2) IVN crosswalk alignment discovery,
+3) leadership reporting with specific alignments and compliance-management/communication recommendations.
+This priority should be treated as persistent and first-order in this workspace.
+RELATIONSHIP-ROLE PRINCIPLE (PERSISTENT)
+No component has an inherent ""Enabling"" or ""Dependent"" feature.
+A component is simply a deliverable in a governance document that is large enough to measure delivery, but too small to split into two independently deliverable items.
+""Enabling"" and ""Dependent"" are pair-specific relationship roles only.
+A component is enabling in a specific pair when it is >50% likely to progress the other component toward delivery.
+Recorded: 2026-05-05
+================================================================================
+Overarching Problem: Extracting components from PDF documents for IVN analysis.
+Broader Context: IVN (Interoperable Validation Network) requires component extraction for system governance and documentation.
+Chat History Improvement: Initial chat logs clarify the workflow and synchronization requirements.
+Concepts: PDF parsing, component extraction, file synchronization, chat log management.
+Prerequisite Knowledge: Python scripting, file I/O, PDF libraries, text processing.
+Domain Terms: IVN, component, prompt file, chat log, synchronization.
+High-Level Description: This script parses PDF files and extracts relevant IVN components.
+Why Exists: To automate component extraction for IVN governance.
+Role: Entry-point for PDF component extraction.
+Key Concepts: Parsing, extraction, output validation, error handling.
+Input/Output: Input is a PDF file; output is a CSV/TSV file with extracted components.
+Output Structure: Tabular data with component fields.
+Validity Checks: Output must match expected schema and contain all required fields.
+Success Criteria: Script runs without errors, output is valid and complete.
+Error Handling: Handles missing fields, malformed PDFs, and logs errors.
+Evaluation: Output files are checked for completeness and correctness.
+Correct Behavior: Script extracts all components as specified.
+Example Scenario: Given a sample PDF, script produces a valid CSV file.
+

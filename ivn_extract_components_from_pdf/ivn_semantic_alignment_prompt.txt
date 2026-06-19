@@ -1,0 +1,49 @@
+﻿================================================================================
+WORKSPACE TOP PRIORITY (PERSISTENT)
+================================================================================
+Top priority: Automate end-to-end processing for Executive Order 14402 (Eliminating Waste and Saving Taxpayer Dollars by Consolidating Procurement), including:
+1) component inventory extraction,
+2) IVN crosswalk alignment discovery,
+3) leadership reporting with specific alignments and compliance-management/communication recommendations.
+This priority should be treated as persistent and first-order in this workspace.
+RELATIONSHIP-ROLE PRINCIPLE (PERSISTENT)
+No component has an inherent ""Enabling"" or ""Dependent"" feature.
+A component is simply a deliverable in a governance document that is large enough to measure delivery, but too small to split into two independently deliverable items.
+""Enabling"" and ""Dependent"" are pair-specific relationship roles only.
+A component is enabling in a specific pair when it is >50% likely to progress the other component toward delivery.
+Recorded: 2026-05-05
+================================================================================
+This document serves as the authoritative specification for the Python script "ivn_semantic_alignment.py".
+
+## 1. Overarching Problem & Context
+
+The script's mission is to perform a deep semantic analysis to find meaningful alignments between components extracted from a source document (like an Executive Order) and a target dataset (the IVN database). Simple keyword matching is insufficient. This script must uncover relationships based on conceptual similarity, shared themes, and semantic meaning, even when the wording is different.
+
+## 2. High-Level Script Description
+
+This script will be a sophisticated analysis engine. It will ingest two structured data files (Excel), process the text of the components from each, and produce a report detailing the alignments found at multiple levels of semantic depth.
+
+- **Role:** Semantic crosswalking and alignment analysis.
+- **Key Concepts:**
+    - **Vector Embeddings:** Text will be converted into numerical vectors to represent its semantic meaning.
+    - **Cosine Similarity:** A mathematical measure to determine how similar two vectors (and thus two pieces of text) are.
+    - **Thematic Analysis:** Grouping components into broader categories.
+    - **Keyword Expansion:** Using related terms to broaden the search.
+
+## 3. Input/Output Definitions
+
+- **Input:**
+    1. An Excel file containing the components extracted from the source document (e.g., `ivn_components_Executive_Order_14240_...xlsx`).
+    2. The `USDA-IVN-dataset.xlsx` file.
+- **Output:**
+    - A final report (likely in Excel or Markdown format) detailing the direct, thematic, and inferred alignments with supporting evidence and confidence scores.
+
+## 4. Prerequisite Knowledge
+
+- **Python Programming:** Advanced level.
+- **Libraries:**
+    - `pandas`: For data manipulation.
+    - `scikit-learn`: For feature extraction (e.g., TfidfVectorizer) and machine learning models.
+    - `numpy`: For numerical operations.
+    - A sentence-transformer library like `sentence-transformers` for generating high-quality text embeddings.
+

@@ -1,0 +1,45 @@
+﻿================================================================================
+WORKSPACE TOP PRIORITY (PERSISTENT)
+================================================================================
+Top priority: Automate end-to-end processing for Executive Order 14402 (Eliminating Waste and Saving Taxpayer Dollars by Consolidating Procurement), including:
+1) component inventory extraction,
+2) IVN crosswalk alignment discovery,
+3) leadership reporting with specific alignments and compliance-management/communication recommendations.
+This priority should be treated as persistent and first-order in this workspace.
+RELATIONSHIP-ROLE PRINCIPLE (PERSISTENT)
+No component has an inherent ""Enabling"" or ""Dependent"" feature.
+A component is simply a deliverable in a governance document that is large enough to measure delivery, but too small to split into two independently deliverable items.
+""Enabling"" and ""Dependent"" are pair-specific relationship roles only.
+A component is enabling in a specific pair when it is >50% likely to progress the other component toward delivery.
+Recorded: 2026-05-05
+================================================================================
+This document serves as the authoritative specification for the Python script "ivn_simple_text_parser.py".
+
+## 1. Overarching Problem & Context
+
+The primary goal is to extract structured components from the raw text of Executive Order 14240. The previous method of using `ivn_extract_components_from_pdf.py` proved to be unreliable and repeatedly failed. This simpler script is designed to be a robust, direct, and reliable replacement for that specific task. It bypasses the complexities of PDF parsing by operating on plain text that has already been successfully fetched.
+
+## 2. High-Level Script Description
+
+- **Role:** A simple, targeted text parser.
+- **Why it exists:** To unblock the EO 14240 analysis project by providing a reliable way to extract components after the main PDF script failed.
+- **Key Concepts:**
+    - **Regex Parsing:** Uses regular expressions to identify section markers (e.g., "Sec. 1.") which are treated as the primary components.
+    - **Text Extraction:** For each identified section, it extracts the title and the full description.
+    - **Structured Output:** It formats the extracted data into a list of dictionaries, ready for conversion to a pandas DataFrame.
+    - **Excel Export:** Saves the final list of components into a clearly named Excel file.
+
+## 3. Input/Output Definitions
+
+- **Input:**
+    - `eo_text`: A string containing the full raw text of the Executive Order.
+    - `source_url`: The URL of the source document.
+    - `source_title`: A short title for the source document (e.g., "EO 14240").
+- **Output:**
+    - An Excel file named `ivn_components_[SourceTitle]_[Timestamp].xlsx`.
+    - The Excel file contains one sheet, "Extracted Components", with the columns: `Source`, `Component`, `Component Description`, and `Component URL`.
+
+## 4. Success Criteria
+
+A successful run will produce an Excel file containing the sections of the Executive Order parsed into separate rows.
+
