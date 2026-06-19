@@ -1,0 +1,16 @@
+Top Priority: Executive Order 14240 Analysis
+Top Priority: To-Be-Crosswalked Crosswalk & Reporting
+- Crosswalk the component_description in each row in the To-Be-Crosswalked tab against the component_description in each row in the Components tab to discover pairs of alignments where a component_description in the To-Be-Crosswalked tab is likely to progress a component_description in the Component tab toward its delivery state.
+- Create a table for these alignments using the columns and column names from the Alignments tab so validated alignments can be added to the Alignments tab.
+- Write a report for leadership that cites the alignments found.
+- For each alignment pair, write a recommendation for leaders to change how they manage the component_description in the Component tab to deliver compliance with the component_description in the To-Be-Crosswalked tab, and how to communicate that compliance.
+- Record these instructions in internal state, prompt and reasoning .txt files as a persistent top priority for this workspace.
+- Prove that the database was actually queried and cite specific records in the database.
+
+Secondary Task: Debug M-25-22 Alignment
+- The discover_alignments.py script currently finds 0 alignments for the M-25-22 task. This needs to be investigated and fixed.
+
+IVN Graph Engine Internal State:
+- Menu options for source validation, discovery, and semantic alignment CSV output are implemented and accessible.
+- All outputs are written to the workspace and synchronized with documentation.
+- Awaiting user input for further actions or validation of outputs.

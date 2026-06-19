@@ -1,0 +1,17 @@
+
+The primary objective is to crosswalk the component_description in each row in the To-Be-Crosswalked tab against the component_description in each row in the Components tab to discover pairs of alignments where a component_description in the To-Be-Crosswalked tab is likely to progress a component_description in the Component tab toward its delivery state.
+
+This involves:
+1.  Querying the To-Be-Crosswalked and Components tabs in the IVN database.
+2.  Discovering and scoring alignments using semantic similarity (excluding self-mapping pairs).
+3.  Generating a table for these alignments using the columns and column names from the Alignments tab so validated alignments can be added to the Alignments tab.
+4.  Writing a report for leadership that cites the alignments found and provides actionable recommendations for compliance and communication.
+5.  Recording these instructions in internal state, prompt and reasoning .txt files as a persistent top priority for this workspace.
+6.  Proving that the database was actually queried and citing specific records in the database.
+
+The IVN Graph Engine now supports:
+- Autonomous validation of IVN sources for outdated documents
+- Autonomous discovery of new U.S. Federal governance sources
+- Output of semantic alignments as CSV with columns matching the Alignments tab
+- All new features are accessible from the main menu
+- All outputs are synchronized for transparency and reproducibility

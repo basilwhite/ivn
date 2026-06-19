@@ -1,0 +1,38 @@
+Section,Title,Component,Theme
+1,Overview,"Ensuring the Government and the Public Benefit from a Competitive American AI Marketplace",Ensuring a Competitive American AI Marketplace
+1,Overview,"Safeguarding Taxpayer Dollars by Tracking AI Performance and Managing Risk",Safeguarding Taxpayer Dollars
+1,Overview,"Promoting Effective AI Acquisition with Cross-Functional Engagement",Promoting Cross-Functional Engagement
+3.b,"Update Agency Policies","Update internal procedures on acquisition to comply with M-25-22 and M-25-21.",Promoting Cross-Functional Engagement
+3.c,"Maximize the Use of American-Made AI","Maximize the use of AI products and services that are developed and produced in the United States.",Ensuring a Competitive American AI Marketplace
+3.d,"Protect Privacy","Establish policies and processes to ensure compliance with privacy requirements.",Safeguarding Taxpayer Dollars
+3.e,"Protect IP Rights and Use of Government Data","Have appropriate processes for addressing use of government data and include appropriate contractual terms.",Safeguarding Taxpayer Dollars
+3.e.i,"Scoping licensing and other IP rights","Scope licensing and other IP rights appropriately to avoid vendor lock-in.",Ensuring a Competitive American AI Marketplace
+3.e.ii,Timeline,"Ensure components necessary to operate and monitor the AI system remain available.",Safeguarding Taxpayer Dollars
+3.e.iii,"Data Handling","Provide clear guidance on handling, access, and use of agency data.",Safeguarding Taxpayer Dollars
+3.e.iv,"Use of Government Data","Ensure contracts permanently prohibit the use of non-public inputted agency data and outputted results to further train publicly or commercially available AI algorithms without explicit agency consent.",Safeguarding Taxpayer Dollars
+3.e.v,"Documentation, Transparency, and Accessibility","Prioritize obtaining documentation that facilitates transparency and explainability.",Safeguarding Taxpayer Dollars
+3.f,"Spotlight AI Acquisition Authorities, Approaches, and Vehicles","GSA to develop a plan to release publicly available guide(s) for the acquisition workforce.",Promoting Cross-Functional Engagement
+3.g,"Contribute to a Shared Repository of Best Practices","GSA to develop a web-based repository for sharing information, knowledge, and resources about AI acquisition.",Promoting Cross-Functional Engagement
+3.h,"Determine Necessary Disclosures of AI Use in the Fulfillment of a Government Contract","Determine whether there are circumstances that merit including a provision in a solicitation requiring disclosure of AI use.",Safeguarding Taxpayer Dollars
+4.a.i,"Convening a Cross-Functional Team","Convene an internal cross-functional team to inform the procurement of AI systems or services.",Promoting Cross-Functional Engagement
+4.a.ii,"Determining the Use of High-Impact AI","Make an initial determination of whether a system is likely to host high-impact AI use cases.",Safeguarding Taxpayer Dollars
+4.b.i,"Broad Market Research","Conduct thorough market research to seek state-of-the-art AI capabilities.",Ensuring a Competitive American AI Marketplace
+4.b.ii,"Product Demonstration","Seek detailed demonstrations and tests of potentially useful AI systems or services.",Safeguarding Taxpayer Dollars
+4.b.iii,"Performance-Based Acquisition Techniques","Use performance-based techniques to identify requirements and contract terms.",Safeguarding Taxpayer Dollars
+4.c.i,"AI Use Transparency Requirements","Disclose in solicitations whether a planned use of an AI system meets the threshold of a high-impact use case.",Safeguarding Taxpayer Dollars
+4.c.ii,"Protections Against Vendor Lock-In","Include provisions in the solicitation reflecting the agency's interest in AI proposals that reduce the risk of vendor lock-in.",Ensuring a Competitive American AI Marketplace
+4.c.iii,"IP Rights and Use of Government Data","Include appropriate terms related to IP rights and lawful use of government data.",Safeguarding Taxpayer Dollars
+4.d.i,"Testing and Evaluation","Test proposed solutions to understand the capabilities and limitations of any offered AI system or service.",Safeguarding Taxpayer Dollars
+4.d.ii,"Opportunity and Risk Re-Evaluation","Assess proposals for potential new AI-related risks that were not previously identified.",Safeguarding Taxpayer Dollars
+4.d.iii.A,"IP Rights and Use of Government Data","Include contract terms consistent with the processes adopted by the agency per Section 3(d).",Safeguarding Taxpayer Dollars
+4.d.iii.B,Privacy,"Include contract terms that address privacy considerations as described in Section 3(c).",Safeguarding Taxpayer Dollars
+4.d.iii.C,"Vendor Lock-In Protections","Include contract terms to reduce the risk that switching vendors could become cost-prohibitive.",Ensuring a Competitive American AI Marketplace
+4.d.iii.D,"OMB Memorandum M-25-21 Compliance Requirements","Contracts must ensure compliance with minimum risk management practices for high-impact use cases as required under M-25-21.",Safeguarding Taxpayer Dollars
+4.d.iii.E,"Ongoing Testing and Monitoring","Contractual terms must provide the contracting agency the ability to regularly monitor and evaluate performance, risks, and effectiveness of an AI system or service.",Safeguarding Taxpayer Dollars
+4.d.iii.F,"Vendor Performance Requirements","Require vendors to regularly monitor an AI system's performance and rectify unacceptable behavior.",Safeguarding Taxpayer Dollars
+4.d.iii.G,"New Feature Notification","Require vendors to provide a notification to relevant agency stakeholders prior to the integration of new AI enhancements, features, or components.",Safeguarding Taxpayer Dollars
+4.e.i,"Authorization To Operate Compliance","Any AI systems and services operated as an information system by or on behalf of an agency must receive an authorization to operate.",Safeguarding Taxpayer Dollars
+4.e.ii,"Contractual Oversight","Perform effective system oversight consistent with the terms of the contract.",Safeguarding Taxpayer Dollars
+4.e.iii,"Performance and Cost Justification","Arrange for periodic evaluation of the AI system or service's value to the government.",Safeguarding Taxpayer Dollars
+4.e.iv,"Sunset Criteria","Determine criteria for sunsetting the use of an AI system.",Safeguarding Taxpayer Dollars
+4.f.i,"Vendor Lock-In Protection","Implement any contractual terms related to ongoing rights and access to any data or derived products resulting from the services provided under the contract.",Ensuring a Competitive American AI Marketplace

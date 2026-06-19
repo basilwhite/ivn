@@ -1,0 +1,17 @@
+
+**Current Goal: To-Be-Crosswalked Crosswalk & Reporting**
+
+**Plan:**
+1.  **Acknowledge and Prioritize:** The user has assigned a new, high-priority task. Internal state, prompt, and reasoning files are updated to reflect this.
+2.  **Query IVN Database:** Load the To-Be-Crosswalked and Components tabs from the provided Excel database.
+3.  **Semantic Crosswalk:** Use TF-IDF and cosine similarity to crosswalk component_description fields, excluding self-mapping pairs (similarity=1.0), and iteratively lower the threshold until alignments are found.
+4.  **Output Table:** Generate a table for these alignments using the columns and column names from the Alignments tab so validated alignments can be added to the Alignments tab.
+5.  **Leadership Report:** Write a report for leadership that cites the alignments found and provides actionable recommendations for compliance and communication.
+6.  **Persistent Priority:** Record these instructions in internal state, prompt and reasoning .txt files as a persistent top priority for this workspace.
+7.  **Proof of Query:** Prove that the database was actually queried and cite specific records in the database.
+
+**Reasoning for new features:**
+- Source validation ensures the IVN dataset remains current and authoritative by flagging outdated or superseded documents.
+- Autonomous discovery leverages existing source titles to suggest search queries for new or updated .gov documents, supporting continuous improvement.
+- Semantic alignment CSV output provides a machine-readable, auditable record of all alignments, supporting leadership reporting and compliance.
+- Menu integration ensures all features are accessible and workflow is transparent.

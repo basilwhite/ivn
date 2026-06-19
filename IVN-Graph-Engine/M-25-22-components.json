@@ -1,0 +1,224 @@
+[
+    {
+        "Section":  "1",
+        "Title":  "Overview",
+        "Component":  "Ensuring the Government and the Public Benefit from a Competitive American AI Marketplace",
+        "Theme":  "Ensuring a Competitive American AI Marketplace"
+    },
+    {
+        "Section":  "1",
+        "Title":  "Overview",
+        "Component":  "Safeguarding Taxpayer Dollars by Tracking AI Performance and Managing Risk",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "1",
+        "Title":  "Overview",
+        "Component":  "Promoting Effective AI Acquisition with Cross-Functional Engagement",
+        "Theme":  "Promoting Cross-Functional Engagement"
+    },
+    {
+        "Section":  "3.b",
+        "Title":  "Update Agency Policies",
+        "Component":  "Update internal procedures on acquisition to comply with M-25-22 and M-25-21.",
+        "Theme":  "Promoting Cross-Functional Engagement"
+    },
+    {
+        "Section":  "3.c",
+        "Title":  "Maximize the Use of American-Made AI",
+        "Component":  "Maximize the use of AI products and services that are developed and produced in the United States.",
+        "Theme":  "Ensuring a Competitive American AI Marketplace"
+    },
+    {
+        "Section":  "3.d",
+        "Title":  "Protect Privacy",
+        "Component":  "Establish policies and processes to ensure compliance with privacy requirements.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "3.e",
+        "Title":  "Protect IP Rights and Use of Government Data",
+        "Component":  "Have appropriate processes for addressing use of government data and include appropriate contractual terms.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "3.e.i",
+        "Title":  "Scoping licensing and other IP rights",
+        "Component":  "Scope licensing and other IP rights appropriately to avoid vendor lock-in.",
+        "Theme":  "Ensuring a Competitive American AI Marketplace"
+    },
+    {
+        "Section":  "3.e.ii",
+        "Title":  "Timeline",
+        "Component":  "Ensure components necessary to operate and monitor the AI system remain available.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "3.e.iii",
+        "Title":  "Data Handling",
+        "Component":  "Provide clear guidance on handling, access, and use of agency data.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "3.e.iv",
+        "Title":  "Use of Government Data",
+        "Component":  "Ensure contracts permanently prohibit the use of non-public inputted agency data and outputted results to further train publicly or commercially available AI algorithms without explicit agency consent.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "3.e.v",
+        "Title":  "Documentation, Transparency, and Accessibility",
+        "Component":  "Prioritize obtaining documentation that facilitates transparency and explainability.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "3.f",
+        "Title":  "Spotlight AI Acquisition Authorities, Approaches, and Vehicles",
+        "Component":  "GSA to develop a plan to release publicly available guide(s) for the acquisition workforce.",
+        "Theme":  "Promoting Cross-Functional Engagement"
+    },
+    {
+        "Section":  "3.g",
+        "Title":  "Contribute to a Shared Repository of Best Practices",
+        "Component":  "GSA to develop a web-based repository for sharing information, knowledge, and resources about AI acquisition.",
+        "Theme":  "Promoting Cross-Functional Engagement"
+    },
+    {
+        "Section":  "3.h",
+        "Title":  "Determine Necessary Disclosures of AI Use in the Fulfillment of a Government Contract",
+        "Component":  "Determine whether there are circumstances that merit including a provision in a solicitation requiring disclosure of AI use.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.a.i",
+        "Title":  "Convening a Cross-Functional Team",
+        "Component":  "Convene an internal cross-functional team to inform the procurement of AI systems or services.",
+        "Theme":  "Promoting Cross-Functional Engagement"
+    },
+    {
+        "Section":  "4.a.ii",
+        "Title":  "Determining the Use of High-Impact AI",
+        "Component":  "Make an initial determination of whether a system is likely to host high-impact AI use cases.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.b.i",
+        "Title":  "Broad Market Research",
+        "Component":  "Conduct thorough market research to seek state-of-the-art AI capabilities.",
+        "Theme":  "Ensuring a Competitive American AI Marketplace"
+    },
+    {
+        "Section":  "4.b.ii",
+        "Title":  "Product Demonstration",
+        "Component":  "Seek detailed demonstrations and tests of potentially useful AI systems or services.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.b.iii",
+        "Title":  "Performance-Based Acquisition Techniques",
+        "Component":  "Use performance-based techniques to identify requirements and contract terms.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.c.i",
+        "Title":  "AI Use Transparency Requirements",
+        "Component":  "Disclose in solicitations whether a planned use of an AI system meets the threshold of a high-impact use case.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.c.ii",
+        "Title":  "Protections Against Vendor Lock-In",
+        "Component":  "Include provisions in the solicitation reflecting the agency\u0027s interest in AI proposals that reduce the risk of vendor lock-in.",
+        "Theme":  "Ensuring a Competitive American AI Marketplace"
+    },
+    {
+        "Section":  "4.c.iii",
+        "Title":  "IP Rights and Use of Government Data",
+        "Component":  "Include appropriate terms related to IP rights and lawful use of government data.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.d.i",
+        "Title":  "Testing and Evaluation",
+        "Component":  "Test proposed solutions to understand the capabilities and limitations of any offered AI system or service.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.d.ii",
+        "Title":  "Opportunity and Risk Re-Evaluation",
+        "Component":  "Assess proposals for potential new AI-related risks that were not previously identified.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.d.iii.A",
+        "Title":  "IP Rights and Use of Government Data",
+        "Component":  "Include contract terms consistent with the processes adopted by the agency per Section 3(d).",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.d.iii.B",
+        "Title":  "Privacy",
+        "Component":  "Include contract terms that address privacy considerations as described in Section 3(c).",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.d.iii.C",
+        "Title":  "Vendor Lock-In Protections",
+        "Component":  "Include contract terms to reduce the risk that switching vendors could become cost-prohibitive.",
+        "Theme":  "Ensuring a Competitive American AI Marketplace"
+    },
+    {
+        "Section":  "4.d.iii.D",
+        "Title":  "OMB Memorandum M-25-21 Compliance Requirements",
+        "Component":  "Contracts must ensure compliance with minimum risk management practices for high-impact use cases as required under M-25-21.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.d.iii.E",
+        "Title":  "Ongoing Testing and Monitoring",
+        "Component":  "Contractual terms must provide the contracting agency the ability to regularly monitor and evaluate performance, risks, and effectiveness of an AI system or service.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.d.iii.F",
+        "Title":  "Vendor Performance Requirements",
+        "Component":  "Require vendors to regularly monitor an AI system\u0027s performance and rectify unacceptable behavior.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.d.iii.G",
+        "Title":  "New Feature Notification",
+        "Component":  "Require vendors to provide a notification to relevant agency stakeholders prior to the integration of new AI enhancements, features, or components.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.e.i",
+        "Title":  "Authorization To Operate Compliance",
+        "Component":  "Any AI systems and services operated as an information system by or on behalf of an agency must receive an authorization to operate.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.e.ii",
+        "Title":  "Contractual Oversight",
+        "Component":  "Perform effective system oversight consistent with the terms of the contract.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.e.iii",
+        "Title":  "Performance and Cost Justification",
+        "Component":  "Arrange for periodic evaluation of the AI system or service\u0027s value to the government.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.e.iv",
+        "Title":  "Sunset Criteria",
+        "Component":  "Determine criteria for sunsetting the use of an AI system.",
+        "Theme":  "Safeguarding Taxpayer Dollars"
+    },
+    {
+        "Section":  "4.f.i",
+        "Title":  "Vendor Lock-In Protection",
+        "Component":  "Implement any contractual terms related to ongoing rights and access to any data or derived products resulting from the services provided under the contract.",
+        "Theme":  "Ensuring a Competitive American AI Marketplace"
+    }
+]

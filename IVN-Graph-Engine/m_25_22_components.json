@@ -1,0 +1,108 @@
+{
+    "1. Overview and Grounding Themes": [
+        {
+            "component": "Benefit from Competitive Marketplace",
+            "description": "Ensure vendor sourcing, data portability, and long-term interoperability to avoid vendor lock-in. Communicate clear and specific requirements."
+        },
+        {
+            "component": "Safeguard Taxpayer Dollars",
+            "description": "Track AI performance and manage risk. Ensure AI systems are fit for purpose and deliver consistent results."
+        },
+        {
+            "component": "Promote Effective AI Acquisition",
+            "description": "Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.)."
+        }
+    ],
+    "2. Scope": [
+        {
+            "component": "Covered Agencies",
+            "description": "All agencies under 44 U.S.C. 3502(1), with some requirements specific to CFO Act agencies. Excludes the Intelligence Community."
+        },
+        {
+            "component": "Covered AI",
+            "description": "AI systems acquired by or on behalf of covered agencies. Includes systems for researching, developing, or implementing AI, and systems where AI is integrated."
+        },
+        {
+            "component": "Excludes",
+            "description": "Common commercial products with embedded AI (e.g., word processors, map navigation) unless AI is the primary function."
+        },
+        {
+            "component": "Exemptions",
+            "description": "Regulatory actions on non-agency AI use. Assessments of AI for law enforcement or national security targets. Development of general AI testing metrics. Basic, applied, or experimental research (unless for developing specific agency applications). Incidental AI use by contractors."
+        },
+        {
+            "component": "Applicability",
+            "description": "New contracts issued 180 days after the memorandum. Options to renew/extend existing contracts after 180 days. Does not apply to National Security Systems."
+        }
+    ],
+    "3. Agency-Level Requirements": [
+        {
+            "component": "Update Agency Policies (within 270 days)",
+            "description": "Review planned AI acquisitions for performance and risk. Convene cross-functional teams. Ensure appropriate contract terms for IP rights."
+        },
+        {
+            "component": "Protect Privacy",
+            "description": "Establish policies and contractual terms for handling PII. Involve Senior Agency Officials for Privacy early and ongoing."
+        },
+        {
+            "component": "Protect IP Rights and Use of Government Data",
+            "description": "Address government data use and IP rights in contracts. Ensure **long-term access** to necessary components. Provide clear guidance on **data handling**. Prioritize obtaining **documentation for transparency and explainability**."
+        },
+        {
+            "component": "Spotlight AI Acquisition (GSA, within 100 days)",
+            "description": "GSA to release a public guide on AI procurement."
+        },
+        {
+            "component": "Contribute to Shared Repository (GSA, within 200 days)",
+            "description": "GSA to develop a web-based repository for sharing AI acquisition information."
+        },
+        {
+            "component": "Determine Necessary Disclosures of AI Use",
+            "description": "Agencies must consider requiring vendors to disclose AI use during contract performance."
+        }
+    ],
+    "4. AI Acquisition Lifecycle Guidance": [
+        {
+            "component": "a. Identification of Requirements",
+            "description": "Convene a cross-functional team to inform procurement and identify risks. Make an initial determination if the system is likely to be \"high-impact AI.\""
+        },
+        {
+            "component": "b. Market Research & Planning",
+            "description": "Conduct broad market research, seeking novel capabilities from new entrants. Seek detailed product demonstrations in real-world scenarios. Use performance-based acquisition techniques (SOOs, PWS, QASPs, incentives)."
+        },
+        {
+            "component": "c. Solicitation Development",
+            "description": "Disclose if a planned use is a \"high-impact use case.\" Inform vendors of transparency and documentation requirements for high-impact cases. Include provisions to reduce vendor lock-in (knowledge transfer, data/model portability). Include terms for IP rights and government data use."
+        },
+        {
+            "component": "d. Selection and Award",
+            "description": "Test proposed solutions in agency-specific environments. Re-evaluate risks before selection. Include contract terms for: IP Rights and Government Data Use Privacy Vendor Lock-In Protections M-25-21 Compliance Ongoing Testing and Monitoring Vendor Performance Requirements New Feature Notification"
+        },
+        {
+            "component": "e. Contract Administration",
+            "description": "Ensure Authorization to Operate (ATO) compliance. Perform effective contractual oversight and monitor for emerging risks. Justify performance and cost through periodic evaluations. Determine sunset criteria for the AI system."
+        },
+        {
+            "component": "f. Contract Closeout",
+            "description": "Implement contractual terms for ongoing rights and access to data/derived products."
+        }
+    ],
+    "Appendix I: Consolidated Table of Required Actions": [
+        {
+            "component": "GSA (100 days)",
+            "description": "Develop and release a public guide on AI procurement."
+        },
+        {
+            "component": "Each Agency (180 days)",
+            "description": "Achieve full compliance with the memorandum."
+        },
+        {
+            "component": "Each Agency (200 days)",
+            "description": "Standardize treatment of data ownership and IP rights in AI procurements."
+        },
+        {
+            "component": "GSA (200 days)",
+            "description": "Develop a web-based repository for AI procurement resources."
+        }
+    ]
+}

@@ -1,0 +1,2 @@
+Enabling Source,Enabling Component,Enabling Component Description,Dependent Component,Dependent Component Description
+USDA DR 3140-001,DM-3140-001-P01,"Requires all agency software to have a security plan.",OCIO-APPS-P05,"Develop and maintain a software bill of materials (SBOM) for all applications. This is in response to recent OMB guidance on software supply chain security."
