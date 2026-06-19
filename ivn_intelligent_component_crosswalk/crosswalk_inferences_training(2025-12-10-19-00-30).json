@@ -1,0 +1,24 @@
+{
+  "threshold": 0.6,
+  "graph_edges": [],
+  "classifier": {
+    "scaler_mean": [
+      0.23783963662874727,
+      0.0
+    ],
+    "scaler_scale": [
+      0.11548759130137523,
+      1.0
+    ],
+    "classes": [
+      0
+    ],
+    "feature_importances": [
+      0.0,
+      0.0
+    ],
+    "n_features_in": 2,
+    "n_classes": 1
+  },
+  "clf_obj": {
+    "clf": 
