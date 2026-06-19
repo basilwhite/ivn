@@ -1,0 +1,64 @@
+Prompt specification for tfidf_crosswalk.py
+
+1) Problem and context
+This script exists to keep code and companion support files synchronized in a transparent, auditable workflow.
+It scans the workspace for current scripts, excludes timestamped legacy versions, and ensures each current script has prompt, reasoning, and internal-state files.
+
+2) Why this script exists
+It reduces drift between implementation and documentation by updating support files when scripts change and flagging manual reconciliation when prompt files change.
+
+3) Required concepts
+- Filesystem traversal and pattern filtering
+- Deterministic naming conventions for companion files
+- State tracking with file modification times
+- Append-only reasoning logs with UTC timestamps
+- Safe documentation logs that avoid hidden chain-of-thought
+
+4) Domain terms
+- Current script: non-legacy code file in scope
+- Legacy script: timestamped historical file to ignore
+- Prompt file: authoritative plain-English specification
+- Reasoning log: concise append-only event summary
+- Internal state: persistent sync metadata and diagnostics
+
+5) High-level behavior
+- Discover code files in this folder tree
+- Ignore support files and legacy timestamped versions
+- Create missing support files for each current script
+- Track mtimes and synchronize prompt/internal-state content
+- Provide a menu for sync, logging, and status reporting
+
+6) Inputs and outputs
+Input interfaces:
+- Interactive menu choices
+- Optional script path and speaker/text for reasoning entries
+
+Output artifacts:
+- <script>_prompt.txt
+- <script>_reasoning.txt
+- <script>_internal_state.txt
+- Console status lines
+
+7) Success criteria
+A successful run creates or updates required support files for all current scripts and records stable state metadata.
+Prompt files must remain sufficient for a naive model to reconstruct script intent and structure.
+
+8) Failure handling
+- Invalid menu input should be rejected and retried
+- Parse failures should degrade gracefully to generic summaries
+- Corrupt internal state should be reinitialized with a note
+
+9) Validation checks
+- Every current script has exactly one prompt, one reasoning log, and one internal-state file
+- No support files are generated for timestamped legacy scripts
+- Reasoning entries are append-only and UTC-stamped
+
+10) Learning progression
+Understanding improves as reasoning entries accumulate concrete user goals, code updates, and verification outcomes.
+The prompt should be revised whenever code behavior or interfaces change.
+
+12) Functions detected
+- extract_ivn_components
+- extract_m2522_components
+- find_tfidf_alignments
+- write_alignment_report

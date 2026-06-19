@@ -1,0 +1,97 @@
+{
+  "M-25-22": {
+    "title": "Increasing the Acquisition of Commercial Products and Services",
+    "components": [
+      {
+        "area": "Reporting",
+        "sub_area": "Recent awards for non-commercial items",
+        "component": "State the total value and number of noncommercial contracts awarded on or after April 15, 2025, through September 30, 2025, by product service code (PSC).",
+        "details": "State the total value and number of noncommercial contracts awarded on or after April 15, 2025, through September 30, 2025, by product service code (PSC)."
+      },
+      {
+        "area": "Reporting",
+        "sub_area": "Recent awards for non-commercial items",
+        "component": "Provide a list of Procurement Instrument Identifiers (PIIDs) associated with each award identified.",
+        "details": "Provide a list of Procurement Instrument Identifiers (PIIDs) associated with each award identified in (i)."
+      },
+      {
+        "area": "Reporting",
+        "sub_area": "Recent awards for non-commercial items",
+        "component": "For any award over $10 million, provide the PIID, a description of the requirement, type of contract pricing, and total contract value, including base and all options.",
+        "details": "For any award covered in (i) over $10 million, provide: The PIID, a description of the requirement, type of contract pricing, and total contract value, including base and all options."
+      },
+      {
+        "area": "Reporting",
+        "sub_area": "Recent awards for non-commercial items",
+        "component": "For any award over $10 million, provide the date of the next contract option.",
+        "details": "For any award covered in (i) over $10 million, provide: The date of the next contract option."
+      },
+      {
+        "area": "Reporting",
+        "sub_area": "Recent awards for non-commercial items",
+        "component": "For any award over $10 million, provide action planned by the SPE as a result of the review.",
+        "details": "For any award covered in (i) over $10 million, provide: Action planned by the SPE as a result of the review."
+      },
+      {
+        "area": "Reporting",
+        "sub_area": "Recent awards for non-commercial items",
+        "component": "For any award over $10 million, provide an explanation if a shift to a commercial solution is not planned at the next contract option.",
+        "details": "For any award covered in (i) over $10 million, provide: An explanation if a shift to a commercial solution is not planned at the next contract option, making references to market research and price analysis that support the conclusion to remain with the non-commercial solution."
+      },
+      {
+        "area": "Reporting",
+        "sub_area": "Acquisition Planning for near-term awards for non-commercial items",
+        "component": "State the total number of all open (pre-award) actions for non-commercial products or services that were in process on or after April 15, 2025, and were initiated by March 31, 2026.",
+        "details": "State the total number of all open (pre-award) actions for non-commercial products or services that were in process on or after April 15, 2025, and were initiated by March 31, 2026."
+      },
+      {
+        "area": "Reporting",
+        "sub_area": "Acquisition Planning for near-term awards for non-commercial items",
+        "component": "For each action over $10 million, provide a description of the requirement, planned contract type, and the Government’s independent cost estimate.",
+        "details": "For each action covered by (i) with an estimated value over $10 million, provide: A description of the requirement, planned contract type, and the Government’s independent cost estimate."
+      },
+      {
+        "area": "Reporting",
+        "sub_area": "Acquisition Planning for near-term awards for non-commercial items",
+        "component": "For each action over $10 million, provide a description of the action planned by the SPE as a result of the review.",
+        "details": "For each action covered by (i) with an estimated value over $10 million, provide: A description of the action planned by the SPE as a result of the review."
+      },
+      {
+        "area": "Reporting",
+        "sub_area": "Acquisition Planning for near-term awards for non-commercial items",
+        "component": "For each action over $10 million, if a commercial solution is not planned, provide the SPE’s explanation of why the market research and other factors justify the agency’s determination to purchase a non-commercial solution.",
+        "details": "For each action covered by (i) with an estimated value over $10 million, provide: If a commercial solution is not planned, the SPE’s explanation of why the market research and other factors justify the agency’s determination to purchase a non-commercial solution."
+      },
+      {
+        "area": "Reporting",
+        "sub_area": "Future procurements",
+        "component": "Describe internal mechanisms put in place, including guidance, to ensure any future planned award of a non-commercial award is reviewed by the SPE.",
+        "details": "Describe internal mechanisms put in place, including guidance, to ensure any future planned award of a non-commercial award is reviewed by the SPE."
+      },
+      {
+        "area": "Strengthened Responsibilities of the Agency Competition Advocate",
+        "sub_area": "General",
+        "component": "Confirm that the policy official serving as the competition advocate is at a level not lower than the head of the contracting activity or deputy SPE.",
+        "details": "To ensure sufficient agency leadership attention is being given to maximizing acquisition of commercial products and services, agencies must confirm that the policy official serving as the competition advocate is at a level not lower than the head of the contracting activity or deputy SPE."
+      },
+      {
+        "area": "Strengthened Responsibilities of the Agency Competition Advocate",
+        "sub_area": "General",
+        "component": "The competition advocate should support activities associated with the successful implementation of the Order.",
+        "details": "The competition advocate should support activities associated with the successful implementation of the Order, that include, at a minimum, the following: Making recommendations to the SPE on improvements to internal policies and practices for maximizing commercial buying; Working with the agency’s acquisition innovation advocate and category management lead to support implementation of the deviation to streamline FAR Part 12; Coordinating with the agency’s small business director on opportunities to lower barriers to entry for commercial providers; Working with the Procurement Committee on E-Government (PCE) to review and make appropriate improvements to current data collection protocols; and Supporting the SPE in developing annual progress reports to OMB."
+      },
+      {
+        "area": "Improved Data Collection and Benchmarking",
+        "sub_area": "General",
+        "component": "OFPP will work with the PCE, in coordination with agency competition advocates, to review opportunities to improve tracking of commercial product and services buying in FPDS.",
+        "details": "OFPP will work with the PCE, in coordination with agency competition advocates, to review opportunities to improve tracking of commercial product and services buying in FPDS, and with GSA to evaluate how best to baseline and benchmark agency acquisitions of commercial products and services."
+      },
+      {
+        "area": "Consultation with OMB",
+        "sub_area": "General",
+        "component": "An agency contemplating the solicitation of a non-commercial product or service may seek the input of OMB, including the policy input of OFPP.",
+        "details": "Pursuant to section 5(b) of the Order, an agency contemplating the solicitation of a non-commercial product or service may seek the input of OMB, including the policy input of OFPP."
+      }
+    ]
+  }
+}

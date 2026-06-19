@@ -1,0 +1,18 @@
+Initial Analysis of the IVN Database
+=====================================
+
+File Path: C:\Users\Basil.White\OneDrive - USDA\OCIO-STRATUS Governance Document Working Group - Documents\USDA-IVN-dataset.xlsx
+
+First 5 Rows:
+                                                      source_name                 source_agency                                                       source_id
+0  AMS Strategic Plan 2020-2024 (latest version as of 2026-01-08)                          USDA  AMS Strategic Plan 2020-2024 (latest version as of 2026-01-08)
+1       Farmers First: USDA Small Family Farms Policy Agenda 2025  USDA Office of the Secretary       Farmers First: USDA Small Family Farms Policy Agenda 2025
+2                                   USDA Strategic Plan 2022-2026                          USDA                                   USDA Strategic Plan 2022-2026
+3                                              USDA IT Directives                          USDA                                              USDA IT Directives
+4      Federal Acquisition Regulation (FAR) Companion Version 2.0                           OMB      Federal Acquisition Regulation (FAR) Companion Version 2.0
+
+Columns:
+['source_name', 'source_agency', 'source_id']
+
+Info:
+None

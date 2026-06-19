@@ -1,0 +1,81 @@
+M-25-22 and IVN Database Alignment Report (v3)
+=============================================
+
+## 1. Overview and Grounding Themes
+
+- **M-25-22 Component:** - Communicate clear and specific requirements.
+- **IVN Database Source:** OMB M-21-02, Fiscal Year 2020-2021 Guidance on Federal Information Security and Privacy Management Requirements
+- **Keyword Match:** requirements
+
+- **M-25-22 Component:** - Communicate clear and specific requirements.
+- **IVN Database Source:** This Departmental Manual (DM) provides guidance for cybersecurity incident management and reporting and describes essential preparations for effective incident management. b. This DM supports compliance by the United States Department of Agriculture (USDA) with Federal laws, regulations, and guidance on cybersecurity incident management. c. This DM serves as the foundation for Mission Areas, agencies, and staff offices to develop and implement cybersecurity incident management procedures and plans that comply with Federal and Departmental requirements.
+- **Keyword Match:** requirements
+
+- **M-25-22 Component:** - Track AI performance and manage risk.
+- **IVN Database Source:** USDA 2024 Annual Performance Plan and Report
+- **Keyword Match:** performance
+
+- **M-25-22 Component:** - Track AI performance and manage risk.
+- **IVN Database Source:** USDA FY24 Annual Performance Plan and FY22 Report
+- **Keyword Match:** performance
+
+- **M-25-22 Component:** - Track AI performance and manage risk.
+- **IVN Database Source:** OMB Memorandum M-16-17, OMB Circular No. A-123, Management's Responsibility for Enterprise Risk Management and Internal Control, July 15, 2016
+- **Keyword Match:** risk management
+
+- **M-25-22 Component:** - Track AI performance and manage risk.
+- **IVN Database Source:** NIST AI 100-1, Artificial Intelligence Risk Management Framework (AI RMF 1.0)
+- **Keyword Match:** risk management
+
+- **M-25-22 Component:** - Track AI performance and manage risk.
+- **IVN Database Source:** National Institute of Standards and Technology AI 100-1 AI Risk Management Framework 1.0
+- **Keyword Match:** risk management
+
+- **M-25-22 Component:** - Track AI performance and manage risk.
+- **IVN Database Source:** National Institute of Standards and Technology AI 100-1 AI Risk Management Framework 1.0
+- **Keyword Match:** ai risk
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** OMB M-16-04, Cybersecurity Strategy and Implementation Plan (CSIP) for the Federal Civilian Government
+- **Keyword Match:** cybersecurity
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** OMB M-21-31, Improving the Federal Government's Investigative and Remediation Capabilities Related to Cybersecurity Incidents
+- **Keyword Match:** cybersecurity
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** OMB M-22-01, Improving Detection of Cybersecurity Vulnerabilities and Incidents on Federal Government Systems through Endpoint Detection and Response, October 2021
+- **Keyword Match:** cybersecurity
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** OMB M-22-09, Moving the U.S. Government Toward Zero Trust Cybersecurity Principles
+- **Keyword Match:** cybersecurity
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** This Departmental Manual (DM) provides guidance for cybersecurity incident management and reporting and describes essential preparations for effective incident management. b. This DM supports compliance by the United States Department of Agriculture (USDA) with Federal laws, regulations, and guidance on cybersecurity incident management. c. This DM serves as the foundation for Mission Areas, agencies, and staff offices to develop and implement cybersecurity incident management procedures and plans that comply with Federal and Departmental requirements.
+- **Keyword Match:** cybersecurity
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** OMB M-21-02, Fiscal Year 2020-2021 Guidance on Federal Information Security and Privacy Management Requirements
+- **Keyword Match:** privacy
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** OMB M-03-22, OMB Guidance for Implementing the Privacy Provisions of the EGovernment Act of 2002
+- **Keyword Match:** privacy
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** OMB M-05-08, Designation of Senior Agency Officials for Privacy
+- **Keyword Match:** privacy
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** OMB M-03-22, Guidance for Implementing the Privacy Provisions of the E-Government Act of 2002
+- **Keyword Match:** privacy
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** OMB M-25-32, Preventing Improper Payments and Protecting Privacy Through Do Not Pay 
+- **Keyword Match:** privacy
+
+- **M-25-22 Component:** - Foster cross-functional engagement (acquisition, IT, cybersecurity, privacy, civil rights, etc.).
+- **IVN Database Source:** USDA Office of Civil Rights - Budget Explanatory Notes 2025
+- **Keyword Match:** civil rights
+
