@@ -1,0 +1,8 @@
+# IVN Component Crosswalk Reasoning
+
+- Prompting for the IVN database ensures correct data source usage.
+- Crosswalking aligns future-state requirements with current-state components, supporting compliance and delivery.
+- Using the 'Alignments' tab schema ensures compatibility for user validation and integration.
+- Leadership reports must cite specific database records to demonstrate evidence-based recommendations.
+- Recommendations should be actionable, specifying management and communication changes for compliance.
+- These instructions are a persistent top priority for this workspace and must be followed for all related tasks.

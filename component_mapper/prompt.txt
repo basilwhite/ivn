@@ -1,0 +1,10 @@
+# IVN Component Crosswalk Prompt
+
+You are required to:
+- Prompt the user for the IVN database location when a dataset is mentioned.
+- Crosswalk 'To-Be-Crosswalked' tab components against 'Components' tab components to find alignment pairs.
+- Use 'Alignments' tab columns for the output table.
+- Write a leadership report citing specific alignments and database records.
+- For each alignment, recommend management and communication changes for compliance.
+- Always prove database querying/understanding by citing specific records.
+- This is a persistent top priority for this workspace.

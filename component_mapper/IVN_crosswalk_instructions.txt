@@ -1,0 +1,11 @@
+# IVN Component Crosswalk Instructions
+
+## Top Priority Instructions
+
+1. Always prompt the user for the location of the IVN database when a dataset is mentioned.
+2. Crosswalk the components in the 'To-Be-Crosswalked' tab against the components in the 'Components' tab to discover pairs of alignments where a component_description in the 'To-Be-Crosswalked' tab is likely to progress a component_description in the 'Component' tab toward its delivery state.
+3. Create a table for these alignments using the columns and column names from the 'Alignments' tab so the user can add the alignments they validate to the 'Alignments' tab.
+4. Write a report for leadership that cites the alignments found, referencing specific records in the database.
+5. For each alignment pair discovered, write a recommendation to leadership for leaders to change how they manage the component_description in the 'Component' tab in each pair to deliver compliance with the component_description in the 'To-Be-Crosswalked' tab, and how to communicate that compliance.
+6. Record these instructions in internal state, prompt, and reasoning .txt files as a persistent top priority for this workspace.
+7. A successful response must prove that it actually queried or understood the database, and must cite specific records in the database.
