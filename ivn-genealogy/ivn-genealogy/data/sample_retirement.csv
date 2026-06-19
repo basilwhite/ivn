@@ -1,0 +1,12 @@
+id,type,citation,level,heading
+USC_T5,Provision,5 U.S.C.,Title,Government Organization and Employees
+USC_T5_CH83,Provision,5 U.S.C. ch. 83,Chapter,Retirement (CSRS)
+USC_8336,Provision,5 U.S.C. §8336,USC_Section,Immediate retirement (CSRS)
+USC_T5_CH84,Provision,5 U.S.C. ch. 84,Chapter,Federal Employees’ Retirement System (FERS)
+USC_8412,Provision,5 U.S.C. §8412,USC_Section,Immediate retirement (FERS)
+USC_8414,Provision,5 U.S.C. §8414,USC_Section,Early retirement (FERS)
+USC_8461,Provision,5 U.S.C. §8461,USC_Section,Authority of the Office of Personnel Management
+CFR_5_831,Provision,5 C.F.R. pt. 831,CFR_Section,Civil Service Retirement System
+CFR_5_841,Provision,5 C.F.R. pt. 841,CFR_Section,FERS—General Administration
+CFR_5_842,Provision,5 C.F.R. pt. 842,CFR_Section,FERS—Basic Annuity Rights
+CFR_5_846,Provision,5 C.F.R. pt. 846,CFR_Section,FERS—Elections of Coverage

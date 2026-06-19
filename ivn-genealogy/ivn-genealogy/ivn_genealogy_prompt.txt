@@ -1,0 +1,110 @@
+Overarching Problem
+This workspace supports IVN genealogy analysis. The core problem is converting governance alignments into decision-grade proposals for institutional change while preserving traceability and confidence.
+
+Broader Context
+Leadership uses IVN data to understand how enabling governance components authorize and support dependent components. Evidence from these alignments can justify changes in policy, strategy, regulation, Executive Orders, and Public Law.
+
+Why This Exists
+This prompt defines how to generate evidence-based proposals from IVN alignments in a consistent, auditable format.
+
+Implemented Assets in This Workspace
+- gov_graph/queries/proposals.py builds standardized proposal packages and computes decision readiness.
+- tests/test_proposals.py verifies confidence thresholds and proposal quality checks.
+- docs/evidence_proposal_protocol.md defines required package sections and escalation thresholds.
+- docs/communication_playbook.md standardizes how proposal evidence is communicated to leaders.
+- templates/proposal_package_template.md provides a reusable briefing scaffold.
+- gov_graph/api/main.py exposes POST /proposals/validate for readiness checks and audience-specific briefs.
+- gov_graph/cli/app.py exposes proposal sample-brief command for executive, oversight, and implementation modes.
+
+Role of the Companion Files
+- ivn_genealogy_internal_state.txt stores persistent operating commitments and quality gates.
+- ivn_genealogy_reasoning.txt stores append-only conversation milestones and decisions.
+- This file is the plain-English specification that a naive model can use to regenerate expected behavior.
+
+How Understanding Improved
+- Early framing: IVN explains lineage and compliance relationships.
+- Current framing: IVN is an evidence engine for governance change recommendations across authority layers.
+- Required behavior: recommendations must be traceable, confidence-scored, and suitable for oversight scrutiny.
+
+Concepts Required
+- Enabling component and dependent component relationships.
+- Compliance surface and authorization chain.
+- First-order and second-order governance impacts.
+- Authority layers: policy, program, regulation, EO, Public Law.
+- Evidence traceability and confidence scoring.
+
+Prerequisites
+- Basic governance and public administration concepts.
+- Familiarity with IVN alignment records.
+- Ability to distinguish evidence from interpretation.
+
+Domain Terms
+- IVN: Institutional or interconnected governance network used for lineage and alignment analysis.
+- Evidence graph: Explicit set of linked alignments supporting a claim.
+- Authority chain: Path across policy, program, regulation, EO, and statute.
+- No-change baseline: Alternative that keeps current state for comparison.
+
+Required Output Structure
+Every recommendation package must include:
+1. Decision Question
+2. Evidence Graph (specific alignments)
+3. Authority Chain mapping
+4. Change Hypothesis
+5. Impact Analysis
+6. Alternatives (at least two, including no-change baseline)
+7. Confidence and Source Trace
+8. Implementation Path with owners and sequence
+
+Input and Output Definitions
+Input
+- IVN alignment records and relationship metadata.
+- User question describing proposed governance change.
+
+Programmatic Input (for build_proposal_package)
+- decision_question: str
+- evidence_graph: list of alignment relationship dicts
+- authority_chain: dict keyed by authority layers
+- change_hypothesis: str
+- impact_analysis: dict with first_order, second_order, and risks
+- alternatives: list of option dicts (must include no-change baseline)
+- implementation_path: list of sequenced step dicts
+- confidence_score: float between 0.00 and 1.00
+- source_trace: list of evidence snapshot dicts
+
+Output
+- Structured recommendation package with confidence score 0.00-1.00 and label:
+  High (0.80-1.00), Medium (0.50-0.79), Low (0.00-0.49).
+- Full source trace sufficient for audit review.
+- validation_issues list and is_decision_ready boolean for quality gating.
+- communication_brief output that tailors key points by audience mode.
+
+Success Criteria
+- Every recommendation maps to concrete alignment evidence.
+- Facts and judgments are explicitly separated.
+- Alternatives and impacts are clear and decision-useful.
+- Output is defensible in legal and oversight review.
+
+Failure Handling
+- If evidence is incomplete or low confidence, request clarification or additional data.
+- If authority mapping is ambiguous, flag uncertainty and provide bounded options.
+
+Validation Checks
+- Evidence linkage present for each claim.
+- Confidence score and label present.
+- Source trace present and complete.
+- At least two alternatives included.
+- No unsupported assertion in final recommendation.
+- Authority chain includes policy, program, regulation, executive_order, and public_law layers.
+
+Correct Model Behavior
+- Evidence-first reasoning.
+- Explicit uncertainty disclosure.
+- Decision-ready framing for leadership.
+- Avoid generic recommendations without alignment support.
+
+Example Scenarios
+- Recommend a policy update to remove conflicting directive language supported by alignment evidence.
+- Recommend a regulatory interpretation review where multiple dependent controls fail under one enabling authority.
+- Recommend EO or Public Law change pathway when statutory constraints block validated implementation needs.
+
+The user wants me to act as an autonomous agent to analyze the M-25-22 document, cross-reference it with the IVN database, and produce a report for leadership. This report should include identified alignments and recommendations for managing and communicating these alignments to ensure and demonstrate compliance with M-25-22. This is a top priority task for this workspace.

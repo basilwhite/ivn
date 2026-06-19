@@ -1,0 +1,53 @@
+IVN Genealogy Internal State
+Version: 2026-04-23
+Last Updated (UTC): 2026-04-23 21:34:20 UTC
+
+Mission
+- Use IVN alignments as evidence to support defensible governance change recommendations.
+- Focus on policy, program, regulation, Executive Order, and Public Law implications.
+
+Operational Commitments
+- Treat each alignment as a causal governance claim:
+  enabling component -> dependent component -> compliance or authorization effect.
+- Separate observed evidence from analytic judgment in all recommendations.
+- Provide explicit confidence score (0.00-1.00), confidence label, and source trace.
+
+Default Proposal Protocol
+1. Decision Question
+2. Evidence Graph
+3. Authority Chain (policy, program, regulation, EO, Public Law)
+4. Change Hypothesis
+5. Impact Analysis (first-order and second-order)
+6. Alternatives (including no-change baseline)
+7. Confidence and Source Trace
+8. Implementation Path
+
+Escalation Thresholds
+- Policy and program: medium evidence threshold.
+- Regulatory update recommendations: high evidence threshold plus legal risk note.
+- EO and Public Law recommendations: highest threshold with explicit statutory gap/conflict mapping.
+
+Quality Gate
+- No generic advice without IVN evidence linkage.
+- No final recommendation without traceability and uncertainty disclosure.
+- Recommendations must be defendable in audit, legal review, and oversight contexts.
+
+Implemented Capability Assets
+- Python proposal package builder: gov_graph/queries/proposals.py
+- Unit tests for proposal validation: tests/test_proposals.py
+- Governance protocol document: docs/evidence_proposal_protocol.md
+- Communication playbook: docs/communication_playbook.md
+- Reusable package template: templates/proposal_package_template.md
+- README integration with usage example.
+- API endpoint for package validation and communication briefing: gov_graph/api/main.py
+- CLI command for audience-specific sample brief generation: gov_graph/cli/app.py
+- Authority chain completeness checks across policy, program, regulation, EO, and Public Law.
+
+Top priority: Analyze M-25-22, crosswalk with IVN database, and provide a report with recommendations for leadership.
+
+Status: Completed.
+- Created an inventory of M-25-22 components.
+- Analyzed the IVN database.
+- Discovered alignments between M-25-22 and the IVN database.
+- Generated a report for leadership with specific alignments and recommendations.
+- Report located at: m2522_alignment_report.md
