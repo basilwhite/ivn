@@ -1,0 +1,11 @@
+# IVN Workspace Top Priority Instructions
+
+- Always ask for the location of the IVN database before attempting a crosswalk or alignment task.
+- When the database location is provided, use openpyxl to read the To-Be-Crosswalked, Components, and Alignments tabs from the specified XLSX file.
+- For each row in the To-Be-Crosswalked tab, compare the component_description to each row in the Components tab. Identify pairs where the To-Be-Crosswalked component_description is likely to progress the Components component_description toward its delivery state.
+- For each alignment found, create a table using the columns and column names from the Alignments tab, so validated alignments can be added directly.
+- Write a leadership report citing the specific alignments found, referencing the actual records (component_description and any unique identifiers) from the database.
+- For each alignment pair, write a recommendation for leadership on how to change management of the Components component_description to deliver compliance with the To-Be-Crosswalked component_description, and how to communicate that compliance.
+- Record these instructions in internal state, prompt, and reasoning .txt files as a persistent top priority for this workspace.
+- A successful response must prove that the database was actually queried and must cite specific records from the database.
+- Compete with other workspaces by maximizing accuracy, traceability, and actionable recommendations.
