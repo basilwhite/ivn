@@ -19,6 +19,8 @@ This network is not a product, but a logical artifact of White House policy and 
 The intent of the IVN project is to refine this network, and help policymakers apply it to communicate and create strategy with greater systemic effects. 
 </p>
 
+<p>A graphic interface of the IVN is available at <a href="https://basilwhite.com/ivn">https://basilwhite.com/ivn</a></p>
+
 <h2>Academic Publications by the IVN Team</h2>
 <ul>
 <li>Martin, B.A., White, B., Traquair, J. (2025). How Might We Improve HCI on a Platform Designed to Improve Interagency Collaboration?. In: Stephanidis, C., Antona, M., Ntoa, S., Salvendy, G. (eds) HCI International 2024 – Late Breaking Posters. HCII 2024. Communications in Computer and Information Science, vol 2319. Springer, Cham. https://doi.org/10.1007/978-3-031-78516-0_11 - <a href="https://basilwhite.com/ivn/MartinWhiteTraquair2024HowMightWeImproveHCIonaPlatform.pdf">https://basilwhite.com/ivn/MartinWhiteTraquair2024HowMightWeImproveHCIonaPlatform.pdf</a>
