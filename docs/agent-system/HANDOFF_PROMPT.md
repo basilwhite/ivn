@@ -247,7 +247,7 @@ first end-to-end manual trigger test, enable nightly sweep.
 9. Agent never sends outreach, submits proposals, or delivers
    analysis. Agent drafts and stages only.
 10. Revenue agent never submits anything. Basil approves and sends.
-
+ 
 ---
 
 ## KEY FILES IN REPO /docs/agent-system/
