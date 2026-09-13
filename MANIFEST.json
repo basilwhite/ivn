@@ -1,0 +1,426 @@
+{
+  "manifest_version": "1.0",
+  "repo": "https://github.com/basilwhite/ivn",
+  "last_updated": "2026-05-08",
+  "description": "Completeness model for IVN repo. The recruiting agent diffs this manifest against the live repo file list and the normalized dataset tables to identify and score gaps.",
+
+  "gap_scoring": {
+    "description": "Each gap type has a severity weight (1–5). The recruiter multiplies weight by gap count to produce a priority score per run.",
+    "weights": {
+      "missing_alignment_citation":   5,
+      "missing_alignment_rationale":  4,
+      "missing_alignment_validation": 4,
+      "missing_component_description":3,
+      "missing_component_url":        2,
+      "missing_required_file":        3,
+      "missing_companion_prompt":     2,
+      "stale_data_file":              1
+    }
+  },
+
+  "schema_gap_rules": {
+    "description": "Rules applied to the normalized Excel tables fetched from the repo. These run on every sweep independent of the file manifest.",
+    "tables": {
+      "Components": {
+        "gap_type": "missing_component_description",
+        "null_fields": ["component_description"],
+        "sub_agent": "validator"
+      },
+      "Components_url": {
+        "gap_type": "missing_component_url",
+        "null_fields": ["component_url", "fetch_status"],
+        "sub_agent": "validator"
+      },
+      "Alignments_citation": {
+        "gap_type": "missing_alignment_citation",
+        "null_fields": ["linkage_mandate"],
+        "sub_agent": "mapper"
+      },
+      "Alignments_rationale": {
+        "gap_type": "missing_alignment_rationale",
+        "null_fields": ["alignment_rationale"],
+        "sub_agent": "mapper"
+      },
+      "Alignments_validation": {
+        "gap_type": "missing_alignment_validation",
+        "null_fields": ["valid", "similarity", "confidence"],
+        "sub_agent": "validator"
+      },
+      "Alignments_orphan": {
+        "gap_type": "missing_alignment_citation",
+        "description": "Component in Components table with zero rows in Alignments as enabling_component_id or dependent_component_id.",
+        "sub_agent": "mapper"
+      }
+    }
+  },
+
+  "files": [
+
+    {
+      "filename": "README.md",
+      "type": "doc",
+      "status": "required",
+      "sub_agent": "doc",
+      "gap_type": "missing_required_file",
+      "description": "Project overview, IVN definition, schema summary, and onboarding instructions.",
+      "depends_on": [],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 2000,
+        "required_sections": [
+          "What is the Integrated Value Network",
+          "Schema",
+          "How to contribute",
+          "Completeness model"
+        ]
+      }
+    },
+
+    {
+      "filename": "MANIFEST.json",
+      "type": "doc",
+      "status": "required",
+      "sub_agent": "doc",
+      "gap_type": "missing_required_file",
+      "description": "This file. Completeness model for the repo. Must be present and parseable.",
+      "depends_on": [],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 500,
+        "required_sections": []
+      }
+    },
+
+    {
+      "filename": "IVN_Normalize_Dataset.py",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Normalizes the Dataset Excel tab into Sources, Components, Alignments. Denormalizes back. Interactive menu.",
+      "depends_on": ["IVN_Normalize_Dataset_prompt.txt"],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 5000,
+        "required_companion_files": ["IVN_Normalize_Dataset_prompt.txt"]
+      }
+    },
+
+    {
+      "filename": "IVN_Normalize_Dataset_prompt.txt",
+      "type": "prompt",
+      "status": "required",
+      "sub_agent": "doc",
+      "gap_type": "missing_companion_prompt",
+      "description": "Authoritative spec for IVN_Normalize_Dataset.py. Must be in sync with script.",
+      "depends_on": ["IVN_Normalize_Dataset.py"],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 10000,
+        "required_sections": [
+          "PROBLEM THE SCRIPT SOLVES",
+          "SCHEMA DEFINITIONS",
+          "DATASET_ORDER",
+          "SUCCESSFUL OUTCOME DEFINITION"
+        ]
+      }
+    },
+
+    {
+      "filename": "Ivn_citation_validator.py",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Validates source citations in IVN components against USC and CFR references.",
+      "depends_on": [],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 2000,
+        "required_companion_files": []
+      }
+    },
+
+    {
+      "filename": "component_mapper.py",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Maps policy documents to IVN components.",
+      "depends_on": ["component_mapper_prompt.txt"],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 2000,
+        "required_companion_files": ["component_mapper_prompt.txt"]
+      }
+    },
+
+    {
+      "filename": "ivn_component_alignment_management_system.py",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Manages creation and update of component alignment records.",
+      "depends_on": ["ivn_component_alignment_management_system_prompt.txt"],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 2000,
+        "required_companion_files": ["ivn_component_alignment_management_system_prompt.txt"]
+      }
+    },
+
+    {
+      "filename": "ivn_components_error_checker.py",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Detects schema errors and data quality issues in IVN component records.",
+      "depends_on": ["ivn_components_error_checker_prompt.txt"],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 2000,
+        "required_companion_files": ["ivn_components_error_checker_prompt.txt"]
+      }
+    },
+
+    {
+      "filename": "ivn_crosswalk_optimizer.py",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Optimizes EC-DC crosswalk scoring across agency pairs.",
+      "depends_on": ["ivn_crosswalk_optimizer_context.txt"],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 2000,
+        "required_companion_files": ["ivn_crosswalk_optimizer_context.txt"]
+      }
+    },
+
+    {
+      "filename": "ivn_governance_alignment_engine.py",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Produces scored alignment recommendations across governance components.",
+      "depends_on": ["ivn_governance_alignment_engine_prompt.txt"],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 2000,
+        "required_companion_files": ["ivn_governance_alignment_engine_prompt.txt"]
+      }
+    },
+
+    {
+      "filename": "ivn_intelligent_component_crosswalk.py",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "AI-assisted crosswalk generation between IVN components.",
+      "depends_on": ["ivn_intelligent_component_crosswalk_prompt.txt"],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 2000,
+        "required_companion_files": ["ivn_intelligent_component_crosswalk_prompt.txt"]
+      }
+    },
+
+    {
+      "filename": "ivn_transformation_engine.py",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Transforms IVN data between formats for downstream tooling.",
+      "depends_on": ["ivn_transformation_engine_prompt.txt"],
+      "completeness_criteria": {
+        "file_exists": true,
+        "min_size_bytes": 2000,
+        "required_companion_files": ["ivn_transformation_engine_prompt.txt"]
+      }
+    },
+
+    {
+      "filename": "ivn_neo4j_schema.cypher",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Neo4j node and relationship schema for the IVN graph. Defines Component, Source, and Alignment node types and their properties.",
+      "depends_on": ["IVN_Normalize_Dataset_prompt.txt"],
+      "completeness_criteria": {
+        "file_exists": false,
+        "min_size_bytes": 500,
+        "required_sections": [],
+        "note": "DOES NOT EXIST YET — gap recruiter must spawn coder agent to produce this"
+      }
+    },
+
+    {
+      "filename": "ivn_neo4j_load.cypher",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "LOAD CSV Cypher queries to ingest normalized IVN Excel tables into Neo4j.",
+      "depends_on": ["ivn_neo4j_schema.cypher", "IVN_Normalize_Dataset.py"],
+      "completeness_criteria": {
+        "file_exists": false,
+        "min_size_bytes": 500,
+        "required_sections": [],
+        "note": "DOES NOT EXIST YET — gap recruiter must spawn coder agent to produce this"
+      }
+    },
+
+    {
+      "filename": "ivn_neo4j_queries.cypher",
+      "type": "script",
+      "status": "required",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Library of named Cypher queries for IVN graph analysis: orphan detection, shortest path between components, agency coverage heatmap, transitive dependency chains.",
+      "depends_on": ["ivn_neo4j_schema.cypher"],
+      "completeness_criteria": {
+        "file_exists": false,
+        "min_size_bytes": 1000,
+        "required_sections": [],
+        "note": "DOES NOT EXIST YET — gap recruiter must spawn coder agent to produce this"
+      }
+    },
+
+    {
+      "filename": "ivn_kuzu_loader.py",
+      "type": "script",
+      "status": "optional",
+      "sub_agent": "coder",
+      "gap_type": "missing_required_file",
+      "description": "Loads normalized IVN tables into a Kùzu embedded graph database for local analysis without a Neo4j server.",
+      "depends_on": ["IVN_Normalize_Dataset.py"],
+      "completeness_criteria": {
+        "file_exists": false,
+        "min_size_bytes": 1000,
+        "required_sections": [],
+        "note": "DOES NOT EXIST YET — lower priority than Neo4j scripts"
+      }
+    },
+
+    {
+      "filename": "ivn_schema.md",
+      "type": "doc",
+      "status": "required",
+      "sub_agent": "doc",
+      "gap_type": "missing_required_file",
+      "description": "Human-readable IVN schema reference. Documents all three normalized tables, field definitions, ID format rules, directional rule (Enabling→Dependent), and null handling policy.",
+      "depends_on": ["IVN_Normalize_Dataset_prompt.txt"],
+      "completeness_criteria": {
+        "file_exists": false,
+        "min_size_bytes": 3000,
+        "required_sections": [
+          "Sources table",
+          "Components table",
+          "Alignments table",
+          "Directional rule",
+          "ID generation",
+          "Null policy"
+        ],
+        "note": "DOES NOT EXIST YET — gap recruiter must spawn doc agent to produce this"
+      }
+    },
+
+    {
+      "filename": "ivn_agent_onboarding.md",
+      "type": "doc",
+      "status": "required",
+      "sub_agent": "doc",
+      "gap_type": "missing_required_file",
+      "description": "Onboarding document for AI agents joining the IVN system. Equivalent to the Governance_Component_Dependency_Mapping_Tool context. Defines schema, directional rule, output formats, and task types.",
+      "depends_on": ["ivn_schema.md"],
+      "completeness_criteria": {
+        "file_exists": false,
+        "min_size_bytes": 2000,
+        "required_sections": [
+          "Directional rule",
+          "Output format",
+          "Task types",
+          "Schema reference"
+        ],
+        "note": "DOES NOT EXIST YET — gap recruiter must spawn doc agent to produce this"
+      }
+    },
+
+    {
+      "filename": "Public-IVN-dataset.xlsx",
+      "type": "data",
+      "status": "required",
+      "sub_agent": null,
+      "gap_type": "stale_data_file",
+      "description": "Public-facing denormalized IVN dataset. Human-maintained. Recruiter checks staleness only — does not generate content.",
+      "depends_on": ["IVN_Normalize_Dataset.py"],
+      "completeness_criteria": {
+        "file_exists": true,
+        "max_age_days": 30,
+        "note": "Recruiter flags as stale if not updated in 30 days. Does not spawn agent — alerts human."
+      }
+    },
+
+    {
+      "filename": "IVN-dataset.xlsb",
+      "type": "data",
+      "status": "required",
+      "sub_agent": null,
+      "gap_type": "stale_data_file",
+      "description": "Primary IVN dataset in binary Excel format. Human-maintained. Recruiter checks staleness only.",
+      "depends_on": [],
+      "completeness_criteria": {
+        "file_exists": true,
+        "max_age_days": 30,
+        "note": "Recruiter flags as stale. Does not spawn agent — alerts human."
+      }
+    }
+  ],
+
+  "recruiter_sweep_output": {
+    "description": "Schema for the gap report the recruiter writes to staging/manifest.json on each sweep.",
+    "fields": {
+      "sweep_timestamp":    "ISO 8601 datetime",
+      "trigger":            "scheduled | gap_threshold | manual",
+      "schema_gaps": [
+        {
+          "gap_type":            "string — from gap_scoring.weights keys",
+          "table":               "string — Components | Alignments",
+          "field":               "string — field name with null value",
+          "component_id":        "string or null",
+          "enabling_component_id":"string or null",
+          "dependent_component_id":"string or null",
+          "severity":            "integer 1–5",
+          "sub_agent_assigned":  "mapper | validator | coder | doc",
+          "task_dispatched":     "boolean"
+        }
+      ],
+      "file_gaps": [
+        {
+          "filename":            "string",
+          "gap_type":            "string",
+          "severity":            "integer 1–5",
+          "sub_agent_assigned":  "coder | doc",
+          "task_dispatched":     "boolean"
+        }
+      ],
+      "total_priority_score":   "integer — sum of severity × gap count",
+      "files_staged":           "integer — count of files dropped to staging this run",
+      "alerts": [
+        {
+          "type":    "stale_data | budget_threshold | staging_backlog",
+          "message": "string",
+          "action":  "human_review"
+        }
+      ]
+    }
+  }
+}
